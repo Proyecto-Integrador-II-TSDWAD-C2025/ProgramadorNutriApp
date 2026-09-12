@@ -1,5 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- ===== 3.1 Colores de marca (verdes) ===== -->
+    <color name="primary">#2D7A3A</color>
+    <color name="primary_mid">#3DA34D</color>
+    <color name="primary_light">#55C966</color>
+    <color name="primary_pale">#EAF7EC</color>
+    <color name="dark_navy">#1A1A2E</color>
+    <color name="background">#F4F9F5</color>
+
+    <!-- ===== 3.2 Variantes derivadas de gradientes ===== -->
+    <color name="green_dark">#0F2D18</color>
+    <color name="green_dark_2">#2D6F39</color>
+    <color name="green_dark_3">#256C33</color>
+    <color name="emerald_fallback">#10B981</color>
+    <color name="emerald_dark">#064E3B</color>
+
+    <!-- ===== 3.3 Neutros / grises de texto ===== -->
+    <color name="text_heading">#1A1A2E</color>
+    <color name="text_body">#333333</color>
+    <color name="text_secondary">#4D5A52</color>
+    <color name="text_tertiary">#666666</color>
+    <color name="text_tertiary_alt">#58665E</color>
+    <color name="text_muted">#718078</color>
+    <color name="text_muted_alt">#888888</color>
+    <color name="text_disabled">#6C757D</color>
+
+    <!-- ===== 3.4 Bordes y superficies ===== -->
+    <color name="border_primary">#DCE7DF</color>
+    <color name="border_green_soft">#C8E6CC</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_alt">#EDF2EE</color>
+    <color name="surface_alt_2">#F7FBF8</color>
+    <color name="surface_gray">#E9ECEF</color>
+    <color name="surface_gray_alt">#F3F4F6</color>
+
+    <!-- ===== 3.5 Colores semánticos ===== -->
+    <!-- Éxito -->
+    <color name="success_text">#047857</color>
+    <color name="success_bg">#ECFDF5</color>
+    <color name="success_border">#A7F3D0</color>
+
+    <!-- Advertencia -->
+    <color name="warning_text">#B45309</color>
+    <color name="warning_bg">#FFFBEB</color>
+    <color name="warning_border">#FEF3C7</color>
+
+    <!-- Información -->
+    <color name="info_text">#1E3A8A</color>
+    <color name="info_bg">#EFF6FF</color>
+    <color name="info_border">#BFDBFE</color>
+
+    <!-- Peligro -->
+    <color name="danger_text">#DC2626</color>
+    <color name="danger_text_dark">#B91C1C</color>
+    <color name="danger_bg">#FEF2F2</color>
+    <color name="danger_bg_alt">#FDECEE</color>
+    <color name="danger_border">#E6B8BD</color>
+    <color name="danger_border_alt">#FCA5A5</color>
+
+    <!-- Botones de eliminar (danger) -->
+    <color name="delete_btn_1">#AD2434</color>
+    <color name="delete_btn_2">#C83B4A</color>
+    <color name="delete_btn_3">#BB2D3B</color>
+    <color name="delete_btn_4">#DC3545</color>
+
 </resources>
