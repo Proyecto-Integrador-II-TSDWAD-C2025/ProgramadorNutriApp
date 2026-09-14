@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="perfil_badge">PERFIL</string>
+    <string name="perfil_titulo">Completá tu perfil</string>
+    <string name="perfil_descripcion">Estos datos nos ayudan a recomendarte una rutina acorde a tu objetivo y disponibilidad semanal.</string>
+    <string name="volver_dashboard">Volver</string>
+    <string name="guardar_perfil">Guardar perfil</string>
+    <string name="mensaje_perfil_demo">Perfil guardado en modo demostración</string>
+
+    <string name="label_sexo">Sexo biológico</string>
+    <string name="label_edad">Edad</string>
+    <string name="label_peso_actual">Peso actual</string>
+    <string name="label_altura">Altura</string>
+    <string name="label_peso_objetivo">Peso objetivo</string>
+    <string name="label_objetivo">Objetivo físico</string>
+    <string name="label_actividad">Nivel de actividad</string>
+    <string name="label_dias_entrenamiento">Días disponibles por semana</string>
+    <string name="label_preferencia">Preferencia alimenticia</string>
+    <string name="label_limitaciones">Limitaciones físicas o de salud</string>
+    <string name="label_consideraciones_alimentarias">Alergias o consideraciones alimentarias</string>
+
+    <string name="hint_edad">Ejemplo: 18</string>
+    <string name="hint_peso_actual">Ejemplo: 70 kg</string>
+    <string name="hint_altura">Ejemplo: 175 cm</string>
+    <string name="hint_peso_objetivo">Ejemplo: 65 kg</string>
+    <string name="hint_dias_entrenamiento">Ejemplo: 3</string>
+    <string name="hint_opcional">Opcional</string>
+
+    <string-array name="opciones_sexo">
+        <item>Seleccioná tu sexo</item>
+        <item>Masculino</item>
+        <item>Femenino</item>
+    </string-array>
+
+    <string-array name="opciones_objetivo">
+        <item>Seleccioná tu objetivo</item>
+        <item>Bajar grasa corporal</item>
+        <item>Aumentar masa muscular</item>
+        <item>Mantener peso</item>
+        <item>Mejorar hábitos saludables</item>
+    </string-array>
+
+    <string-array name="opciones_actividad">
+        <item>Seleccioná tu nivel</item>
+        <item>Bajo</item>
+        <item>Moderado</item>
+        <item>Alto</item>
+    </string-array>
+
+    <string-array name="opciones_preferencia">
+        <item>Seleccioná una opción</item>
+        <item>Sin preferencia</item>
+        <item>Vegetariana</item>
+        <item>Alta en proteínas</item>
+        <item>Baja en calorías</item>
+    </string-array>
+</resources>
