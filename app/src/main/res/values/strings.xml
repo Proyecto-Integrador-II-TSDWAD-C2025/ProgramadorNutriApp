@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">NutriAppMovil</string>
+    <string name="titulo_contacto">Contacto</string>
+    <string name="label_nombre">Nombre</string>
+    <string name="label_email">Email</string>
+    <string name="label_asunto">Asunto</string>
+    <string name="label_mensaje">Mensaje</string>
+    <string name="boton_enviar">Enviar</string>
+    <string name="hint_nombre">Ingresá tu nombre completo</string>
+    <string name="hint_email">tu@email.com</string>
+    <string name="hint_asunto">Motivo de tu consulta</string>
+    <string name="hint_mensaje">Escribí tu mensaje aquí</string>
 </resources>

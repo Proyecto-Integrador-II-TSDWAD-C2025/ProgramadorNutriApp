@@ -17,9 +17,10 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
+            // TODO: descomentar cuando LoginActivity este disponible en develop
+            // Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+            // startActivity(intent);
+            // finish();
         }, SPLASH_DURATION_MS);
     }
 }
