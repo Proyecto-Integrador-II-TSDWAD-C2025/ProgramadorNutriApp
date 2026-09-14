@@ -24,4 +24,10 @@
     <string name="detalle_merienda">Yogur natural con granola casera y un puñado de nueces</string>
     <string name="comida_cena">Salmón con vegetales al horno</string>
     <string name="detalle_cena">Filete de salmón al horno con zapallo, zanahoria y brócoli</string>
+    <string name="login_title">Iniciar Sesión</string>
+    <string name="login_subtitle">Ingresá tus credenciales para continuar</string>
+    <string name="login_label_email">Correo electrónico</string>
+    <string name="login_label_password">Contraseña</string>
+    <string name="login_button_ingresar">Ingresar</string>
+    <string name="login_button_registrar">Registrarse</string>
 </resources>

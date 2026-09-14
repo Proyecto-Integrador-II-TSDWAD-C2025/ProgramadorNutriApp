@@ -12,33 +12,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NutriAppMovil"
         tools:targetApi="31">
-
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
-
-        <!-- DashboardActivity provisional para testing de MiRutinaActivity -->
+            android:exported="true" /> <!-- DashboardActivity provisional para testing de MiRutinaActivity -->
         <activity
             android:name=".DashboardActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ContactoActivity"
             android:exported="false" />
-
         <activity
             android:name=".SplashActivity"
             android:exported="false" />
-
         <activity
             android:name=".MiPlanAlimenticioActivity"
             android:exported="false" />
-
         <activity
             android:name=".MiRutinaActivity"
             android:exported="false"
