@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    android:padding="24dp"
+    tools:context=".ContactoActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/titulo_contacto"
+        android:textColor="@color/text_heading"
+        android:fontFamily="@font/inter_bold"
+        android:textSize="24sp"
+        android:layout_marginBottom="24dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_nombre"
+        android:textColor="@color/text_secondary"
+        android:fontFamily="@font/inter_medium"
+        android:textSize="14sp"
+        android:layout_marginBottom="4dp" />
+
+    <EditText
+        android:id="@+id/edtNombreContacto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="@string/hint_nombre"
+        android:autofillHints="name"
+        android:padding="13dp"
+        android:background="@drawable/input_fondo"
+        android:fontFamily="@font/inter_regular"
+        android:textColor="@color/text_body"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_email"
+        android:textColor="@color/text_secondary"
+        android:fontFamily="@font/inter_medium"
+        android:textSize="14sp"
+        android:layout_marginBottom="4dp" />
+
+    <EditText
+        android:id="@+id/edtEmailContacto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:hint="@string/hint_email"
+        android:autofillHints="emailAddress"
+        android:padding="13dp"
+        android:background="@drawable/input_fondo"
+        android:fontFamily="@font/inter_regular"
+        android:textColor="@color/text_body"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_asunto"
+        android:textColor="@color/text_secondary"
+        android:fontFamily="@font/inter_medium"
+        android:textSize="14sp"
+        android:layout_marginBottom="4dp" />
+
+    <EditText
+        android:id="@+id/edtAsuntoContacto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="@string/hint_asunto"
+        android:autofillHints=""
+        android:padding="13dp"
+        android:background="@drawable/input_fondo"
+        android:fontFamily="@font/inter_regular"
+        android:textColor="@color/text_body"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_mensaje"
+        android:textColor="@color/text_secondary"
+        android:fontFamily="@font/inter_medium"
+        android:textSize="14sp"
+        android:layout_marginBottom="4dp" />
+
+    <EditText
+        android:id="@+id/edtMensajeContacto"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:inputType="textMultiLine"
+        android:hint="@string/hint_mensaje"
+        android:autofillHints=""
+        android:gravity="top|start"
+        android:padding="13dp"
+        android:background="@drawable/input_fondo"
+        android:fontFamily="@font/inter_regular"
+        android:textColor="@color/text_body"
+        android:layout_marginBottom="24dp" />
+
+    <Button
+        android:id="@+id/btnEnviarContacto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/boton_enviar"
+        android:textColor="@color/white"
+        android:fontFamily="@font/inter_semibold"
+        android:backgroundTint="@color/primary"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp" />
+
+</LinearLayout>

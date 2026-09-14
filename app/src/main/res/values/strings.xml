@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">NutriAppMovil</string>
+    <string name="titulo_contacto">Contacto</string>
+    <string name="label_nombre">Nombre</string>
+    <string name="label_email">Email</string>
+    <string name="label_asunto">Asunto</string>
+    <string name="label_mensaje">Mensaje</string>
+    <string name="boton_enviar">Enviar</string>
+    <string name="hint_nombre">Ingresá tu nombre completo</string>
+    <string name="hint_email">tu@email.com</string>
+    <string name="hint_asunto">Motivo de tu consulta</string>
+    <string name="hint_mensaje">Escribí tu mensaje aquí</string>
+    <string name="titulo_plan_alimenticio">Mi Plan Alimenticio</string>
+    <string name="subtitulo_plan_alimenticio">Plan orientativo del día</string>
+    <string name="tag_desayuno">DESAYUNO</string>
+    <string name="tag_almuerzo">ALMUERZO</string>
+    <string name="tag_merienda">MERIENDA</string>
+    <string name="tag_cena">CENA</string>
+    <string name="comida_desayuno">Avena con frutas</string>
+    <string name="detalle_desayuno">Avena cocida con banana, manzana picada y una cucharada de miel</string>
+    <string name="comida_almuerzo">Pollo grillado con vegetales</string>
+    <string name="detalle_almuerzo">Pechuga de pollo a la plancha con ensalada de vegetales de estación</string>
+    <string name="comida_merienda">Yogur con granola</string>
+    <string name="detalle_merienda">Yogur natural con granola casera y un puñado de nueces</string>
+    <string name="comida_cena">Salmón con vegetales al horno</string>
+    <string name="detalle_cena">Filete de salmón al horno con zapallo, zanahoria y brócoli</string>
 </resources>
