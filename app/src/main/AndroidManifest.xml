@@ -30,6 +30,10 @@
             android:name=".SplashActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".MiPlanAlimenticioActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
