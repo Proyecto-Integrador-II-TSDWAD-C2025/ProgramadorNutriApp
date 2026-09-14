@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/bg_card_exercise"
+    android:padding="26dp">
+
+    <TextView
+        android:id="@+id/tvNombreEjercicio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_semibold"
+        android:textColor="@color/text_heading"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@id/ivCompletado"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Sentadillas con peso corporal" />
+
+    <ImageView
+        android:id="@+id/ivCompletado"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:contentDescription="Completado"
+        android:src="@drawable/bg_completed"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tvDescripcionEjercicio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/inter_regular"
+        android:textColor="@color/text_body"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNombreEjercicio"
+        tools:text="Mantener la espalda recta y bajar hasta que los muslos esten paralelos al suelo." />
+
+    <LinearLayout
+        android:id="@+id/layoutDetalleEjercicio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDescripcionEjercicio">
+
+        <!-- Tag Series/Reps -->
+        <TextView
+            android:id="@+id/tvSeriesReps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_tag_chip"
+            android:fontFamily="@font/inter_medium"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:textColor="@color/primary"
+            android:textSize="12sp"
+            tools:text="3 series x 12-15" />
+
+        <!-- Tag Duracion (alternativa) -->
+        <TextView
+            android:id="@+id/tvDuracion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_tag_chip"
+            android:fontFamily="@font/inter_medium"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:textColor="@color/primary"
+            android:textSize="12sp"
+            android:visibility="gone"
+            tools:text="5 minutos"
+            tools:visibility="visible" />
+
+        <!-- Tag Completado -->
+        <TextView
+            android:id="@+id/tvTagCompletado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_completed"
+            android:fontFamily="@font/inter_medium"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:text="Completado"
+            android:textColor="@color/success_text"
+            android:textSize="12sp"
+            android:visibility="gone"
+            tools:visibility="visible" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

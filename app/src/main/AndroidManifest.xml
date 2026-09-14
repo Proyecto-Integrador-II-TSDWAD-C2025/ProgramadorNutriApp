@@ -15,6 +15,11 @@
 
         <activity
             android:name=".MainActivity"
+            android:exported="true" />
+
+        <!-- DashboardActivity provisional para testing de MiRutinaActivity -->
+        <activity
+            android:name=".DashboardActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,6 +39,10 @@
             android:name=".MiPlanAlimenticioActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".MiRutinaActivity"
+            android:exported="false"
+            android:parentActivityName=".DashboardActivity" />
     </application>
 
 </manifest>
