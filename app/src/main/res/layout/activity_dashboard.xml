@@ -319,6 +319,21 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- Botón de Cerrar Sesión -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:background="@android:color/transparent"
+                android:text="Cerrar sesión"
+                android:textColor="@color/danger_text_dark"
+                android:fontFamily="@font/inter_semibold"
+                android:textAllCaps="false"
+                app:layout_constraintTop_toBottomOf="@id/cardContacto"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
