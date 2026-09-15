@@ -79,6 +79,10 @@ SplashActivity → LoginActivity → DashboardActivity ┬→ MiRutinaActivity
 └→ RegisterActivity ├→ PerfilActivity
 └→ ContactoActivity
 
+## Video de demostración
+
+Video breve mostrando la navegación entre las 8 Activities del Sprint 1:
+https://drive.google.com/file/d/1sPxGSkXx3gr8MmMe8ypwPvnBfQfO5mfR/view
 
 Cada Activity hija permite volver a su Activity padre correspondiente.
 
