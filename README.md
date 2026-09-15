@@ -1,3 +1,36 @@
+# NutriApp — Aplicación Móvil
+
+**NutriApp** es una aplicación móvil nativa en Android que brinda planes personalizados de nutrición y entrenamiento físico, adaptados a las necesidades de cada usuario. Este repositorio contiene el cliente móvil (Java), desarrollado como parte del Proyecto Integrador II — Equipo TERACODE.
+
+La plataforma tiene como objetivo principal ayudar a las personas a mejorar su salud y condición física, ya sea aumentando o disminuyendo su masa corporal, mediante recomendaciones específicas basadas en su perfil.
+
+## Descripción
+
+Este repositorio corresponde al cliente móvil nativo del ecosistema NutriApp, que también cuenta con un backend en Django REST Framework y un frontend web en Angular (repositorio [Programador-Web-TSDWAD-C2025](https://github.com/Proyecto-Integrador-II-TSDWAD-C2025/Programador-Web-TSDWAD-C2025)).
+
+- **App Móvil**: Android nativo (Java)
+- **Backend**: Django REST Framework con MySQL
+- **API**: consumo de endpoints RESTful (a partir del Sprint 2)
+- **Autenticación**: Token Authentication (DRF)
+
+## Características (Sprint 1)
+
+- Navegación completa entre 8 Activities
+- Paleta de colores y tipografía institucional (Inter)
+- Formulario de contacto funcional
+- Ícono y branding propio integrado
+- Estructura de ramas con Pull Requests
+
+## Estructura del proyecto
+
+ProgramadorNutriApp/
+├── app/
+│ ├── src/main/java/com/example/nutriappmovil/ # Activities
+│ ├── src/main/res/layout/ # Layouts XML
+│ ├── src/main/res/values/ # colors.xml, strings.xml
+│ ├── src/main/res/font/ # Tipografía Inter
+│ └── src/main/res/drawable/ # Fondos y formas
+└── README.md
 
 ## Instalación
 
@@ -38,6 +71,16 @@ Alcance del Sprint 1: navegabilidad entre pantallas, sin conexión al backend.
 - **MiPlanAlimenticioActivity** — plan alimenticio del día.
 - **PerfilActivity** — información personal del usuario.
 - **ContactoActivity** — formulario de contacto.
+
+## Mapa de navegación
+
+SplashActivity → LoginActivity → DashboardActivity ┬→ MiRutinaActivity
+│ ├→ MiPlanAlimenticioActivity
+└→ RegisterActivity ├→ PerfilActivity
+└→ ContactoActivity
+
+
+Cada Activity hija permite volver a su Activity padre correspondiente.
 
 ## Próximos pasos
 
