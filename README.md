@@ -1,5 +1,5 @@
 
-## 🛠️ Instalación
+## Instalación
 
 ### Requisitos previos
 
@@ -18,7 +18,7 @@ git clone https://github.com/Proyecto-Integrador-II-TSDWAD-C2025/ProgramadorNutr
 3. Conectar un dispositivo Android por USB (con Depuración USB activada) o usar un emulador.
 4. Ejecutar con el botón **Run** (▶).
 
-## 🌱 Estructura de ramas
+## Estructura de ramas
 
 - `main` — versión estable, entregada al cierre de cada Sprint.
 - `develop` — rama de integración activa del equipo.
@@ -26,7 +26,7 @@ git clone https://github.com/Proyecto-Integrador-II-TSDWAD-C2025/ProgramadorNutr
 
 Todo cambio se integra a `develop` mediante Pull Request (nunca push directo). Al cierre de cada Sprint, `develop` se mergea a `main`.
 
-## 📱 Pantallas (Activities) — Sprint 1
+## Pantallas (Activities) — Sprint 1
 
 Alcance del Sprint 1: navegabilidad entre pantallas, sin conexión al backend.
 
@@ -39,7 +39,7 @@ Alcance del Sprint 1: navegabilidad entre pantallas, sin conexión al backend.
 - **PerfilActivity** — información personal del usuario.
 - **ContactoActivity** — formulario de contacto.
 
-## 🎯 Próximos pasos
+## Próximos pasos
 
 - [ ] Consumir los endpoints del backend Django (relevados en la Clase 03)
 - [ ] Implementar autenticación real con Token Authentication (DRF)
@@ -47,14 +47,14 @@ Alcance del Sprint 1: navegabilidad entre pantallas, sin conexión al backend.
 - [ ] Sumar tests automatizados
 - [ ] Generar el release (APK) para descarga
 
-## 📚 Documentación del proyecto
+## Documentación del proyecto
 
 - [Wiki del repositorio](../../wiki)
 - Especificación de Requisitos de Software (IEEE 830) — ver Wiki
 - Plan de Pruebas y Test Cases — ver página [Testing](../../wiki/Testing)
 - Plan de Seguridad (Ciberseguridad) — ver Wiki
 
-## 👥 Equipo TERACODE
+## Equipo TERACODE
 
 | Integrante | Rol | Responsabilidad (Sprint 1) |
 |---|---|---|
