@@ -30,4 +30,12 @@
     <string name="login_label_password">Contraseña</string>
     <string name="login_button_ingresar">Ingresar</string>
     <string name="login_button_registrar">Registrarse</string>
+
+    <string name="register_title">Crear Cuenta</string>
+    <string name="register_subtitle">Completá tus datos para sumarte a NutriApp</string>
+    <string name="register_label_name">Nombre completo</string>
+    <string name="register_label_email">Correo electrónico</string>
+    <string name="register_label_password">Contraseña</string>
+    <string name="register_button_submit">Registrarme</string>
+    <string name="register_button_back">Ya tengo cuenta, iniciar sesión</string>
 </resources>
