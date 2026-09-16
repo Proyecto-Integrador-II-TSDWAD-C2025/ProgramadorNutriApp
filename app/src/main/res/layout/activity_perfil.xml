@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnVolverPerfil"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_button_secondary"
+            android:fontFamily="@font/inter_semibold"
+            android:minWidth="112dp"
+            android:text="@string/volver_dashboard"
+            android:textAllCaps="false"
+            android:textColor="@color/primary"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/card_fondo"
+            android:orientation="vertical"
+            android:padding="26dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_tag_chip"
+                android:fontFamily="@font/inter_semibold"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="7dp"
+                android:text="@string/perfil_badge"
+                android:textColor="@color/primary"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/perfil_titulo"
+                android:textColor="@color/text_heading"
+                android:textSize="26sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/inter_regular"
+                android:lineSpacingExtra="3dp"
+                android:text="@string/perfil_descripcion"
+                android:textColor="@color/text_secondary"
+                android:textSize="15sp" />
+
+            <TextView
+                style="@style/PerfilLabel"
+                android:text="@string/label_sexo" />
+
+            <Spinner
+                android:id="@+id/spSexo"
+                style="@style/PerfilInput"
+                android:entries="@array/opciones_sexo" />
+
+            <TextView
+                style="@style/PerfilLabel"
+                android:text="@string/label_edad" />
+
+            <EditText
+                android:id="@+id/etEdad"
+                style="@style/PerfilInput"
+                android:hint="@string/hint_edad"
+                android:inputType="number"
+                android:maxLength="3" />
+
+            <TextView
+                style="@style/PerfilLabel"
+                android:text="@string/label_peso_actual" />
+
+            <EditText
+                android:id="@+id/etPesoActual"
+                style="@style/PerfilInput"
+                android:hint="@string/hint_peso_actual"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                style="@style/PerfilLabel"
+                android:text="@string/label_altura" />
+
+            <EditText
+                android:id="@+id/etAltura"
+                style="@style/PerfilInput"
+                android:hint="@string/hint_altura"
+                android:inputType="number"
+                android:maxLength="3" />
+
+            <TextView
+                style="@style/PerfilLabel"
+                android:text="@string/label_peso_objetivo" />
+
+            <EditText
+                android:id="@+id/etPesoObjetivo"
+                style="@style/PerfilInput"
+                android:hint="@string/hint_peso_objetivo"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                style="@style/PerfilLabel"
+                android:text="@string/label_objetivo" />
+
+            <Spinner
+                android:id="@+id/spObjetivo"
+                style="@style/PerfilInput"
+                android:entries="@array/opciones_objetivo" />
+
+            <TextView
+                style="@style/PerfilLabel"
+                android:text="@string/label_actividad" />
+
+            <Spinner
+                android:id="@+id/spActividad"
+                style="@style/PerfilInput"
+                android:entries="@array/opciones_actividad" />
+
+            <TextView
+                style="@style/PerfilLabel"
+                android:text="@string/label_dias_entrenamiento" />
+
+            <EditText
+                android:id="@+id/etDiasEntrenamiento"
+                style="@style/PerfilInput"
+                android:hint="@string/hint_dias_entrenamiento"
+                android:inputType="number"
+                android:maxLength="1" />
+
+            <TextView
+                style="@style/PerfilLabel"
+                android:text="@string/label_preferencia" />
+
+            <Spinner
+                android:id="@+id/spPreferencia"
+                style="@style/PerfilInput"
+                android:entries="@array/opciones_preferencia" />
+
+            <TextView
+                style="@style/PerfilLabel"
+                android:text="@string/label_limitaciones" />
+
+            <EditText
+                android:id="@+id/etLimitaciones"
+                style="@style/PerfilInput"
+                android:gravity="top|start"
+                android:hint="@string/hint_opcional"
+                android:inputType="textCapSentences|textMultiLine"
+                android:minHeight="96dp" />
+
+            <TextView
+                style="@style/PerfilLabel"
+                android:text="@string/label_consideraciones_alimentarias" />
+
+            <EditText
+                android:id="@+id/etConsideracionesAlimentarias"
+                style="@style/PerfilInput"
+                android:gravity="top|start"
+                android:hint="@string/hint_opcional"
+                android:inputType="textCapSentences|textMultiLine"
+                android:minHeight="96dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnGuardarPerfil"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/bg_button_primary"
+                android:fontFamily="@font/inter_semibold"
+                android:text="@string/guardar_perfil"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

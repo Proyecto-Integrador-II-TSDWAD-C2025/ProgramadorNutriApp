@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollDashboard"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="28dp"
+            android:paddingBottom="28dp">
+
+            <!-- Saludo -->
+            <TextView
+                android:id="@+id/tvSaludo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:text="Hola, Catalina 👋"
+                android:textColor="@color/text_heading"
+                android:textSize="26sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Subtitulo -->
+            <TextView
+                android:id="@+id/tvSubtituloDashboard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/inter_regular"
+                android:text="¿Qué querés hacer hoy?"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/tvSaludo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Card: Mi Plan Alimenticio -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cardMiPlanAlimenticio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/card_fondo"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="18dp"
+                app:layout_constraintTop_toBottomOf="@id/tvSubtituloDashboard"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                    android:id="@+id/iconMiPlanAlimenticio"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_icon_circle"
+                    android:gravity="center"
+                    android:text="🍽️"
+                    android:textSize="22sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvTituloPlanAlimenticio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="Mi Plan Alimenticio"
+                    android:textColor="@color/text_heading"
+                    android:textSize="17sp"
+                    app:layout_constraintTop_toTopOf="@id/iconMiPlanAlimenticio"
+                    app:layout_constraintStart_toEndOf="@id/iconMiPlanAlimenticio"
+                    app:layout_constraintEnd_toStartOf="@id/chevronPlanAlimenticio" />
+
+                <TextView
+                    android:id="@+id/tvSubtituloPlanAlimenticio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="Ver tu plan orientativo del día"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"
+                    app:layout_constraintTop_toBottomOf="@id/tvTituloPlanAlimenticio"
+                    app:layout_constraintStart_toEndOf="@id/iconMiPlanAlimenticio"
+                    app:layout_constraintEnd_toStartOf="@id/chevronPlanAlimenticio" />
+
+                <TextView
+                    android:id="@+id/chevronPlanAlimenticio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="›"
+                    android:textColor="@color/text_muted"
+                    android:textSize="22sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Card: Mi Rutina -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cardMiRutina"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/card_fondo"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="18dp"
+                app:layout_constraintTop_toBottomOf="@id/cardMiPlanAlimenticio"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                    android:id="@+id/iconMiRutina"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_icon_circle"
+                    android:gravity="center"
+                    android:text="🏋️"
+                    android:textSize="22sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvTituloMiRutina"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="Mi Rutina"
+                    android:textColor="@color/text_heading"
+                    android:textSize="17sp"
+                    app:layout_constraintTop_toTopOf="@id/iconMiRutina"
+                    app:layout_constraintStart_toEndOf="@id/iconMiRutina"
+                    app:layout_constraintEnd_toStartOf="@id/chevronMiRutina" />
+
+                <TextView
+                    android:id="@+id/tvSubtituloMiRutina"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="Ver los ejercicios de tu rutina asignada"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"
+                    app:layout_constraintTop_toBottomOf="@id/tvTituloMiRutina"
+                    app:layout_constraintStart_toEndOf="@id/iconMiRutina"
+                    app:layout_constraintEnd_toStartOf="@id/chevronMiRutina" />
+
+                <TextView
+                    android:id="@+id/chevronMiRutina"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="›"
+                    android:textColor="@color/text_muted"
+                    android:textSize="22sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Card: Perfil -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cardPerfil"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/card_fondo"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="18dp"
+                app:layout_constraintTop_toBottomOf="@id/cardMiRutina"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                    android:id="@+id/iconPerfil"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_icon_circle"
+                    android:gravity="center"
+                    android:text="👤"
+                    android:textSize="22sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvTituloPerfil"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="Perfil"
+                    android:textColor="@color/text_heading"
+                    android:textSize="17sp"
+                    app:layout_constraintTop_toTopOf="@id/iconPerfil"
+                    app:layout_constraintStart_toEndOf="@id/iconPerfil"
+                    app:layout_constraintEnd_toStartOf="@id/chevronPerfil" />
+
+                <TextView
+                    android:id="@+id/tvSubtituloPerfil"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="Ver y editar tus datos personales"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"
+                    app:layout_constraintTop_toBottomOf="@id/tvTituloPerfil"
+                    app:layout_constraintStart_toEndOf="@id/iconPerfil"
+                    app:layout_constraintEnd_toStartOf="@id/chevronPerfil" />
+
+                <TextView
+                    android:id="@+id/chevronPerfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="›"
+                    android:textColor="@color/text_muted"
+                    android:textSize="22sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Card: Contacto -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cardContacto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/card_fondo"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="18dp"
+                app:layout_constraintTop_toBottomOf="@id/cardPerfil"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                    android:id="@+id/iconContacto"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_icon_circle"
+                    android:gravity="center"
+                    android:text="📞"
+                    android:textSize="22sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvTituloContacto"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="Contacto"
+                    android:textColor="@color/text_heading"
+                    android:textSize="17sp"
+                    app:layout_constraintTop_toTopOf="@id/iconContacto"
+                    app:layout_constraintStart_toEndOf="@id/iconContacto"
+                    app:layout_constraintEnd_toStartOf="@id/chevronContacto" />
+
+                <TextView
+                    android:id="@+id/tvSubtituloContacto"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="Envianos una consulta"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"
+                    app:layout_constraintTop_toBottomOf="@id/tvTituloContacto"
+                    app:layout_constraintStart_toEndOf="@id/iconContacto"
+                    app:layout_constraintEnd_toStartOf="@id/chevronContacto" />
+
+                <TextView
+                    android:id="@+id/chevronContacto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="›"
+                    android:textColor="@color/text_muted"
+                    android:textSize="22sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Botón de Cerrar Sesión -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:background="@android:color/transparent"
+                android:text="Cerrar sesión"
+                android:textColor="@color/danger_text_dark"
+                android:fontFamily="@font/inter_semibold"
+                android:textAllCaps="false"
+                app:layout_constraintTop_toBottomOf="@id/cardContacto"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
