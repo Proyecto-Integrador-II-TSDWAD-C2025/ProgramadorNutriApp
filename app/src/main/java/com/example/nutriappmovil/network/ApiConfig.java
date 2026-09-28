@@ -1,10 +1,11 @@
 package com.example.nutriappmovil.network;
 
+import com.example.nutriappmovil.BuildConfig;
+
 public final class ApiConfig {
 
     private ApiConfig() {
     }
 
-    public static final String BASE_URL =
-            "http://10.0.2.2:8000/api/";
+    public static final String BASE_URL = BuildConfig.API_BASE_URL;
 }

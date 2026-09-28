@@ -2,6 +2,17 @@ plugins {
     id("com.android.application")
 }
 
+// Para generar el APK final: -PNUTRIAPP_RELEASE_API_BASE_URL=https://dominio/api/
+val releaseApiBaseUrl = providers.gradleProperty("NUTRIAPP_RELEASE_API_BASE_URL")
+    .getOrElse("https://example.invalid/api/")
+
+require(releaseApiBaseUrl.startsWith("https://") && releaseApiBaseUrl.endsWith("/")) {
+    "NUTRIAPP_RELEASE_API_BASE_URL debe usar HTTPS y terminar con /."
+}
+
+fun buildConfigString(value: String): String =
+    "\"${value.replace("\\", "\\\\").replace("\"", "\\\"")}\""
+
 android {
     namespace = "com.example.nutriappmovil"
     compileSdk = 33
@@ -14,13 +25,30 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders["usesCleartextTraffic"] = "false"
     }
 
     buildTypes {
+        debug {
+            buildConfigField(
+                "String",
+                "API_BASE_URL",
+                "\"http://10.0.2.2:8000/api/\""
+            )
+            manifestPlaceholders["usesCleartextTraffic"] = "true"
+        }
         release {
             isMinifyEnabled = false
+            buildConfigField(
+                "String",
+                "API_BASE_URL",
+                buildConfigString(releaseApiBaseUrl)
+            )
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+    }
+    buildFeatures {
+        buildConfig = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

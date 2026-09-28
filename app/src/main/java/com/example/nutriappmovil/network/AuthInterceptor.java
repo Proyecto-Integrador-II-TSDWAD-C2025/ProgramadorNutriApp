@@ -23,9 +23,11 @@ public class AuthInterceptor implements Interceptor {
 
         Request originalRequest = chain.request();
 
-        String token = sessionManager.getToken();
+        String authorizationHeader = AuthHeader.fromToken(
+                sessionManager.getToken()
+        );
 
-        if (token == null) {
+        if (authorizationHeader == null) {
             return chain.proceed(originalRequest);
         }
 
@@ -33,7 +35,7 @@ public class AuthInterceptor implements Interceptor {
                 .newBuilder()
                 .header(
                         "Authorization",
-                        "Token " + token
+                        authorizationHeader
                 )
                 .build();
 
