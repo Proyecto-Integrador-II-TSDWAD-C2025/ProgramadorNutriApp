@@ -33,9 +33,9 @@ android {
             buildConfigField(
                 "String",
                 "API_BASE_URL",
-                "\"http://10.0.2.2:8000/api/\""
+                    "\"https://nutriapp-appmovil.up.railway.app/api/\""
             )
-            manifestPlaceholders["usesCleartextTraffic"] = "true"
+            manifestPlaceholders["usesCleartextTraffic"] = "false"
         }
         release {
             isMinifyEnabled = false
