@@ -1,36 +1,43 @@
 package com.example.nutriappmovil;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nutriappmovil.adapter.EjercicioAdapter;
-import com.example.nutriappmovil.data.MockMiRutinaData;
 import com.example.nutriappmovil.model.Asignacion;
+import com.example.nutriappmovil.model.CompletarEjercicioRequest;
+import com.example.nutriappmovil.model.CompletarEjercicioResponse;
 import com.example.nutriappmovil.model.Ejercicio;
 import com.example.nutriappmovil.model.MiRutinaResponse;
 import com.example.nutriappmovil.model.Rutina;
+import com.example.nutriappmovil.network.ApiClient;
+import com.example.nutriappmovil.network.RutinaApiService;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Activity "Mi Rutina".
- * Hija de DashboardActivity. Muestra la rutina asignada al usuario.
- *
- * TODO Sprint futuro: reemplazar MockMiRutinaData.getRutinaCompleta() por la
- * llamada al endpoint GET /api/mi-rutina/ y deserializar directamente en
- * MiRutinaResponse usando Gson.
+ * Conecta con el backend via RutinaApiService.
+ * Maneja estados: carga, sin asignacion, revision, error.
+ * Optimistic UI al completar ejercicios con rollback si falla la API.
  */
 public class MiRutinaActivity extends AppCompatActivity {
 
@@ -46,23 +53,24 @@ public class MiRutinaActivity extends AppCompatActivity {
     private RecyclerView recyclerEjercicios;
     private EjercicioAdapter adapter;
     private Button btnVolver;
+    private View layoutLoading;
+
+    private RutinaApiService rutinaApiService;
+    private final Set<Integer> completandoIds = new HashSet<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mi_rutina);
 
+        rutinaApiService = ApiClient.getClient(this).create(RutinaApiService.class);
+
         initViews();
         setupRecyclerView();
         setupListeners();
+        setupAccessibilityIds();
 
-        // Cargar datos mock. En un sprint futuro se reemplaza por la llamada a la API.
-        MiRutinaResponse response = MockMiRutinaData.getRutinaCompleta();
-        // Para probar otros estados, descomentar una de las siguientes lineas:
-        // MiRutinaResponse response = MockMiRutinaData.getSinAsignacion();
-        // MiRutinaResponse response = MockMiRutinaData.getEnRevision();
-
-        renderizarEstado(response);
+        cargarRutina();
     }
 
     private void initViews() {
@@ -77,24 +85,62 @@ public class MiRutinaActivity extends AppCompatActivity {
         tagDuracion = findViewById(R.id.tagDuracion);
         recyclerEjercicios = findViewById(R.id.recyclerEjercicios);
         btnVolver = findViewById(R.id.btnVolver);
+        layoutLoading = findViewById(R.id.layoutLoading);
     }
 
     private void setupRecyclerView() {
         recyclerEjercicios.setLayoutManager(new LinearLayoutManager(this));
         adapter = new EjercicioAdapter();
+        adapter.setOnEjercicioClickListener((ejercicio, position) -> {
+            onEjercicioClicked(ejercicio, position);
+        });
         recyclerEjercicios.setAdapter(adapter);
     }
 
     private void setupListeners() {
-        btnVolver.setOnClickListener(v -> {
-            // Volver al DashboardActivity cuando este disponible.
-            // Por ahora, finish() devuelve al activity anterior en el stack.
-            // TODO: cuando DashboardActivity este mergeado, se puede usar:
-            // Intent intent = new Intent(this, DashboardActivity.class);
-            // intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            // startActivity(intent);
-            finish();
+        btnVolver.setOnClickListener(v -> finish());
+    }
+
+    private void setupAccessibilityIds() {
+        bannerRevision.setContentDescription("bannerRevision");
+        layoutEmpty.setContentDescription("layoutEmpty");
+        btnVolver.setContentDescription("btnVolver");
+    }
+
+    private void cargarRutina() {
+        mostrarCargando(true);
+
+        rutinaApiService.getMiRutina().enqueue(new Callback<MiRutinaResponse>() {
+            @Override
+            public void onResponse(Call<MiRutinaResponse> call, Response<MiRutinaResponse> response) {
+                mostrarCargando(false);
+                if (response.isSuccessful() && response.body() != null) {
+                    renderizarEstado(response.body());
+                } else {
+                    mostrarError("No se pudo cargar tu rutina. Intenta de nuevo.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MiRutinaResponse> call, Throwable t) {
+                mostrarCargando(false);
+                mostrarError("Error de conexion. Verifica tu red e intenta de nuevo.");
+            }
         });
+    }
+
+    private void mostrarCargando(boolean cargando) {
+        if (layoutLoading != null) {
+            layoutLoading.setVisibility(cargando ? View.VISIBLE : View.GONE);
+        }
+        if (!cargando) {
+            // Nada; el estado se decide en renderizarEstado
+        } else {
+            layoutInfoRutina.setVisibility(View.GONE);
+            recyclerEjercicios.setVisibility(View.GONE);
+            layoutEmpty.setVisibility(View.GONE);
+            bannerRevision.setVisibility(View.GONE);
+        }
     }
 
     private void renderizarEstado(MiRutinaResponse response) {
@@ -106,7 +152,9 @@ public class MiRutinaActivity extends AppCompatActivity {
         // Banner de revision
         if (response.isRequiereRevision()) {
             bannerRevision.setVisibility(View.VISIBLE);
-            tvBannerRevision.setText("Tu rutina esta en revision");
+            tvBannerRevision.setText(response.getMensaje() != null
+                    ? response.getMensaje()
+                    : "Tu rutina esta en revision");
         } else {
             bannerRevision.setVisibility(View.GONE);
         }
@@ -123,6 +171,7 @@ public class MiRutinaActivity extends AppCompatActivity {
     private void mostrarVacio() {
         layoutInfoRutina.setVisibility(View.GONE);
         recyclerEjercicios.setVisibility(View.GONE);
+        bannerRevision.setVisibility(View.GONE);
         layoutEmpty.setVisibility(View.VISIBLE);
     }
 
@@ -139,6 +188,53 @@ public class MiRutinaActivity extends AppCompatActivity {
 
         List<Object> itemsPlanos = construirListaPlana(rutina.getEjercicios());
         adapter.setItems(itemsPlanos);
+    }
+
+    private void onEjercicioClicked(Ejercicio ejercicio, int position) {
+        if (completandoIds.contains(ejercicio.getIdEjercicio())) {
+            return; // Bloquear doble toque
+        }
+
+        completandoIds.add(ejercicio.getIdEjercicio());
+
+        boolean estadoPrevio = ejercicio.isCompletadoHoy();
+        ejercicio.setCompletadoHoy(!estadoPrevio);
+        adapter.updateItem(position, ejercicio);
+
+        rutinaApiService.completarEjercicio(
+                new CompletarEjercicioRequest(ejercicio.getIdEjercicio())
+        ).enqueue(new Callback<CompletarEjercicioResponse>() {
+            @Override
+            public void onResponse(Call<CompletarEjercicioResponse> call,
+                                   Response<CompletarEjercicioResponse> response) {
+                completandoIds.remove(ejercicio.getIdEjercicio());
+                if (response.isSuccessful() && response.body() != null) {
+                    // Confirmado por el backend. Sincronizar estado exacto.
+                    ejercicio.setCompletadoHoy(response.body().isCompletadoHoy());
+                    adapter.updateItem(position, ejercicio);
+                } else {
+                    // Error del servidor: revertir
+                    revertirEstado(ejercicio, position, estadoPrevio);
+                    mostrarError("No se pudo guardar el ejercicio. Intenta de nuevo.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CompletarEjercicioResponse> call, Throwable t) {
+                completandoIds.remove(ejercicio.getIdEjercicio());
+                revertirEstado(ejercicio, position, estadoPrevio);
+                mostrarError("Error de conexion. Se revirtio el cambio.");
+            }
+        });
+    }
+
+    private void revertirEstado(Ejercicio ejercicio, int position, boolean estadoPrevio) {
+        ejercicio.setCompletadoHoy(estadoPrevio);
+        adapter.updateItem(position, ejercicio);
+    }
+
+    private void mostrarError(String mensaje) {
+        Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show();
     }
 
     /**
