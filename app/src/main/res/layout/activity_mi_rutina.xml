@@ -30,6 +30,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Mi Rutina"
+                android:contentDescription="tvTitulo"
                 android:fontFamily="@font/inter_bold"
                 android:textColor="@color/text_heading"
                 android:textSize="26sp"
@@ -217,6 +218,16 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/layoutLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnVolver"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Boton Volver -->
     <androidx.appcompat.widget.AppCompatButton

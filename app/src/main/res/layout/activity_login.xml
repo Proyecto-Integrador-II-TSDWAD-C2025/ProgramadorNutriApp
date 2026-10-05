@@ -49,6 +49,7 @@
         android:fontFamily="@font/inter_regular"
         android:textSize="16sp"
         android:inputType="textEmailAddress"
+        android:contentDescription="etEmail"
         android:layout_marginBottom="16dp"/>
 
     <!-- Label Contraseña -->
@@ -73,6 +74,7 @@
         android:fontFamily="@font/inter_regular"
         android:textSize="16sp"
         android:inputType="textPassword"
+        android:contentDescription="etPassword"
         android:layout_marginBottom="32dp"/>
 
     <!-- Botón Primario: Ingresar -->
@@ -85,6 +87,7 @@
         android:textColor="@color/white"
         android:fontFamily="@font/inter_semibold"
         android:textAllCaps="false"
+        android:contentDescription="btnLogin"
         android:layout_marginBottom="16dp"/>
 
     <!-- Botón Secundario: Registro -->
