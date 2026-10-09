@@ -24,13 +24,13 @@
             android:paddingTop="28dp"
             android:paddingBottom="28dp">
 
-            <!-- Saludo -->
+            <!-- Saludo: el nombre real se completa desde /api/me/ -->
             <TextView
                 android:id="@+id/tvSaludo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_bold"
-                android:text="Hola, Catalina 👋"
+                android:text="Hola 👋"
                 android:textColor="@color/text_heading"
                 android:textSize="26sp"
                 app:layout_constraintTop_toTopOf="parent"
@@ -51,6 +51,72 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
+            <!-- Rol real del usuario (viene de /api/me/). Con texto "Rol: ..." para
+                 que el dato no dependa solo del color del chip -->
+            <TextView
+                android:id="@+id/tvRol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:accessibilityLiveRegion="polite"
+                android:background="@drawable/bg_chip_rol"
+                android:fontFamily="@font/inter_medium"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
+                android:text="Cargando tu perfil…"
+                android:textColor="@color/primary"
+                android:textSize="13sp"
+                app:layout_constraintTop_toBottomOf="@id/tvSubtituloDashboard"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/progressDashboard"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="10dp"
+                android:contentDescription="Cargando tu perfil"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/primary"
+                app:layout_constraintTop_toTopOf="@id/tvRol"
+                app:layout_constraintBottom_toBottomOf="@id/tvRol"
+                app:layout_constraintStart_toEndOf="@id/tvRol" />
+
+            <!-- Error al cargar /api/me/ (oculto por defecto) -->
+            <LinearLayout
+                android:id="@+id/layoutErrorDashboard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/tvRol"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                    android:id="@+id/tvErrorDashboard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:accessibilityLiveRegion="polite"
+                    android:background="@color/danger_bg_alt"
+                    android:fontFamily="@font/inter_regular"
+                    android:padding="12dp"
+                    android:textColor="@color/danger_text_dark"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnReintentar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/inter_semibold"
+                    android:text="Reintentar"
+                    android:textAllCaps="false"
+                    android:textColor="@color/primary" />
+
+            </LinearLayout>
+
             <!-- Card: Mi Plan Alimenticio -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cardMiPlanAlimenticio"
@@ -62,16 +128,18 @@
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
                 android:padding="18dp"
-                app:layout_constraintTop_toBottomOf="@id/tvSubtituloDashboard"
+                app:layout_constraintTop_toBottomOf="@id/layoutErrorDashboard"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
+                <!-- El emoji es decorativo: TalkBack lo saltea y lee solo el título -->
                 <TextView
                     android:id="@+id/iconMiPlanAlimenticio"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="@drawable/bg_icon_circle"
                     android:gravity="center"
+                    android:importantForAccessibility="no"
                     android:text="🍽️"
                     android:textSize="22sp"
                     app:layout_constraintTop_toTopOf="parent"
@@ -109,6 +177,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_regular"
+                    android:importantForAccessibility="no"
                     android:text="›"
                     android:textColor="@color/text_muted"
                     android:textSize="22sp"
@@ -133,12 +202,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
+                <!-- El emoji es decorativo: TalkBack lo saltea y lee solo el título -->
                 <TextView
                     android:id="@+id/iconMiRutina"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="@drawable/bg_icon_circle"
                     android:gravity="center"
+                    android:importantForAccessibility="no"
                     android:text="🏋️"
                     android:textSize="22sp"
                     app:layout_constraintTop_toTopOf="parent"
@@ -176,6 +247,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_regular"
+                    android:importantForAccessibility="no"
                     android:text="›"
                     android:textColor="@color/text_muted"
                     android:textSize="22sp"
@@ -200,12 +272,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
+                <!-- El emoji es decorativo: TalkBack lo saltea y lee solo el título -->
                 <TextView
                     android:id="@+id/iconPerfil"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="@drawable/bg_icon_circle"
                     android:gravity="center"
+                    android:importantForAccessibility="no"
                     android:text="👤"
                     android:textSize="22sp"
                     app:layout_constraintTop_toTopOf="parent"
@@ -243,6 +317,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_regular"
+                    android:importantForAccessibility="no"
                     android:text="›"
                     android:textColor="@color/text_muted"
                     android:textSize="22sp"
@@ -267,12 +342,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
+                <!-- El emoji es decorativo: TalkBack lo saltea y lee solo el título -->
                 <TextView
                     android:id="@+id/iconContacto"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="@drawable/bg_icon_circle"
                     android:gravity="center"
+                    android:importantForAccessibility="no"
                     android:text="📞"
                     android:textSize="22sp"
                     app:layout_constraintTop_toTopOf="parent"
@@ -310,6 +387,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_regular"
+                    android:importantForAccessibility="no"
                     android:text="›"
                     android:textColor="@color/text_muted"
                     android:textSize="22sp"
