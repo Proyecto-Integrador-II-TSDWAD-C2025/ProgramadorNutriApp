@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Opciones fijas del formulario de planes (res/values/plan_options.xml).
+  Cada lista "labels" es lo que ve la persona; "values" es lo que acepta
+  Django (choices de models.py). Mantener el mismo orden en ambas.
+-->
+<resources>
+
+    <string-array name="plan_objetivo_labels">
+        <item>Bajar grasa corporal</item>
+        <item>Mantener peso</item>
+        <item>Aumentar masa muscular</item>
+        <item>Mejorar hábitos saludables</item>
+    </string-array>
+    <string-array name="plan_objetivo_values">
+        <item>bajar_grasa</item>
+        <item>mantener_peso</item>
+        <item>aumentar_masa</item>
+        <item>mejorar_habitos</item>
+    </string-array>
+
+    <string-array name="plan_nivel_actividad_labels">
+        <item>Bajo</item>
+        <item>Moderado</item>
+        <item>Alto</item>
+    </string-array>
+    <string-array name="plan_nivel_actividad_values">
+        <item>bajo</item>
+        <item>moderado</item>
+        <item>alto</item>
+    </string-array>
+
+    <string-array name="plan_preferencia_labels">
+        <item>Todas</item>
+        <item>Vegetariana</item>
+        <item>Alta en proteínas</item>
+        <item>Baja en calorías</item>
+    </string-array>
+    <string-array name="plan_preferencia_values">
+        <item>todas</item>
+        <item>vegetariana</item>
+        <item>alta_proteina</item>
+        <item>baja_calorias</item>
+    </string-array>
+
+</resources>
