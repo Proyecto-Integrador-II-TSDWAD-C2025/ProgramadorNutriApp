@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Chip del rol en el Dashboard. Estilo de la guía: fondo primary_pale + texto primary -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/primary_pale" />
+    <corners android:radius="16dp" />
+</shape>
