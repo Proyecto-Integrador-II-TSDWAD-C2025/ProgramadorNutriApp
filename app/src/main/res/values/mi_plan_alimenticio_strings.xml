@@ -59,4 +59,21 @@
     <string name="plan_alim_estado_completada">Completada hoy</string>
     <string name="plan_alim_estado_pendiente">Pendiente</string>
 
+    <!-- Completar comida: botón de cada tarjeta -->
+    <string name="plan_alim_marcar">Marcar como completada</string>
+    <string name="plan_alim_desmarcar">Desmarcar</string>
+    <string name="plan_alim_guardando">Guardando…</string>
+    <!-- Lo que lee TalkBack en el botón: incluye el nombre de la comida -->
+    <string name="plan_alim_marcar_descripcion">Marcar como completada: %1$s</string>
+    <string name="plan_alim_desmarcar_descripcion">Desmarcar como completada: %1$s</string>
+    <string name="plan_alim_guardando_descripcion">Guardando el cambio de %1$s</string>
+
+    <!-- Completar comida: confirmación y errores -->
+    <string name="plan_alim_confirmacion_marcada">Listo: marcaste %1$s como completada.</string>
+    <string name="plan_alim_confirmacion_desmarcada">Listo: desmarcaste %1$s.</string>
+    <string name="plan_alim_completar_error_red">No pudimos guardar el cambio. Revisá tu conexión e intentá de nuevo.</string>
+    <string name="plan_alim_completar_error_servidor">No pudimos guardar el cambio (código %1$d). Intentá de nuevo.</string>
+    <string name="plan_alim_completar_no_pertenece">Esa comida ya no forma parte de tu plan. Actualizamos el menú.</string>
+    <string name="plan_alim_completar_sin_plan">Ya no tenés un plan activo. Actualizamos la pantalla.</string>
+
 </resources>

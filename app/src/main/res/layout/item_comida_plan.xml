@@ -81,4 +81,19 @@
         android:visibility="gone"
         tools:visibility="visible" />
 
+    <!-- El adapter cambia el texto, el estilo y el contentDescription según el estado.
+         Queda deshabilitado mientras se guarda el cambio. -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCompletarComida"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/bg_button_primary"
+        android:fontFamily="@font/inter_semibold"
+        android:minHeight="48dp"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        tools:text="@string/plan_alim_marcar" />
+
 </LinearLayout>

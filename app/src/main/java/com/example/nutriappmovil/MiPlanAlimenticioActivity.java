@@ -14,14 +14,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nutriappmovil.adapter.ComidaPlanAdapter;
 import com.example.nutriappmovil.adapter.MenuPlanAlimenticio;
+import com.example.nutriappmovil.adapter.SolicitudesEnCurso;
 import com.example.nutriappmovil.model.AsignacionPlan;
+import com.example.nutriappmovil.model.CompletarComidaRequest;
+import com.example.nutriappmovil.model.CompletarComidaResponse;
 import com.example.nutriappmovil.model.MiPlanAlimenticioResponse;
+import com.example.nutriappmovil.model.PlanComida;
 import com.example.nutriappmovil.model.PlanDetalle;
 import com.example.nutriappmovil.network.ApiClient;
 import com.example.nutriappmovil.network.PlanAlimenticioApiService;
 import com.example.nutriappmovil.session.SessionManager;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -31,7 +36,8 @@ import retrofit2.Response;
 /**
  * Activity "Mi Plan Alimenticio". Hija de DashboardActivity.
  * Sprint 2: muestra el plan real del usuario (GET /api/mi-plan-alimenticio/)
- * con sus comidas agrupadas por día.
+ * con sus comidas agrupadas por día, y permite marcar cada comida como
+ * completada (POST /api/mi-plan-alimenticio/completar-comida/).
  *
  * Estados de la pantalla:
  * - Cargando.
@@ -40,6 +46,10 @@ import retrofit2.Response;
  * - En revisión: Django manda "asignacion" en null y un mensaje.
  * - Error de red o del servidor, con Reintentar.
  * - Sesión inválida (401): limpia la sesión y vuelve al Login.
+ *
+ * Completar comida: el endpoint es un alternador (un segundo POST deshace el
+ * primero), así que cada comida admite una sola solicitud a la vez. La tarjeta
+ * cambia al instante y, si la llamada falla, vuelve a su estado anterior.
  */
 public class MiPlanAlimenticioActivity extends AppCompatActivity {
 
@@ -65,6 +75,10 @@ public class MiPlanAlimenticioActivity extends AppCompatActivity {
     private SessionManager sessionManager;
     private PlanAlimenticioApiService planApiService;
     private Call<MiPlanAlimenticioResponse> llamadaPlan;
+    private Call<MiPlanAlimenticioResponse> llamadaSincronizar;
+
+    private final SolicitudesEnCurso comidasEnCurso = new SolicitudesEnCurso();
+    private final List<Call<CompletarComidaResponse>> llamadasCompletar = new ArrayList<>();
 
     // Se activa al ir a Perfil para volver a pedir el plan al regresar
     private boolean recargarAlVolver;
@@ -81,7 +95,7 @@ public class MiPlanAlimenticioActivity extends AppCompatActivity {
                 .getClient(this)
                 .create(PlanAlimenticioApiService.class);
 
-        adapter = new ComidaPlanAdapter();
+        adapter = new ComidaPlanAdapter(comidasEnCurso, this::completarComida);
         recyclerComidas.setLayoutManager(new LinearLayoutManager(this));
         recyclerComidas.setAdapter(adapter);
 
@@ -105,6 +119,14 @@ public class MiPlanAlimenticioActivity extends AppCompatActivity {
         if (llamadaPlan != null) {
             llamadaPlan.cancel();
         }
+        if (llamadaSincronizar != null) {
+            llamadaSincronizar.cancel();
+        }
+        for (Call<CompletarComidaResponse> llamada : llamadasCompletar) {
+            llamada.cancel();
+        }
+        llamadasCompletar.clear();
+        comidasEnCurso.limpiar();
     }
 
     private void inicializarVistas() {
@@ -288,6 +310,134 @@ public class MiPlanAlimenticioActivity extends AppCompatActivity {
         btnEstadoAccion.setOnClickListener(accion);
 
         layoutEstado.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * Marca o desmarca una comida. La tarjeta cambia al instante; cuando
+     * Django responde se confirma con su valor, y si falla se revierte.
+     */
+    private void completarComida(PlanComida planComida) {
+        int idPlanComida = planComida.getIdPlanComida();
+
+        // Ya hay una solicitud para esta comida: un segundo POST la desharía
+        if (!comidasEnCurso.iniciar(idPlanComida)) {
+            return;
+        }
+
+        boolean estadoAnterior = planComida.isCompletadaHoy();
+        String nombre = ComidaPlanAdapter.nombreParaMensajes(
+                planComida,
+                ComidaPlanAdapter.etiquetaTipo(this, planComida.getTipoComida())
+        );
+
+        adapter.actualizarEstado(idPlanComida, !estadoAnterior);
+
+        Call<CompletarComidaResponse> llamada = planApiService.completarComida(
+                new CompletarComidaRequest(idPlanComida)
+        );
+        llamadasCompletar.add(llamada);
+
+        llamada.enqueue(new Callback<CompletarComidaResponse>() {
+            @Override
+            public void onResponse(
+                    Call<CompletarComidaResponse> call,
+                    Response<CompletarComidaResponse> response
+            ) {
+                llamadasCompletar.remove(call);
+                if (call.isCanceled() || isFinishing() || isDestroyed()) {
+                    return;
+                }
+
+                comidasEnCurso.finalizar(idPlanComida);
+
+                if (response.isSuccessful() && response.body() != null) {
+                    // El estado final es el que informa Django
+                    boolean completada = response.body().isCompletadaHoy();
+                    adapter.actualizarEstado(idPlanComida, completada);
+                    avisar(getString(
+                            completada
+                                    ? R.string.plan_alim_confirmacion_marcada
+                                    : R.string.plan_alim_confirmacion_desmarcada,
+                            nombre
+                    ));
+                    return;
+                }
+
+                adapter.actualizarEstado(idPlanComida, estadoAnterior);
+
+                if (response.code() == 401) {
+                    volverAlLogin();
+                } else if (response.code() == 400) {
+                    // La comida ya no pertenece al plan del usuario
+                    avisar(getString(R.string.plan_alim_completar_no_pertenece));
+                    cargarPlan();
+                } else if (response.code() == 404) {
+                    // El usuario ya no tiene un plan activo
+                    avisar(getString(R.string.plan_alim_completar_sin_plan));
+                    cargarPlan();
+                } else {
+                    avisar(getString(R.string.plan_alim_completar_error_servidor, response.code()));
+                    if (response.isSuccessful()) {
+                        // Respondió 2xx sin cuerpo: no sabemos cómo quedó
+                        sincronizarPlan();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CompletarComidaResponse> call, Throwable t) {
+                llamadasCompletar.remove(call);
+                if (call.isCanceled() || isFinishing() || isDestroyed()) {
+                    return;
+                }
+
+                comidasEnCurso.finalizar(idPlanComida);
+                adapter.actualizarEstado(idPlanComida, estadoAnterior);
+                avisar(getString(R.string.plan_alim_completar_error_red));
+
+                // Si se agotó el tiempo de espera, Django pudo haber guardado el
+                // cambio igual. Se vuelve a pedir el plan para no quedar desfasados.
+                sincronizarPlan();
+            }
+        });
+    }
+
+    /**
+     * Vuelve a pedir el plan sin cambiar de estado la pantalla: si la llamada
+     * falla no muestra nada, porque el aviso del error ya se dio.
+     */
+    private void sincronizarPlan() {
+        if (llamadaSincronizar != null) {
+            llamadaSincronizar.cancel();
+        }
+
+        llamadaSincronizar = planApiService.getMiPlan();
+        llamadaSincronizar.enqueue(new Callback<MiPlanAlimenticioResponse>() {
+            @Override
+            public void onResponse(
+                    Call<MiPlanAlimenticioResponse> call,
+                    Response<MiPlanAlimenticioResponse> response
+            ) {
+                if (call.isCanceled() || isFinishing() || isDestroyed()) {
+                    return;
+                }
+
+                if (response.code() == 401) {
+                    volverAlLogin();
+                } else if (response.isSuccessful() && response.body() != null) {
+                    mostrarRespuesta(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MiPlanAlimenticioResponse> call, Throwable t) {
+                // Sin conexión: la pantalla queda como estaba
+            }
+        });
+    }
+
+    private void avisar(String mensaje) {
+        Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show();
     }
 
     private void volverAlLogin() {
