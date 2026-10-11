@@ -20,8 +20,9 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="20dp"
+            android:paddingStart="20dp"
             android:paddingTop="28dp"
+            android:paddingEnd="20dp"
             android:paddingBottom="28dp">
 
             <!-- Saludo: el nombre real se completa desde /api/me/ -->
@@ -61,8 +62,10 @@
                 android:accessibilityLiveRegion="polite"
                 android:background="@drawable/bg_chip_rol"
                 android:fontFamily="@font/inter_medium"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="6dp"
+                android:paddingStart="12dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="6dp"
                 android:text="Cargando tu perfil…"
                 android:textColor="@color/primary"
                 android:textSize="13sp"
@@ -111,6 +114,7 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/inter_semibold"
+                    android:minHeight="48dp"
                     android:text="Reintentar"
                     android:textAllCaps="false"
                     android:textColor="@color/primary" />
@@ -257,9 +261,9 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Card: Guía en video (Activity multimedia) -->
+            <!-- Card: Planes -->
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cardMultimedia"
+                android:id="@+id/cardPlanes"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
@@ -274,46 +278,46 @@
 
                 <!-- El emoji es decorativo: TalkBack lo saltea y lee solo el título -->
                 <TextView
-                    android:id="@+id/iconMultimedia"
+                    android:id="@+id/iconPlanes"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="@drawable/bg_icon_circle"
                     android:gravity="center"
                     android:importantForAccessibility="no"
-                    android:text="🎬"
+                    android:text="📋"
                     android:textSize="22sp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
-                    android:id="@+id/tvTituloMultimediaCard"
+                    android:id="@+id/tvTituloPlanes"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="14dp"
                     android:fontFamily="@font/inter_bold"
-                    android:text="@string/dashboard_multimedia_titulo"
+                    android:text="Planes"
                     android:textColor="@color/text_heading"
                     android:textSize="17sp"
-                    app:layout_constraintTop_toTopOf="@id/iconMultimedia"
-                    app:layout_constraintStart_toEndOf="@id/iconMultimedia"
-                    app:layout_constraintEnd_toStartOf="@id/chevronMultimedia" />
+                    app:layout_constraintTop_toTopOf="@id/iconPlanes"
+                    app:layout_constraintStart_toEndOf="@id/iconPlanes"
+                    app:layout_constraintEnd_toStartOf="@id/chevronPlanes" />
 
                 <TextView
-                    android:id="@+id/tvSubtituloMultimediaCard"
+                    android:id="@+id/tvSubtituloPlanes"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="14dp"
                     android:layout_marginTop="3dp"
                     android:fontFamily="@font/inter_regular"
-                    android:text="@string/dashboard_multimedia_subtitulo"
+                    android:text="Ver los planes alimenticios disponibles"
                     android:textColor="@color/text_secondary"
                     android:textSize="13sp"
-                    app:layout_constraintTop_toBottomOf="@id/tvTituloMultimediaCard"
-                    app:layout_constraintStart_toEndOf="@id/iconMultimedia"
-                    app:layout_constraintEnd_toStartOf="@id/chevronMultimedia" />
+                    app:layout_constraintTop_toBottomOf="@id/tvTituloPlanes"
+                    app:layout_constraintStart_toEndOf="@id/iconPlanes"
+                    app:layout_constraintEnd_toStartOf="@id/chevronPlanes" />
 
                 <TextView
-                    android:id="@+id/chevronMultimedia"
+                    android:id="@+id/chevronPlanes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_regular"
@@ -338,7 +342,7 @@
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
                 android:padding="18dp"
-                app:layout_constraintTop_toBottomOf="@id/cardMultimedia"
+                app:layout_constraintTop_toBottomOf="@id/cardPlanes"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 

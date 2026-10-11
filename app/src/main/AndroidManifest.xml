@@ -55,6 +55,11 @@
             android:name=".PerfilActivity"
             android:exported="false"
             android:parentActivityName=".DashboardActivity" />
+        <activity android:name=".PlanesActivity" android:exported="false"
+            android:parentActivityName=".DashboardActivity" />
+        <activity android:name=".PlanFormActivity" android:exported="false"
+            android:parentActivityName=".PlanesActivity"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>
