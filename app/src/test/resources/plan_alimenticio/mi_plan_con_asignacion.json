@@ -1,0 +1,267 @@
+{
+  "requiere_revision": false,
+  "mensaje": "",
+  "asignacion": {
+    "id_usuario_plan": 2,
+    "fecha_inicio": "2026-10-10",
+    "fecha_fin": "2026-10-23",
+    "estado": "activo",
+    "origen": "orientativo",
+    "motivo": "Sugerencia orientativa segun objetivo bajar grasa corporal y preferencia sin preferencia.",
+    "plan": {
+      "id_plan": 3,
+      "comidas_plan": [
+        {
+          "id_plan_comida": 25,
+          "id_plan": 3,
+          "id_comida": {
+            "id_comida": 1,
+            "nombre": "Yogur natural con avena y fruta",
+            "categoria": "preparacion",
+            "porcion_referencia": "1 bol",
+            "calorias": "340.00",
+            "proteinas": "15.00",
+            "carbohidratos": "52.00",
+            "grasas": "8.00"
+          },
+          "dia": 1,
+          "orden": 1,
+          "tipo_comida": "desayuno",
+          "porcion": "1 bol",
+          "alternativa": "Tostadas integrales con queso y fruta",
+          "completada_hoy": false
+        },
+        {
+          "id_plan_comida": 26,
+          "id_plan": 3,
+          "id_comida": {
+            "id_comida": 5,
+            "nombre": "Pollo con arroz integral y verduras",
+            "categoria": "preparacion",
+            "porcion_referencia": "1 plato",
+            "calorias": "610.00",
+            "proteinas": "42.00",
+            "carbohidratos": "66.00",
+            "grasas": "18.00"
+          },
+          "dia": 1,
+          "orden": 2,
+          "tipo_comida": "almuerzo",
+          "porcion": "1 plato",
+          "alternativa": "Pescado con papa y verduras",
+          "completada_hoy": false
+        },
+        {
+          "id_plan_comida": 27,
+          "id_plan": 3,
+          "id_comida": {
+            "id_comida": 13,
+            "nombre": "Fruta con nueces",
+            "categoria": "grasas_saludables",
+            "porcion_referencia": "1 fruta y 1 punado pequeno",
+            "calorias": "220.00",
+            "proteinas": "5.00",
+            "carbohidratos": "28.00",
+            "grasas": "12.00"
+          },
+          "dia": 1,
+          "orden": 3,
+          "tipo_comida": "merienda",
+          "porcion": "1 porcion",
+          "alternativa": "Yogur natural con semillas",
+          "completada_hoy": false
+        },
+        {
+          "id_plan_comida": 28,
+          "id_plan": 3,
+          "id_comida": {
+            "id_comida": 8,
+            "nombre": "Tortilla de verduras con ensalada",
+            "categoria": "preparacion",
+            "porcion_referencia": "1 plato",
+            "calorias": "430.00",
+            "proteinas": "24.00",
+            "carbohidratos": "32.00",
+            "grasas": "22.00"
+          },
+          "dia": 1,
+          "orden": 4,
+          "tipo_comida": "cena",
+          "porcion": "1 plato",
+          "alternativa": "Ensalada completa con huevo y garbanzos",
+          "completada_hoy": false
+        },
+        {
+          "id_plan_comida": 29,
+          "id_plan": 3,
+          "id_comida": {
+            "id_comida": 3,
+            "nombre": "Avena con banana y nueces",
+            "categoria": "preparacion",
+            "porcion_referencia": "1 bol",
+            "calorias": "410.00",
+            "proteinas": "12.00",
+            "carbohidratos": "61.00",
+            "grasas": "15.00"
+          },
+          "dia": 2,
+          "orden": 1,
+          "tipo_comida": "desayuno",
+          "porcion": "1 bol",
+          "alternativa": "Yogur natural con avena y fruta",
+          "completada_hoy": false
+        },
+        {
+          "id_plan_comida": 30,
+          "id_plan": 3,
+          "id_comida": {
+            "id_comida": 10,
+            "nombre": "Lentejas con arroz y verduras",
+            "categoria": "preparacion",
+            "porcion_referencia": "1 plato",
+            "calorias": "570.00",
+            "proteinas": "24.00",
+            "carbohidratos": "88.00",
+            "grasas": "12.00"
+          },
+          "dia": 2,
+          "orden": 2,
+          "tipo_comida": "almuerzo",
+          "porcion": "1 plato",
+          "alternativa": "Pollo con arroz integral y verduras",
+          "completada_hoy": false
+        },
+        {
+          "id_plan_comida": 31,
+          "id_plan": 3,
+          "id_comida": {
+            "id_comida": 2,
+            "nombre": "Tostadas integrales con queso y fruta",
+            "categoria": "preparacion",
+            "porcion_referencia": "2 tostadas y 1 fruta",
+            "calorias": "360.00",
+            "proteinas": "16.00",
+            "carbohidratos": "52.00",
+            "grasas": "10.00"
+          },
+          "dia": 2,
+          "orden": 3,
+          "tipo_comida": "merienda",
+          "porcion": "1 porcion",
+          "alternativa": "Fruta con nueces",
+          "completada_hoy": false
+        },
+        {
+          "id_plan_comida": 32,
+          "id_plan": 3,
+          "id_comida": {
+            "id_comida": 7,
+            "nombre": "Pescado con papa y verduras",
+            "categoria": "preparacion",
+            "porcion_referencia": "1 plato",
+            "calorias": "560.00",
+            "proteinas": "38.00",
+            "carbohidratos": "54.00",
+            "grasas": "17.00"
+          },
+          "dia": 2,
+          "orden": 4,
+          "tipo_comida": "cena",
+          "porcion": "1 plato",
+          "alternativa": "Tortilla de verduras con ensalada",
+          "completada_hoy": false
+        },
+        {
+          "id_plan_comida": 33,
+          "id_plan": 3,
+          "id_comida": {
+            "id_comida": 2,
+            "nombre": "Tostadas integrales con queso y fruta",
+            "categoria": "preparacion",
+            "porcion_referencia": "2 tostadas y 1 fruta",
+            "calorias": "360.00",
+            "proteinas": "16.00",
+            "carbohidratos": "52.00",
+            "grasas": "10.00"
+          },
+          "dia": 3,
+          "orden": 1,
+          "tipo_comida": "desayuno",
+          "porcion": "1 porcion",
+          "alternativa": "Avena con banana y nueces",
+          "completada_hoy": false
+        },
+        {
+          "id_plan_comida": 34,
+          "id_plan": 3,
+          "id_comida": {
+            "id_comida": 6,
+            "nombre": "Pasta integral con pollo y verduras",
+            "categoria": "preparacion",
+            "porcion_referencia": "1 plato",
+            "calorias": "690.00",
+            "proteinas": "45.00",
+            "carbohidratos": "84.00",
+            "grasas": "18.00"
+          },
+          "dia": 3,
+          "orden": 2,
+          "tipo_comida": "almuerzo",
+          "porcion": "1 plato",
+          "alternativa": "Lentejas con arroz y verduras",
+          "completada_hoy": false
+        },
+        {
+          "id_plan_comida": 35,
+          "id_plan": 3,
+          "id_comida": {
+            "id_comida": 14,
+            "nombre": "Yogur natural con semillas",
+            "categoria": "lacteos",
+            "porcion_referencia": "1 pote y 1 cucharada",
+            "calorias": "190.00",
+            "proteinas": "11.00",
+            "carbohidratos": "20.00",
+            "grasas": "8.00"
+          },
+          "dia": 3,
+          "orden": 3,
+          "tipo_comida": "merienda",
+          "porcion": "1 porcion",
+          "alternativa": "Fruta con nueces",
+          "completada_hoy": false
+        },
+        {
+          "id_plan_comida": 36,
+          "id_plan": 3,
+          "id_comida": {
+            "id_comida": 9,
+            "nombre": "Ensalada completa con huevo y garbanzos",
+            "categoria": "preparacion",
+            "porcion_referencia": "1 plato",
+            "calorias": "520.00",
+            "proteinas": "25.00",
+            "carbohidratos": "58.00",
+            "grasas": "21.00"
+          },
+          "dia": 3,
+          "orden": 4,
+          "tipo_comida": "cena",
+          "porcion": "1 plato",
+          "alternativa": "Tortilla de verduras con ensalada",
+          "completada_hoy": false
+        }
+      ],
+      "codigo": "descenso_equilibrado",
+      "nombre_plan": "Descenso equilibrado",
+      "descripcion": "Ciclo orientativo de tres dias para acompanar un objetivo gradual de descenso de grasa corporal.",
+      "duracion_dias": 14,
+      "calorias_objetivo": "1800.00",
+      "objetivo": "bajar_grasa",
+      "nivel_actividad": "moderado",
+      "preferencia_compatible": "todas",
+      "observaciones": "Plantilla educativa y orientativa. Adaptar antes de una asignacion profesional.",
+      "activo": true
+    }
+  }
+}
