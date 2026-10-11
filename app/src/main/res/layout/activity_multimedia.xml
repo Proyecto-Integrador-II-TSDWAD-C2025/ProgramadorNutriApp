@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".MultimediaActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollMultimedia"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnVolverMultimedia"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:id="@+id/tvTituloMultimedia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/multimedia_titulo"
+                android:textColor="@color/text_heading"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/tvSubtituloMultimedia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/multimedia_subtitulo"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp" />
+
+            <!-- Reproductor en proporción 16:9 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <FrameLayout
+                    android:id="@+id/contenedorVideo"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@color/black"
+                    app:layout_constraintDimensionRatio="16:9"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <VideoView
+                        android:id="@+id/videoMultimedia"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/multimedia_video_descripcion" />
+
+                    <!-- Imagen fija que se ve hasta que empieza la reproducción.
+                         Es decorativa: el contenido está descrito en el texto. -->
+                    <ImageView
+                        android:id="@+id/ivPosterMultimedia"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:importantForAccessibility="no"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/multimedia_poster" />
+
+                    <ProgressBar
+                        android:id="@+id/progressCargandoVideo"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/multimedia_cargando"
+                        android:indeterminate="true"
+                        android:indeterminateTint="@color/white" />
+
+                    <!-- Falla del recurso: tapa el reproductor y ofrece reintentar -->
+                    <LinearLayout
+                        android:id="@+id/layoutErrorVideo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:accessibilityLiveRegion="polite"
+                        android:background="@color/dark_navy"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/tvErrorVideo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_medium"
+                            android:text="@string/multimedia_error"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnReintentarVideo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/bg_button_primary"
+                            android:fontFamily="@font/inter_semibold"
+                            android:minWidth="140dp"
+                            android:minHeight="48dp"
+                            android:paddingHorizontal="20dp"
+                            android:text="@string/multimedia_reintentar"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                </FrameLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Avance: la barra es visual; el texto es lo que lee TalkBack -->
+            <ProgressBar
+                android:id="@+id/progresoVideo"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:importantForAccessibility="no"
+                android:max="100"
+                android:progressTint="@color/primary" />
+
+            <TextView
+                android:id="@+id/tvTiempoVideo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/inter_medium"
+                android:textAlignment="center"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                tools:text="0:05 / 0:25" />
+
+            <!-- Controles con nombre visible -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnReproducirVideo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_button_primary"
+                    android:fontFamily="@font/inter_semibold"
+                    android:minHeight="52dp"
+                    android:text="@string/multimedia_reproducir"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnReiniciarVideo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_button_secondary"
+                    android:contentDescription="@string/multimedia_reiniciar_descripcion"
+                    android:fontFamily="@font/inter_semibold"
+                    android:minHeight="52dp"
+                    android:text="@string/multimedia_reiniciar"
+                    android:textAllCaps="false"
+                    android:textColor="@color/primary"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <!-- El mismo contenido en texto: sirve con TalkBack y si el video falla -->
+            <TextView
+                android:id="@+id/tvTituloContenidoMultimedia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/inter_semibold"
+                android:text="@string/multimedia_titulo_contenido"
+                android:textColor="@color/text_heading"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvContenidoMultimedia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/card_fondo"
+                android:fontFamily="@font/inter_regular"
+                android:lineSpacingExtra="2dp"
+                android:padding="18dp"
+                android:text="@string/multimedia_contenido"
+                android:textColor="@color/text_body"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tvNotaMultimedia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/multimedia_nota"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnVolverMultimedia"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/bg_button_secondary"
+        android:fontFamily="@font/inter_semibold"
+        android:minHeight="52dp"
+        android:text="@string/multimedia_volver"
+        android:textAllCaps="false"
+        android:textColor="@color/primary"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
