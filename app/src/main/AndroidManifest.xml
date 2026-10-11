@@ -44,6 +44,10 @@
             android:name=".MiPlanAlimenticioActivity"
             android:exported="false" />
         <activity
+            android:name=".MultimediaActivity"
+            android:exported="false"
+            android:parentActivityName=".DashboardActivity" />
+        <activity
             android:name=".MiRutinaActivity"
             android:exported="false"
             android:parentActivityName=".DashboardActivity" />
