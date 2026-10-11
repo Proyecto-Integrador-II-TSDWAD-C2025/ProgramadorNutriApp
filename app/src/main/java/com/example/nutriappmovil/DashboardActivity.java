@@ -57,6 +57,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         ConstraintLayout cardMiPlanAlimenticio = findViewById(R.id.cardMiPlanAlimenticio);
         ConstraintLayout cardMiRutina = findViewById(R.id.cardMiRutina);
+        ConstraintLayout cardMultimedia = findViewById(R.id.cardMultimedia);
         ConstraintLayout cardPerfil = findViewById(R.id.cardPerfil);
         ConstraintLayout cardContacto = findViewById(R.id.cardContacto);
         View btnLogout = findViewById(R.id.btnLogout);
@@ -67,6 +68,9 @@ public class DashboardActivity extends AppCompatActivity {
 
         cardMiRutina.setOnClickListener(v ->
                 startActivity(new Intent(DashboardActivity.this, MiRutinaActivity.class)));
+
+        cardMultimedia.setOnClickListener(v ->
+                startActivity(new Intent(DashboardActivity.this, MultimediaActivity.class)));
 
         cardPerfil.setOnClickListener(v ->
                 startActivity(new Intent(DashboardActivity.this, PerfilActivity.class)));
