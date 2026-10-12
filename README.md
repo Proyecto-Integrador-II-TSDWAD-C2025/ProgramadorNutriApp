@@ -21,10 +21,17 @@ en `develop`; esto no certifica su regresión completa ni su despliegue.
 Login/sesión/logout (Fernando) y registro/CRUD de usuarios (Johana) siguen
 pendientes de integración móvil. El token de DRF no es JWT ni expira a las 24 h.
 
-- [Plan de pruebas y pendientes](docs/PLAN_PRUEBAS_SPRINT2.md)
-- [Resultados y evidencia de Perfil](docs/EVIDENCIA_PERFIL_DISPOSITIVO_2026-10-12.md)
-- [Accesibilidad de Perfil](docs/ACCESIBILIDAD_PERFIL.md)
-- [Seguridad: controles y riesgos pendientes](docs/SEGURIDAD_SPRINT2.md)
+- [Captura del reporte de pruebas de Perfil](evidencias/perfil-tests-2026-10-12.jpg)
+- [Planilla y estado de Testing](../../wiki/Testing)
+
+La documentación complementaria y los registros se entregan por separado en
+PDF; se retiró la carpeta `docs` a pedido del equipo. Los originales siguen
+recuperables en el historial de Git (commit `f7de775`).
+La captura corresponde a un reporte basado en la salida real de ADB:
+8/8 pruebas de Perfil, HTTP simulado. No acredita TalkBack, fuente ampliada,
+Appium ni integración contra producción. Adjuntar a la planilla las capturas
+de cada caso ejecutado, con commit/APK, dispositivo, fecha y resultado,
+sin credenciales ni datos personales reales.
 
 ## Características (Sprint 1)
 
@@ -78,9 +85,16 @@ Desde la raíz, en PowerShell con JDK 17 y SDK configurados:
 .\gradlew.bat testDebugUnitTest assembleDebug assembleDebugAndroidTest lintDebug
 ```
 
-Las pruebas unitarias suman 31 casos aprobados; las seis pruebas funcionales
-de Perfil ya se ejecutaron en Samsung SM-A217M/Android 12. Usan HTTP simulado,
-no Railway. Ver [comandos y limitaciones](docs/PRUEBAS_PERFIL.md).
+Las pruebas unitarias suman 31 casos aprobados; la clase de Perfil tiene
+8/8 pruebas aprobadas en Samsung SM-A217M/Android 12 (seis funcionales y
+dos comprobaciones estructurales de accesibilidad), integradas por PR #64.
+Usan HTTP simulado, no Railway. Con ambos APK instalados, ejecutar:
+
+```powershell
+adb shell am instrument -w -r -e class com.example.nutriappmovil.PerfilActivityTest com.example.nutriappmovil.test/androidx.test.runner.AndroidJUnitRunner
+```
+
+TalkBack, fuente ampliada y persistencia real requieren pruebas separadas.
 Appium es una suite diferente: [instrucciones y dependencia de login](appium-tests/README.md).
 
 ### APK de release (preparación, no entrega final)
@@ -142,7 +156,7 @@ Cada Activity hija permite volver a su Activity padre correspondiente.
 - [x] Infraestructura Retrofit/OkHttp y API por HTTPS
 - [x] Consumo de Perfil, Planes, Mi Rutina y Mi Plan Alimenticio integrado
 - [x] Almacenamiento cifrado del token disponible para integrar autenticación
-- [x] Tests unitarios y seis pruebas de pantalla de Perfil aprobadas en dispositivo
+- [x] Tests unitarios y ocho pruebas de Perfil aprobadas en dispositivo
 - [ ] Implementar autenticación real con Token Authentication (DRF)
 - [ ] Integrar registro y CRUD móvil de usuarios
 - [ ] Ejecutar pruebas de pantalla de los demás módulos, TalkBack, Appium y regresión real por rol
@@ -150,8 +164,9 @@ Cada Activity hija permite volver a su Activity padre correspondiente.
 
 El código integrado requiere validación en dispositivo; no equivale a una
 entrega final aprobada. La autenticación y el registro mantienen sus responsables.
-Detalle de implementación, comandos, resultados y pendientes de Perfil:
-[Pruebas de Perfil](docs/PRUEBAS_PERFIL.md).
+Los detalles de implementación y los registros completos de Perfil se entregan
+en los PDF complementarios. La captura enlazada arriba conserva el resultado
+y sus limitaciones; los fallos históricos no se ocultan.
 
 ## Documentación del proyecto
 
