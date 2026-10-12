@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Textos de la pantalla Mi Plan Alimenticio (res/values/mi_plan_alimenticio_strings.xml) -->
+<resources>
+
+    <string name="titulo_plan_alimenticio">Mi Plan Alimenticio</string>
+    <string name="subtitulo_plan_alimenticio">Tu menú orientativo, organizado por día</string>
+    <string name="plan_alim_volver">Volver</string>
+
+    <!-- Estado: cargando -->
+    <string name="plan_alim_cargando">Cargando tu plan alimenticio…</string>
+
+    <!-- Estado: el usuario todavía no completó su perfil (404) -->
+    <string name="plan_alim_sin_perfil_titulo">Primero completá tu perfil</string>
+    <string name="plan_alim_sin_perfil_mensaje">Necesitamos tus datos y tu objetivo para sugerirte un plan alimenticio.</string>
+    <string name="plan_alim_ir_a_perfil">Completar mi perfil</string>
+
+    <!-- Estado: el plan necesita revisión profesional (asignacion en null) -->
+    <string name="plan_alim_revision_titulo">Tu plan está en revisión</string>
+    <string name="plan_alim_revision_mensaje">Un profesional tiene que revisar tu plan antes de mostrarlo. Volvé a consultar más tarde.</string>
+    <string name="plan_alim_actualizar">Actualizar</string>
+
+    <!-- Estado: error -->
+    <string name="plan_alim_error_titulo">No pudimos cargar tu plan</string>
+    <string name="plan_alim_error_red">No hay conexión con el servidor. Revisá tu internet e intentá de nuevo.</string>
+    <string name="plan_alim_error_servidor">El servidor respondió con un error (código %1$d). Intentá de nuevo en unos minutos.</string>
+    <string name="plan_alim_error_inesperado">Recibimos una respuesta que no pudimos interpretar. Intentá de nuevo.</string>
+    <string name="plan_alim_reintentar">Reintentar</string>
+    <string name="plan_alim_sesion_expirada">Tu sesión expiró. Iniciá sesión de nuevo.</string>
+
+    <!-- Datos del plan -->
+    <string name="plan_alim_calorias_dia">%1$s kcal por día</string>
+    <plurals name="plan_alim_duracion_dias">
+        <item quantity="one">%1$d día</item>
+        <item quantity="other">%1$d días</item>
+    </plurals>
+    <string name="plan_alim_origen_orientativo">Sugerencia orientativa</string>
+    <string name="plan_alim_origen_profesional">Asignado por un profesional</string>
+    <string name="plan_alim_vigencia">Vigente del %1$s al %2$s</string>
+
+    <!-- Menú -->
+    <string name="plan_alim_titulo_menu">Menú del plan</string>
+    <string name="plan_alim_menu_vacio">Tu plan todavía no tiene comidas cargadas. Cuando el equipo nutricional arme el menú, lo vas a ver acá.</string>
+    <string name="plan_alim_dia">Día %1$d</string>
+
+    <!-- Tipos de comida: el valor que manda Django es la clave en minúscula -->
+    <string name="plan_alim_tipo_desayuno">Desayuno</string>
+    <string name="plan_alim_tipo_almuerzo">Almuerzo</string>
+    <string name="plan_alim_tipo_merienda">Merienda</string>
+    <string name="plan_alim_tipo_cena">Cena</string>
+    <string name="plan_alim_tipo_snack">Snack</string>
+
+    <!-- Tarjeta de cada comida -->
+    <string name="plan_alim_porcion">Porción: %1$s</string>
+    <string name="plan_alim_macros">%1$s kcal · Proteínas %2$s g · Carbohidratos %3$s g · Grasas %4$s g</string>
+    <string name="plan_alim_alternativa">Alternativa: %1$s</string>
+    <string name="plan_alim_completada">✓ Completada hoy</string>
+
+    <!-- Lo que lee TalkBack al final de cada tarjeta -->
+    <string name="plan_alim_estado_completada">Completada hoy</string>
+    <string name="plan_alim_estado_pendiente">Pendiente</string>
+
+    <!-- Completar comida: botón de cada tarjeta -->
+    <string name="plan_alim_marcar">Marcar como completada</string>
+    <string name="plan_alim_desmarcar">Desmarcar</string>
+    <string name="plan_alim_guardando">Guardando…</string>
+    <!-- Lo que lee TalkBack en el botón: incluye el nombre de la comida -->
+    <string name="plan_alim_marcar_descripcion">Marcar como completada: %1$s</string>
+    <string name="plan_alim_desmarcar_descripcion">Desmarcar como completada: %1$s</string>
+    <string name="plan_alim_guardando_descripcion">Guardando el cambio de %1$s</string>
+
+    <!-- Completar comida: confirmación y errores -->
+    <string name="plan_alim_confirmacion_marcada">Listo: marcaste %1$s como completada.</string>
+    <string name="plan_alim_confirmacion_desmarcada">Listo: desmarcaste %1$s.</string>
+    <string name="plan_alim_completar_error_red">No pudimos guardar el cambio. Revisá tu conexión e intentá de nuevo.</string>
+    <string name="plan_alim_completar_error_servidor">No pudimos guardar el cambio (código %1$d). Intentá de nuevo.</string>
+    <string name="plan_alim_completar_no_pertenece">Esa comida ya no forma parte de tu plan. Actualizamos el menú.</string>
+    <string name="plan_alim_completar_sin_plan">Ya no tenés un plan activo. Actualizamos la pantalla.</string>
+
+</resources>

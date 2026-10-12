@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="28dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnVolverForm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:contentDescription="Volver al listado de planes"
+            android:fontFamily="@font/inter_semibold"
+            android:minHeight="48dp"
+            android:text="‹ Volver"
+            android:textAllCaps="false"
+            android:textColor="@color/primary" />
+
+        <TextView
+            android:id="@+id/tvTituloForm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:text="Nuevo plan"
+            android:textColor="@color/text_heading"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/lblNombrePlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/inter_medium"
+            android:labelFor="@id/etNombrePlan"
+            android:text="Nombre del plan"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/etNombrePlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/plan_input"
+            android:fontFamily="@font/inter_regular"
+            android:hint="Ej: Plan para bajar grasa"
+            android:importantForAutofill="no"
+            android:inputType="textCapSentences"
+            android:maxLength="100"
+            android:minHeight="48dp"
+            android:paddingStart="15dp"
+            android:paddingTop="13dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="13dp"
+            android:textColor="@color/text_body"
+            android:textColorHint="@color/text_muted"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvErrorNombrePlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:accessibilityLiveRegion="polite"
+            android:fontFamily="@font/inter_regular"
+            android:textColor="@color/danger_text_dark"
+            android:textSize="13sp"
+            android:visibility="gone" />
+        <TextView
+            android:id="@+id/lblDescripcionPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/inter_medium"
+            android:labelFor="@id/etDescripcionPlan"
+            android:text="Descripción"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/etDescripcionPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/plan_input"
+            android:fontFamily="@font/inter_regular"
+            android:hint="Contá de qué trata el plan"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine|textCapSentences"
+            android:gravity="top|start"
+            android:minLines="3"
+            android:minHeight="48dp"
+            android:paddingStart="15dp"
+            android:paddingTop="13dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="13dp"
+            android:textColor="@color/text_body"
+            android:textColorHint="@color/text_muted"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvErrorDescripcionPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:accessibilityLiveRegion="polite"
+            android:fontFamily="@font/inter_regular"
+            android:textColor="@color/danger_text_dark"
+            android:textSize="13sp"
+            android:visibility="gone" />
+        <TextView
+            android:id="@+id/lblDuracionPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/inter_medium"
+            android:labelFor="@id/etDuracionPlan"
+            android:text="Duración (días)"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/etDuracionPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/plan_input"
+            android:fontFamily="@font/inter_regular"
+            android:hint="Entre 1 y 365"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:maxLength="3"
+            android:minHeight="48dp"
+            android:paddingStart="15dp"
+            android:paddingTop="13dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="13dp"
+            android:textColor="@color/text_body"
+            android:textColorHint="@color/text_muted"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvErrorDuracionPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:accessibilityLiveRegion="polite"
+            android:fontFamily="@font/inter_regular"
+            android:textColor="@color/danger_text_dark"
+            android:textSize="13sp"
+            android:visibility="gone" />
+        <TextView
+            android:id="@+id/lblCaloriasPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/inter_medium"
+            android:labelFor="@id/etCaloriasPlan"
+            android:text="Calorías objetivo (kcal)"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/etCaloriasPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/plan_input"
+            android:fontFamily="@font/inter_regular"
+            android:hint="Entre 500 y 6000"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal"
+            android:maxLength="7"
+            android:minHeight="48dp"
+            android:paddingStart="15dp"
+            android:paddingTop="13dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="13dp"
+            android:textColor="@color/text_body"
+            android:textColorHint="@color/text_muted"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvErrorCaloriasPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:accessibilityLiveRegion="polite"
+            android:fontFamily="@font/inter_regular"
+            android:textColor="@color/danger_text_dark"
+            android:textSize="13sp"
+            android:visibility="gone" />
+        <TextView
+            android:id="@+id/lblObjetivoPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/inter_medium"
+            android:labelFor="@id/spObjetivo"
+            android:text="Objetivo"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp" />
+
+        <Spinner
+            android:id="@+id/spObjetivo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:minHeight="48dp" />
+        <TextView
+            android:id="@+id/lblNivelActividadPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/inter_medium"
+            android:labelFor="@id/spNivelActividad"
+            android:text="Nivel de actividad"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp" />
+
+        <Spinner
+            android:id="@+id/spNivelActividad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:minHeight="48dp" />
+        <TextView
+            android:id="@+id/lblPreferenciaPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/inter_medium"
+            android:labelFor="@id/spPreferencia"
+            android:text="Preferencia compatible"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp" />
+
+        <Spinner
+            android:id="@+id/spPreferencia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:minHeight="48dp" />
+        <TextView
+            android:id="@+id/lblObservacionesPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/inter_medium"
+            android:labelFor="@id/etObservacionesPlan"
+            android:text="Observaciones (opcional)"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/etObservacionesPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/plan_input"
+            android:fontFamily="@font/inter_regular"
+            android:hint="Notas para quien use el plan"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine|textCapSentences"
+            android:gravity="top|start"
+            android:minLines="2"
+            android:minHeight="48dp"
+            android:paddingStart="15dp"
+            android:paddingTop="13dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="13dp"
+            android:textColor="@color/text_body"
+            android:textColorHint="@color/text_muted"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvErrorObservacionesPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:accessibilityLiveRegion="polite"
+            android:fontFamily="@font/inter_regular"
+            android:textColor="@color/danger_text_dark"
+            android:textSize="13sp"
+            android:visibility="gone" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switchActivoPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/inter_medium"
+            android:minHeight="48dp"
+            android:text="Plan activo (visible para los usuarios)"
+            android:textColor="@color/text_body"
+            android:textSize="15sp" />
+
+        <!-- Errores que no corresponden a un campo: red, permisos, plan inexistente, etc. -->
+        <TextView
+            android:id="@+id/tvErrorGeneralPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:accessibilityLiveRegion="polite"
+            android:background="@color/danger_bg_alt"
+            android:fontFamily="@font/inter_regular"
+            android:padding="12dp"
+            android:textColor="@color/danger_text_dark"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnGuardarPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/plan_btn_primario"
+            android:fontFamily="@font/inter_semibold"
+            android:minHeight="48dp"
+            android:text="Guardar"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCancelarPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/plan_btn_outline"
+            android:fontFamily="@font/inter_semibold"
+            android:minHeight="48dp"
+            android:text="Cancelar"
+            android:textAllCaps="false"
+            android:textColor="@color/primary" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
