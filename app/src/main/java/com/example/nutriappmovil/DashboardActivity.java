@@ -27,7 +27,7 @@ import retrofit2.Response;
  * con estados de carga y error. Si el token es inválido o fue revocado (401),
  * limpia la sesión y vuelve al Login.
  * Desde acá se navega a las Activities hijas: Mi Plan Alimenticio,
- * Mi Rutina, Planes, Perfil y Contacto.
+ * Guía en video, Mi Rutina, Planes, Perfil y Contacto.
  */
 public class DashboardActivity extends AppCompatActivity {
 
@@ -56,6 +56,7 @@ public class DashboardActivity extends AppCompatActivity {
         apiService = ApiClient.getClient(this).create(ApiService.class);
 
         ConstraintLayout cardMiPlanAlimenticio = findViewById(R.id.cardMiPlanAlimenticio);
+        ConstraintLayout cardMultimedia = findViewById(R.id.cardMultimedia);
         ConstraintLayout cardMiRutina = findViewById(R.id.cardMiRutina);
         ConstraintLayout cardPlanes = findViewById(R.id.cardPlanes);
         ConstraintLayout cardPerfil = findViewById(R.id.cardPerfil);
@@ -65,6 +66,9 @@ public class DashboardActivity extends AppCompatActivity {
 
         cardMiPlanAlimenticio.setOnClickListener(v ->
                 startActivity(new Intent(DashboardActivity.this, MiPlanAlimenticioActivity.class)));
+
+        cardMultimedia.setOnClickListener(v ->
+                startActivity(new Intent(DashboardActivity.this, MultimediaActivity.class)));
 
         cardMiRutina.setOnClickListener(v ->
                 startActivity(new Intent(DashboardActivity.this, MiRutinaActivity.class)));
