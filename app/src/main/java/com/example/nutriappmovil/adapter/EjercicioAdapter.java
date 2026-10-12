@@ -24,6 +24,15 @@ public class EjercicioAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private static final int TYPE_EJERCICIO = 1;
 
     private final List<Object> items = new ArrayList<>();
+    private OnEjercicioClickListener listener;
+
+    public interface OnEjercicioClickListener {
+        void onEjercicioClick(Ejercicio ejercicio, int adapterPosition);
+    }
+
+    public void setOnEjercicioClickListener(OnEjercicioClickListener listener) {
+        this.listener = listener;
+    }
 
     public void setItems(List<Object> nuevosItems) {
         items.clear();
@@ -31,6 +40,13 @@ public class EjercicioAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             items.addAll(nuevosItems);
         }
         notifyDataSetChanged();
+    }
+
+    public void updateItem(int position, Object item) {
+        if (position >= 0 && position < items.size()) {
+            items.set(position, item);
+            notifyItemChanged(position);
+        }
     }
 
     @Override
@@ -130,6 +146,18 @@ public class EjercicioAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ivCompletado.setVisibility(View.GONE);
                 itemView.setBackgroundResource(R.drawable.bg_card_exercise);
             }
+
+            // Localizador estable para Appium
+            String estado = ejercicio.isCompletadoHoy() ? "completado" : "pendiente";
+            itemView.setContentDescription(
+                    "Ejercicio: " + ejercicio.getNombre() + ", " + estado
+            );
+
+            itemView.setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.onEjercicioClick(ejercicio, getAdapterPosition());
+                }
+            });
         }
     }
 }
