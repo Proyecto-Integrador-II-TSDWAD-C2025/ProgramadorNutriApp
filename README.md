@@ -88,11 +88,19 @@ Cada Activity hija permite volver a su Activity padre correspondiente.
 
 ## Próximos pasos
 
-- [ ] Consumir los endpoints del backend Django (relevados en la Clase 03)
+- [x] Infraestructura Retrofit/OkHttp y API por HTTPS
+- [x] Consumo de Perfil, Planes, Mi Rutina y Mi Plan Alimenticio integrado
+- [x] Almacenamiento cifrado del token disponible para integrar autenticación
+- [x] Tests unitarios y pruebas de pantalla de Perfil preparadas
 - [ ] Implementar autenticación real con Token Authentication (DRF)
-- [ ] Persistir el token en SharedPreferences / DataStore
-- [ ] Sumar tests automatizados
+- [ ] Integrar registro y CRUD móvil de usuarios
+- [ ] Ejecutar pruebas de pantalla, TalkBack, Appium y regresión real por rol
 - [ ] Generar el release (APK) para descarga
+
+El código integrado requiere validación en dispositivo; no equivale a una
+entrega final aprobada. La autenticación y el registro mantienen sus responsables.
+Detalle de implementación, comandos, resultados y pendientes de Perfil:
+[Pruebas de Perfil](docs/PRUEBAS_PERFIL.md).
 
 ## Documentación del proyecto
 
