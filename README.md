@@ -13,6 +13,19 @@ Este repositorio corresponde al cliente móvil nativo del ecosistema NutriApp, q
 - **API**: consumo de endpoints RESTful (a partir del Sprint 2)
 - **Autenticación**: Token Authentication (DRF)
 
+## Sprint 2 — estado al 12/10/2026
+
+Android (Java/XML) → Retrofit/OkHttp por HTTPS → Django REST Framework → MySQL.
+Perfil, Dashboard/Planes, Rutina y Alimentación tienen consumo de API integrado
+en `develop`; esto no certifica su regresión completa ni su despliegue.
+Login/sesión/logout (Fernando) y registro/CRUD de usuarios (Johana) siguen
+pendientes de integración móvil. El token de DRF no es JWT ni expira a las 24 h.
+
+- [Plan de pruebas y pendientes](docs/PLAN_PRUEBAS_SPRINT2.md)
+- [Resultados y evidencia de Perfil](docs/EVIDENCIA_PERFIL_DISPOSITIVO_2026-10-12.md)
+- [Accesibilidad de Perfil](docs/ACCESIBILIDAD_PERFIL.md)
+- [Seguridad: controles y riesgos pendientes](docs/SEGURIDAD_SPRINT2.md)
+
 ## Características (Sprint 1)
 
 - Navegación completa entre 8 Activities
@@ -23,6 +36,7 @@ Este repositorio corresponde al cliente móvil nativo del ecosistema NutriApp, q
 
 ## Estructura del proyecto
 
+```text
 ProgramadorNutriApp/
 ├── app/
 │ ├── src/main/java/com/example/nutriappmovil/ # Activities
@@ -31,25 +45,56 @@ ProgramadorNutriApp/
 │ ├── src/main/res/font/ # Tipografía Inter
 │ └── src/main/res/drawable/ # Fondos y formas
 └── README.md
+```
 
 ## Instalación
 
 ### Requisitos previos
 
-- Android Studio Giraffe | 2022.3.1
-- JDK 17 (embebido en Giraffe)
+- Android Studio compatible con el Gradle Wrapper del proyecto
+- JDK 17 y Android SDK 33 (compilación)
 - Dispositivo Android con API 24+ o emulador
 
 ### Pasos
 
 ```bash
-git clone https://github.com/Proyecto-Integrador-II-TSDWAD-C2025/ProgramadorNutriApp.git
+git clone -b develop https://github.com/Proyecto-Integrador-II-TSDWAD-C2025/ProgramadorNutriApp.git
 ```
 
-1. Abrir Android Studio Giraffe → **Open** → seleccionar la carpeta clonada.
+1. Abrir Android Studio → **Open** → seleccionar la carpeta clonada.
 2. Esperar la sincronización de Gradle.
 3. Conectar un dispositivo Android por USB (con Depuración USB activada) o usar un emulador.
 4. Ejecutar con el botón **Run** (▶).
+
+### Configuración de API y pruebas
+
+El debug utiliza `https://nutriapp-appmovil.up.railway.app/api/`, definido en
+`app/build.gradle.kts`; `ApiConfig` lo obtiene de `BuildConfig.API_BASE_URL`.
+No guardar tokens, contraseñas ni claves de firma en código o Git.
+
+Desde la raíz, en PowerShell con JDK 17 y SDK configurados:
+
+```powershell
+.\gradlew.bat testDebugUnitTest assembleDebug assembleDebugAndroidTest lintDebug
+```
+
+Las pruebas unitarias suman 31 casos aprobados; las seis pruebas funcionales
+de Perfil ya se ejecutaron en Samsung SM-A217M/Android 12. Usan HTTP simulado,
+no Railway. Ver [comandos y limitaciones](docs/PRUEBAS_PERFIL.md).
+Appium es una suite diferente: [instrucciones y dependencia de login](appium-tests/README.md).
+
+### APK de release (preparación, no entrega final)
+
+```powershell
+.\gradlew.bat assembleRelease -PNUTRIAPP_RELEASE_API_BASE_URL=https://nutriapp-appmovil.up.railway.app/api/
+```
+
+Confirmar primero que esa URL corresponde al backend de producción aprobado.
+No omitir la propiedad: su valor por defecto es `https://example.invalid/api/`.
+El proyecto no configura firma release; este comando produce un APK **sin firmar**.
+Para la entrega, usar Android Studio → Build → Generate Signed Bundle / APK → APK,
+guardar la keystore fuera del repositorio y no compartirla con la evidencia.
+Luego verificar URL, versión, instalación limpia, permisos y recorrido por rol.
 
 ## Estructura de ramas
 
@@ -58,6 +103,10 @@ git clone https://github.com/Proyecto-Integrador-II-TSDWAD-C2025/ProgramadorNutr
 - `feature/nombre-apellido` — rama individual de cada integrante.
 
 Todo cambio se integra a `develop` mediante Pull Request (nunca push directo). Al cierre de cada Sprint, `develop` se mergea a `main`.
+
+Antes de integrar: revisar diff/conflictos, compilar y registrar pruebas del commit.
+No sobrescribir ramas de compañeros ni cerrar issues solo porque compila.
+La publicación en `main`, el deploy, la firma del APK y el video son pasos separados.
 
 ## Pantallas (Activities) — Sprint 1
 
@@ -74,10 +123,12 @@ Alcance del Sprint 1: navegabilidad entre pantallas, sin conexión al backend.
 
 ## Mapa de navegación
 
+```text
 SplashActivity → LoginActivity → DashboardActivity ┬→ MiRutinaActivity
 │ ├→ MiPlanAlimenticioActivity
 └→ RegisterActivity ├→ PerfilActivity
 └→ ContactoActivity
+```
 
 ## Video de demostración
 
@@ -105,7 +156,7 @@ Detalle de implementación, comandos, resultados y pendientes de Perfil:
 ## Documentación del proyecto
 
 - [Wiki del repositorio](../../wiki)
-- Especificación de Requisitos de Software (IEEE 830) — ver Wiki
+- Especificación de Requisitos de Software (IEEE 830) — documentos externos de la Wiki; actualización pendiente de revisar
 - Plan de Pruebas y Test Cases — ver página [Testing](../../wiki/Testing)
 - Plan de Seguridad (Ciberseguridad) — ver Wiki
 
@@ -124,4 +175,4 @@ Detalle de implementación, comandos, resultados y pendientes de Perfil:
 
 **Institución**: Instituto Superior Politécnico Córdoba (ISPC) — Tecnicatura Superior en Desarrollo Web y Aplicaciones Digitales — Proyecto Integrador II
 
-**Última actualización**: Septiembre 2026
+**Última actualización**: 12/10/2026

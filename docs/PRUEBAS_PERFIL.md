@@ -72,6 +72,14 @@ manualmente ambos APK, se ejecutó la clase con AndroidJUnitRunner por ADB.
 No confundir estas pruebas con Appium, accesibilidad manual ni integración
 contra MySQL: las respuestas HTTP están simuladas en memoria.
 
+### Ampliación de accesibilidad (en revisión)
+
+La rama `feature/PabloRomero` incluye dos comprobaciones estructurales y
+ajustes acotados al layout de Perfil. La clase completa suma **8/8 PASS** en
+el mismo Samsung; [registro y salida real](EVIDENCIA_ACCESIBILIDAD_PERFIL_2026-10-12.md).
+Las seis pruebas anteriores siguen siendo el antecedente integrado por PR #62.
+TalkBack y fuente ampliada no se dan por aprobados con estos tests.
+
 ## Regresión real pendiente
 
 Cuando se integre el login real, usar una cuenta de pruebas: cargar, editar,

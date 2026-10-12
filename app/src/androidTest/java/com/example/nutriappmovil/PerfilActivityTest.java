@@ -1,6 +1,7 @@
 package com.example.nutriappmovil;
 
 import android.os.SystemClock;
+import android.graphics.drawable.GradientDrawable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,8 @@ import androidx.test.espresso.UiController;
 import androidx.test.espresso.ViewAction;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.core.graphics.ColorUtils;
+import androidx.core.view.ViewCompat;
 
 import com.example.nutriappmovil.network.ApiClient;
 import com.google.gson.Gson;
@@ -36,6 +39,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.*;
@@ -123,7 +127,7 @@ public class PerfilActivityTest {
         abrirPerfilNuevo();
         completarFormulario();
         putCode.set(400);
-        onView(withId(R.id.btnGuardarPerfil)).perform(scrollTo(), click());
+        pulsarGuardar();
         esperarEstado(R.string.perfil_revisar_datos);
         onView(withId(R.id.etEdad)).check(matches(hasErrorText("Edad rechazada por la API")));
         onView(withId(R.id.btnGuardarPerfil)).check(matches(isEnabled()));
@@ -133,12 +137,12 @@ public class PerfilActivityTest {
         abrirPerfilNuevo();
         completarFormulario();
         putCode.set(500);
-        onView(withId(R.id.btnGuardarPerfil)).perform(scrollTo(), click());
+        pulsarGuardar();
         esperarEstado(R.string.perfil_error_guardado);
         onView(withId(R.id.etPesoActual)).check(matches(withText("78,00")));
         onView(withId(R.id.btnGuardarPerfil)).check(matches(isEnabled()));
         putCode.set(200);
-        onView(withId(R.id.btnGuardarPerfil)).perform(scrollTo(), click());
+        pulsarGuardar();
         esperarEstado(R.string.perfil_guardado);
         onView(withId(R.id.etPesoActual)).check(matches(withText("78.00")));
     }
@@ -166,12 +170,75 @@ public class PerfilActivityTest {
         abrirPerfilNuevo();
         completarFormulario();
         scenario.onActivity(activity -> ((EditText) activity.findViewById(R.id.etEdad)).setText("12"));
-        onView(withId(R.id.btnGuardarPerfil)).perform(scrollTo(), click());
+        pulsarGuardar();
         esperarEstado(R.string.perfil_revisar_datos);
         String message = InstrumentationRegistry.getInstrumentation().getTargetContext()
                 .getString(R.string.perfil_error_edad);
         onView(withId(R.id.etEdad)).check(matches(hasErrorText(message)));
         assertEquals(0, putRequests.get());
+    }
+
+    @Test public void etiquetasEncabezadoYAlturaAdaptableEstanConfigurados() {
+        abrirPerfilNuevo();
+        scenario.onActivity(activity -> {
+            int[] fields = {R.id.spSexo, R.id.etEdad, R.id.etPesoActual, R.id.etAltura,
+                    R.id.etPesoObjetivo, R.id.spObjetivo, R.id.spActividad,
+                    R.id.etDiasEntrenamiento, R.id.spPreferencia, R.id.etLimitaciones,
+                    R.id.etConsideracionesAlimentarias};
+            View root = activity.findViewById(android.R.id.content);
+            for (int id : fields) assertTrue("Falta etiqueta para " + id, tieneEtiqueta(root, id));
+            assertTrue(ViewCompat.isAccessibilityHeading(activity.findViewById(R.id.tvTituloPerfil)));
+            assertEquals(View.ACCESSIBILITY_LIVE_REGION_POLITE,
+                    activity.findViewById(R.id.tvEstadoPerfil).getAccessibilityLiveRegion());
+            View volver = activity.findViewById(R.id.btnVolverPerfil);
+            assertEquals(android.view.ViewGroup.LayoutParams.WRAP_CONTENT, volver.getLayoutParams().height);
+            assertTrue(volver.getHeight() / activity.getResources().getDisplayMetrics().density >= 48f);
+        });
+    }
+
+    @Test public void guardarMantieneContrasteNormalYPresionado() {
+        abrirPerfilNuevo();
+        scenario.onActivity(activity -> {
+            Button guardar = activity.findViewById(R.id.btnGuardarPerfil);
+            for (boolean pressed : new boolean[] {false, true}) {
+                guardar.setPressed(pressed);
+                GradientDrawable fondo = (GradientDrawable) guardar.getBackground().getCurrent();
+                assertNotNull(fondo.getColor());
+                double contraste = ColorUtils.calculateContrast(
+                        guardar.getCurrentTextColor(), fondo.getColor().getDefaultColor());
+                assertTrue("Contraste insuficiente: " + contraste, contraste >= 4.5);
+            }
+            guardar.setPressed(false);
+            assertEquals(0, putRequests.get());
+        });
+    }
+
+    private boolean tieneEtiqueta(View view, int fieldId) {
+        if (view instanceof TextView && view.getLabelFor() == fieldId
+                && ((TextView) view).getText().length() > 0) return true;
+        if (view instanceof android.view.ViewGroup) {
+            android.view.ViewGroup group = (android.view.ViewGroup) view;
+            for (int i = 0; i < group.getChildCount(); i++) {
+                if (tieneEtiqueta(group.getChildAt(i), fieldId)) return true;
+            }
+        }
+        return false;
+    }
+
+    private void pulsarGuardar() {
+        onView(isRoot()).perform(closeSoftKeyboard());
+        onView(withId(R.id.btnGuardarPerfil)).perform(scrollTo(), new ViewAction() {
+            @Override public Matcher<View> getConstraints() { return isAssignableFrom(View.class); }
+            @Override public String getDescription() { return "Esperar boton visible tras scroll"; }
+            @Override public void perform(UiController controller, View view) {
+                long deadline = SystemClock.uptimeMillis() + 5000;
+                do {
+                    if (isDisplayingAtLeast(90).matches(view)) return;
+                    controller.loopMainThreadForAtLeast(20);
+                } while (SystemClock.uptimeMillis() < deadline);
+                throw new AssertionError("Guardar no es alcanzable despues del scroll");
+            }
+        }, click());
     }
 
     private void abrirPerfilNuevo() {
