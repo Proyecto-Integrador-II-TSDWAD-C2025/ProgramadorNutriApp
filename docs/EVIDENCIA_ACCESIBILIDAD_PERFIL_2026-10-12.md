@@ -6,6 +6,10 @@
 - Rama: `docs/pablo-cierre-sprint2`, basada en develop `545f224`.
 - APK debug SHA-256: `893B50ADC70D61D5E56A84B6B7790A0AA74F5A16BF65E87AE89028DF62C919F8`.
 
+Los mismos commits y evidencias se incorporaron posteriormente mediante
+fast-forward a `feature/PabloRomero`, rama de trabajo y origen del PR a develop.
+La referencia anterior conserva la rama histórica donde se ejecutaron las pruebas.
+
 ## Resultado observado
 
 **8/8 PASS**, `OK (8 tests)`, 11,936 s. Se conservan los seis casos

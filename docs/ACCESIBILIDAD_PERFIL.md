@@ -25,7 +25,7 @@ Las respuestas HTTP están simuladas; no se toca Railway.
 
 Resultado en Samsung SM-A217M/Android 12: **8/8 PASS** (seis funcionales y
 dos estructurales). Ver [registro y limitaciones](EVIDENCIA_ACCESIBILIDAD_PERFIL_2026-10-12.md).
-Esta ampliación está en la rama `docs/pablo-cierre-sprint2`; no dar por integrado
+Esta ampliación está en la rama `feature/PabloRomero`; no dar por integrado
 el cambio a develop hasta que se apruebe su PR.
 
 ## Recorrido manual pendiente

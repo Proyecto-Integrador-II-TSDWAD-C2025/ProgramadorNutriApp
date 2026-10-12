@@ -74,7 +74,7 @@ contra MySQL: las respuestas HTTP están simuladas en memoria.
 
 ### Ampliación de accesibilidad (en revisión)
 
-La rama `docs/pablo-cierre-sprint2` añade dos comprobaciones estructurales y
+La rama `feature/PabloRomero` incluye dos comprobaciones estructurales y
 ajustes acotados al layout de Perfil. La clase completa suma **8/8 PASS** en
 el mismo Samsung; [registro y salida real](EVIDENCIA_ACCESIBILIDAD_PERFIL_2026-10-12.md).
 Las seis pruebas anteriores siguen siendo el antecedente integrado por PR #62.
