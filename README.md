@@ -91,10 +91,10 @@ Cada Activity hija permite volver a su Activity padre correspondiente.
 - [x] Infraestructura Retrofit/OkHttp y API por HTTPS
 - [x] Consumo de Perfil, Planes, Mi Rutina y Mi Plan Alimenticio integrado
 - [x] Almacenamiento cifrado del token disponible para integrar autenticación
-- [x] Tests unitarios y pruebas de pantalla de Perfil preparadas
+- [x] Tests unitarios y seis pruebas de pantalla de Perfil aprobadas en dispositivo
 - [ ] Implementar autenticación real con Token Authentication (DRF)
 - [ ] Integrar registro y CRUD móvil de usuarios
-- [ ] Ejecutar pruebas de pantalla, TalkBack, Appium y regresión real por rol
+- [ ] Ejecutar pruebas de pantalla de los demás módulos, TalkBack, Appium y regresión real por rol
 - [ ] Generar el release (APK) para descarga
 
 El código integrado requiere validación en dispositivo; no equivale a una

@@ -63,9 +63,14 @@ Con un dispositivo conectado o emulador iniciado:
 .\gradlew.bat connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.example.nutriappmovil.PerfilActivityTest
 ```
 
-Estas pruebas de pantalla compilan, pero su ejecución quedó pendiente: el
-emulador local requiere un controlador de virtualización no instalado.
-No confundirlas con Appium ni con una prueba de integración contra MySQL.
+Ejecución en dispositivo realizada el 12/10/2026: Samsung SM-A217M,
+Android 12 (API 31), commit `05ba3a8923f0f26bbc3ac9d7838b057288209b05`.
+Resultado: **6/6 aprobadas**, `OK (6 tests)`, duración informada 10,088 s.
+El primer intento con Gradle se abortó sin ejecutar casos; tras instalar
+manualmente ambos APK, se ejecutó la clase con AndroidJUnitRunner por ADB.
+[Evidencia y comando de ejecución](EVIDENCIA_PERFIL_DISPOSITIVO_2026-10-12.md).
+No confundir estas pruebas con Appium, accesibilidad manual ni integración
+contra MySQL: las respuestas HTTP están simuladas en memoria.
 
 ## Regresión real pendiente
 
