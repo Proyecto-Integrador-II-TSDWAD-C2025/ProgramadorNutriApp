@@ -78,7 +78,7 @@ public class EjercicioAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             ((HeaderViewHolder) holder).bind(diaTexto);
         } else if (holder instanceof EjercicioViewHolder) {
             Ejercicio ejercicio = (Ejercicio) items.get(position);
-            ((EjercicioViewHolder) holder).bind(ejercicio);
+            ((EjercicioViewHolder) holder).bind(ejercicio, listener);
         }
     }
 
@@ -118,7 +118,7 @@ public class EjercicioAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             ivCompletado = itemView.findViewById(R.id.ivCompletado);
         }
 
-        void bind(Ejercicio ejercicio) {
+        void bind(Ejercicio ejercicio, OnEjercicioClickListener listener) {
             tvNombreEjercicio.setText(ejercicio.getNombre());
             tvDescripcionEjercicio.setText(ejercicio.getDescripcion());
 
@@ -154,8 +154,9 @@ public class EjercicioAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             );
 
             itemView.setOnClickListener(v -> {
-                if (listener != null) {
-                    listener.onEjercicioClick(ejercicio, getAdapterPosition());
+                int position = getAdapterPosition();
+                if (listener != null && position != RecyclerView.NO_POSITION) {
+                    listener.onEjercicioClick(ejercicio, position);
                 }
             });
         }
