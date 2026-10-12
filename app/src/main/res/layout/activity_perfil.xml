@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -13,7 +14,8 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnVolverPerfil"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
             android:background="@drawable/bg_button_secondary"
             android:fontFamily="@font/inter_semibold"
             android:minWidth="112dp"
@@ -42,9 +44,11 @@
                 android:textSize="13sp" />
 
             <TextView
+                android:id="@+id/tvTituloPerfil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
+                android:accessibilityHeading="true"
                 android:fontFamily="@font/inter_bold"
                 android:text="@string/perfil_titulo"
                 android:textColor="@color/text_heading"
@@ -212,7 +216,8 @@
                 android:layout_height="wrap_content"
                 android:minHeight="54dp"
                 android:layout_marginTop="24dp"
-                android:background="@drawable/bg_button_primary"
+                android:background="@drawable/bg_button_perfil_primary"
+                app:backgroundTint="@null"
                 android:fontFamily="@font/inter_semibold"
                 android:text="@string/guardar_perfil"
                 android:textAllCaps="false"
