@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.nutriappmovil.perfil.RetrofitPerfilRepositoryTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-10-13T23:12:46" hostname="ROMERO" time="0.227">
+  <properties/>
+  <testcase name="respuesta400_conservaErroresPorCampo" classname="com.example.nutriappmovil.perfil.RetrofitPerfilRepositoryTest" time="0.201"/>
+  <testcase name="respuesta500_devuelveErrorHttpSinRomperElRepositorio" classname="com.example.nutriappmovil.perfil.RetrofitPerfilRepositoryTest" time="0.005"/>
+  <testcase name="actualizarPerfil_enviaPutConContratoDeDjango" classname="com.example.nutriappmovil.perfil.RetrofitPerfilRepositoryTest" time="0.016"/>
+  <testcase name="respuesta200_convierteJsonEnPerfil" classname="com.example.nutriappmovil.perfil.RetrofitPerfilRepositoryTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
