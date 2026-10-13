@@ -7,5 +7,5 @@ public final class ApiConfig {
     private ApiConfig() {
     }
 
-    public static final String BASE_URL = BuildConfig.API_BASE_URL;
+    public static final String BASE_URL = "https://nutriapp-appmovil.up.railway.app/api/";
 }

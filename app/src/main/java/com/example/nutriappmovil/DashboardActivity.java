@@ -84,14 +84,21 @@ public class DashboardActivity extends AppCompatActivity {
 
         btnReintentar.setOnClickListener(v -> cargarUsuario());
 
-        // Flujo de navegación para el Logout (el logout real contra el backend
-        // lo implementa quien tiene a cargo login/logout)
+        // Flujo de navegación para el Logout real contra el backend
         btnLogout.setOnClickListener(v -> {
-            Intent intent = new Intent(DashboardActivity.this, LoginActivity.class);
-            // FLAG_ACTIVITY_NEW_TASK y FLAG_ACTIVITY_CLEAR_TASK borran las activities anteriores del historial
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
+            progressDashboard.setVisibility(View.VISIBLE);
+
+            apiService.logout().enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    cerrarSesionLocal();
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    cerrarSesionLocal();
+                }
+            });
         });
 
         cargarUsuario();
@@ -118,7 +125,6 @@ public class DashboardActivity extends AppCompatActivity {
                 }
 
                 if (response.code() == 401) {
-                    // Token inválido, vencido o revocado
                     volverAlLogin();
                 } else if (!response.isSuccessful() || response.body() == null) {
                     mostrarError("No pudimos cargar tus datos (código " + response.code() + ").");
@@ -171,7 +177,15 @@ public class DashboardActivity extends AppCompatActivity {
         finish();
     }
 
-    /** "administrador" -> "Administrador" */
+    private void cerrarSesionLocal() {
+        sessionManager.clearSession();
+
+        Intent intent = new Intent(DashboardActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
     private String etiquetaRol(String rol) {
         if (rol == null || rol.isEmpty()) {
             return "sin rol";
