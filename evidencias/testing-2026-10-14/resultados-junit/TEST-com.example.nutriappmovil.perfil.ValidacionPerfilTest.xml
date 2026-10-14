@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.nutriappmovil.perfil.ValidacionPerfilTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-10-14T23:55:08" hostname="ROMERO" time="0.001">
+  <properties/>
+  <testcase name="edadEnLimiteInferior_aceptaTrece" classname="com.example.nutriappmovil.perfil.ValidacionPerfilTest" time="0.0"/>
+  <testcase name="rechazaNoFinitosExponentesYSufijosJavaAntesDeSerializar" classname="com.example.nutriappmovil.perfil.ValidacionPerfilTest" time="0.0"/>
+  <testcase name="aceptaComaPuntoYLimitesDePeso" classname="com.example.nutriappmovil.perfil.ValidacionPerfilTest" time="0.001"/>
+  <testcase name="edadFueraDeFormato_rechazaTexto" classname="com.example.nutriappmovil.perfil.ValidacionPerfilTest" time="0.0"/>
+  <testcase name="aceptaLimitesDeEdadYDias" classname="com.example.nutriappmovil.perfil.ValidacionPerfilTest" time="0.0"/>
+  <testcase name="rechazaEnterosVaciosFraccionariosODesbordados" classname="com.example.nutriappmovil.perfil.ValidacionPerfilTest" time="0.0"/>
+  <testcase name="edadVacia_rechazaCampoObligatorio" classname="com.example.nutriappmovil.perfil.ValidacionPerfilTest" time="0.0"/>
+  <testcase name="edadValida_aceptaValorInterior" classname="com.example.nutriappmovil.perfil.ValidacionPerfilTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
