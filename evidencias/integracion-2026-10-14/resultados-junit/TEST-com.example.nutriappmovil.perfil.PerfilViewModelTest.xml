@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.nutriappmovil.perfil.PerfilViewModelTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-10-15T02:16:16" hostname="ROMERO" time="0.61">
+  <properties/>
+  <testcase name="respuesta200SinPerfil_noConfirmaExitoFalso" classname="com.example.nutriappmovil.perfil.PerfilViewModelTest" time="0.6"/>
+  <testcase name="respuestaValida_publicaPerfilListo" classname="com.example.nutriappmovil.perfil.PerfilViewModelTest" time="0.003"/>
+  <testcase name="dobleCargaEnCurso_noDuplicaSolicitud" classname="com.example.nutriappmovil.perfil.PerfilViewModelTest" time="0.002"/>
+  <testcase name="falloDeConexion_publicaErrorRecuperable" classname="com.example.nutriappmovil.perfil.PerfilViewModelTest" time="0.001"/>
+  <testcase name="respuesta404_permiteCrearPerfil" classname="com.example.nutriappmovil.perfil.PerfilViewModelTest" time="0.003"/>
+  <testcase name="respuesta500_publicaErrorSinPerfil" classname="com.example.nutriappmovil.perfil.PerfilViewModelTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,53 @@
+{
+  "proyecto": "NutriApp",
+  "equipo": "TERACODE",
+  "fecha_local": "2026-10-14",
+  "zona_horaria": "America/Buenos_Aires",
+  "rama": "feature/PabloRomero",
+  "codigo_probado": "1aaf993f056bb958a47d941977ae618048e07d3e",
+  "develop_incorporado": "a4ac44cda6a8562e69e457a459ebe3d1ac7c4d8b",
+  "aporte_previo_integrado": "PR #72 de Johana: Registro y CRUD de usuarios",
+  "integridad": "Los archivos de Johana son identicos a origin/develop; este incremento no los modifica.",
+  "compilacion_y_jvm": {
+    "comando": ".\\gradlew.bat testDebugUnitTest assembleDebug assembleDebugAndroidTest --no-daemon --max-workers=2",
+    "resultado_gradle": "BUILD SUCCESSFUL in 22s; 61 actionable tasks: 16 executed, 45 up-to-date",
+    "hora_reporte_local": "23:16:17",
+    "tests": 45,
+    "fallos": 0,
+    "errores": 0,
+    "omitidos": 0,
+    "estado": "PASS",
+    "nota": "Incluye 1 ExampleUnitTest. No representa 45 recorridos completos de negocio.",
+    "reporte": "reporte-gradle/index.html",
+    "xml": "resultados-junit/",
+    "captura": "01-resumen-jvm.jpg"
+  },
+  "android": {
+    "estado": "PASS",
+    "comando": ".\\gradlew.bat connectedDebugAndroidTest -Pandroid.experimental.androidTest.useUnifiedTestPlatform=false -Pandroid.testInstrumentationRunnerArguments.class=com.example.nutriappmovil.PerfilActivityTest,com.example.nutriappmovil.perfil.PerfilFlujoTest --no-daemon --max-workers=2",
+    "dispositivo": "Samsung SM-A217M, Android 12/API 31, fisico",
+    "alcance": "PerfilActivityTest y PerfilFlujoTest; HTTP interceptado y datos sinteticos, sin Railway",
+    "tests": 9,
+    "fallos": 0,
+    "errores": 0,
+    "omitidos": 0,
+    "resultado_gradle": "BUILD SUCCESSFUL in 2m 43s; 57 actionable tasks: 1 executed, 56 up-to-date",
+    "timestamp_xml_utc": "2026-10-15T02:20:01",
+    "hora_reporte_local": "23:20:01",
+    "reporte": "reporte-android/index.html",
+    "xml": "resultados-android/TEST-Perfil-Android12.xml",
+    "captura_real": "TC-PER-UI-01-guardado.png",
+    "origen_captura": "Tras la limpieza automatica del ejecutor legacy se reinstalaron los mismos APK y se repitio directamente PerfilFlujoTest#datosValidos_guardaPerfilYCapturaResultado. AndroidJUnitRunner: OK (1 test), 14.385 segundos. Captura del 14/10 a las 23:23.",
+    "limpieza_del_ejecutor": "El ejecutor legacy retiro los APK al finalizar, eliminando sus datos locales y la primera captura. Se reinstalaron app debug y APK de tests; la cuenta remota y Railway no fueron modificados. Puede requerir iniciar sesion nuevamente.",
+    "accesibilidad": "AccessibilityChecks.enable() en PerfilFlujoTest; sin errores que hagan fallar el flujo. No es una auditoria completa.",
+    "ejecutor": "Parametro legacy solo en esta ejecucion por la incompatibilidad protobuf de UTP observada anteriormente; no se cambia gradle.properties."
+  },
+  "apk_debug_sha256": "AEBBA39620CF88D3B193C47ECC4C1E6FDB8A436C163966FC9AFC7D15CA636B16",
+  "apk_tests_sha256": "FF9AE82EC55C49D89B7D5E6283F48FAF9972C68D3D22DA3618848B4998CABC90",
+  "limites": [
+    "No se accedio a Railway/MySQL durante estas suites.",
+    "No se valida CRUD de usuarios, login/registro reales, expiracion remota del token, Appium, Scanner, TalkBack ni APK release.",
+    "La tarjeta Administrar usuarios sin comprobacion de rol es un pendiente previo de develop y no se corrige en este aporte.",
+    "No se modifica main. Las advertencias de APIs y Gradle obsoletos siguen presentes."
+  ]
+}

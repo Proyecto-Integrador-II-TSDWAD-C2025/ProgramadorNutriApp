@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuite name="com.example.nutriappmovil.perfil.PerfilFlujoTest" tests="9" failures="0" errors="0" skipped="0" time="24656.0" timestamp="2026-10-15T02:20:01" hostname="localhost">
+  <properties>
+    <property name="device" value="SM-A217M - 12" />
+    <property name="flavor" value="" />
+    <property name="project" value=":app" />
+  </properties>
+  <testcase name="datosValidos_guardaPerfilYCapturaResultado" classname="com.example.nutriappmovil.perfil.PerfilFlujoTest" time="14.063" />
+  <testcase name="etiquetasEncabezadoYAlturaAdaptableEstanConfigurados" classname="com.example.nutriappmovil.PerfilActivityTest" time="0.661" />
+  <testcase name="dobleClickNoDuplicaPutYLaRotacionConservaEdicion" classname="com.example.nutriappmovil.PerfilActivityTest" time="1.273" />
+  <testcase name="falloDeGuardadoConservaDatosYPermiteReintentar" classname="com.example.nutriappmovil.PerfilActivityTest" time="1.426" />
+  <testcase name="validacionLocalNoEnviaValoresFueraDeRango" classname="com.example.nutriappmovil.PerfilActivityTest" time="1.118" />
+  <testcase name="guardarMantieneContrasteNormalYPresionado" classname="com.example.nutriappmovil.PerfilActivityTest" time="2.16" />
+  <testcase name="sesionInvalidaBloqueaEdicionSinCambiarLogin" classname="com.example.nutriappmovil.PerfilActivityTest" time="0.612" />
+  <testcase name="cargaFallidaBloqueaGuardadoYPermiteReintentar" classname="com.example.nutriappmovil.PerfilActivityTest" time="0.919" />
+  <testcase name="muestraError400EnElCampoCorrespondiente" classname="com.example.nutriappmovil.PerfilActivityTest" time="2.213" />
+</testsuite>
