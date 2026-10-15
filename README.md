@@ -1,119 +1,124 @@
-# NutriApp — Aplicación Móvil
+# NutriApp - Equipo TERACODE
 
-**NutriApp** es una aplicación móvil nativa en Android que brinda planes personalizados de nutrición y entrenamiento físico, adaptados a las necesidades de cada usuario. Este repositorio contiene el cliente móvil (Java), desarrollado como parte del Proyecto Integrador II — Equipo TERACODE.
+Aplicación Android para consultar y gestionar información nutricional y de
+entrenamiento. Desarrollada para el Proyecto Integrador II del Instituto Superior
+Politécnico Córdoba (ISPC), en la Tecnicatura Superior en Desarrollo Web y
+Aplicaciones Digitales.
 
-La plataforma tiene como objetivo principal ayudar a las personas a mejorar su salud y condición física, ya sea aumentando o disminuyendo su masa corporal, mediante recomendaciones específicas basadas en su perfil.
+## Objetivo y alcance
 
-## Descripción
+NutriApp reúne el perfil personal, los planes alimenticios y las rutinas de
+ejercicios en una interfaz móvil. El alcance del proyecto contempla:
 
-Este repositorio corresponde al cliente móvil nativo del ecosistema NutriApp, que también cuenta con un backend en Django REST Framework y un frontend web en Angular (repositorio [Programador-Web-TSDWAD-C2025](https://github.com/Proyecto-Integrador-II-TSDWAD-C2025/Programador-Web-TSDWAD-C2025)).
+- Registro, autenticación, sesión y acceso según el rol.
+- Panel principal, perfil personal, alimentación, rutina y contacto.
+- Gestión de usuarios y planes con permisos del servidor.
+- Registro de comidas y ejercicios completados.
+- Contenido multimedia de apoyo.
 
-- **App Móvil**: Android nativo (Java)
-- **Backend**: Django REST Framework con MySQL
-- **API**: consumo de endpoints RESTful (a partir del Sprint 2)
-- **Autenticación**: Token Authentication (DRF)
+El cierre de la integración y la validación de la versión de entrega están
+pendientes. El alcance describe el producto; no certifica la aprobación de
+todos sus recorridos.
 
-## Características (Sprint 1)
+## Arquitectura y tecnologías
 
-- Navegación completa entre 8 Activities
-- Paleta de colores y tipografía institucional (Inter)
-- Formulario de contacto funcional
-- Ícono y branding propio integrado
-- Estructura de ramas con Pull Requests
-
-## Estructura del proyecto
-
-ProgramadorNutriApp/
-├── app/
-│ ├── src/main/java/com/example/nutriappmovil/ # Activities
-│ ├── src/main/res/layout/ # Layouts XML
-│ ├── src/main/res/values/ # colors.xml, strings.xml
-│ ├── src/main/res/font/ # Tipografía Inter
-│ └── src/main/res/drawable/ # Fondos y formas
-└── README.md
-
-## Instalación
-
-### Requisitos previos
-
-- Android Studio Giraffe | 2022.3.1
-- JDK 17 (embebido en Giraffe)
-- Dispositivo Android con API 24+ o emulador
-
-### Pasos
-
-```bash
-git clone https://github.com/Proyecto-Integrador-II-TSDWAD-C2025/ProgramadorNutriApp.git
+```text
+Android (Java / XML)
+        |
+ API REST / HTTPS
+        |
+Django REST Framework
+        |
+      MySQL
 ```
 
-1. Abrir Android Studio Giraffe → **Open** → seleccionar la carpeta clonada.
-2. Esperar la sincronización de Gradle.
-3. Conectar un dispositivo Android por USB (con Depuración USB activada) o usar un emulador.
-4. Ejecutar con el botón **Run** (▶).
+El ecosistema incluye un cliente web Angular, disponible junto al backend en
+[Programador-Web-TSDWAD-C2025](https://github.com/Proyecto-Integrador-II-TSDWAD-C2025/Programador-Web-TSDWAD-C2025).
 
-## Estructura de ramas
+El cliente móvil utiliza AndroidX/Material, Retrofit, OkHttp y Gson.
+La API emplea Token Authentication de Django REST Framework.
+La interfaz utiliza la identidad visual del proyecto y la tipografía Inter.
 
-- `main` — versión estable, entregada al cierre de cada Sprint.
-- `develop` — rama de integración activa del equipo.
-- `feature/nombre-apellido` — rama individual de cada integrante.
+## Instalación y ejecución
 
-Todo cambio se integra a `develop` mediante Pull Request (nunca push directo). Al cierre de cada Sprint, `develop` se mergea a `main`.
+Requisitos: Android Studio compatible con el Gradle Wrapper, JDK 17,
+Android SDK 33 y un dispositivo o emulador con Android API 24 o superior.
 
-## Pantallas (Activities) — Sprint 1
+```powershell
+git clone -b develop https://github.com/Proyecto-Integrador-II-TSDWAD-C2025/ProgramadorNutriApp.git
+```
 
-Alcance del Sprint 1: navegabilidad entre pantallas, sin conexión al backend.
+1. Abrir el proyecto en Android Studio.
+2. Configurar el SDK y esperar la sincronización de Gradle.
+3. Conectar un dispositivo con depuración USB o iniciar un emulador.
+4. Seleccionar el módulo `app` y ejecutar la aplicación.
 
-- **SplashActivity** — pantalla de bienvenida.
-- **LoginActivity** — inicio de sesión.
-- **RegisterActivity** — registro de nuevos usuarios.
-- **DashboardActivity** — panel principal con accesos a las demás secciones.
-- **MiRutinaActivity** — rutina de entrenamiento del usuario.
-- **MiPlanAlimenticioActivity** — plan alimenticio del día.
-- **PerfilActivity** — información personal del usuario.
-- **ContactoActivity** — formulario de contacto.
+La URL de desarrollo se define en `app/build.gradle.kts` y se expone mediante
+`BuildConfig.API_BASE_URL`. El dispositivo necesita acceso a Internet y al
+backend configurado.
 
-## Mapa de navegación
+## Estructura del repositorio
 
-SplashActivity → LoginActivity → DashboardActivity ┬→ MiRutinaActivity
-│ ├→ MiPlanAlimenticioActivity
-└→ RegisterActivity ├→ PerfilActivity
-└→ ContactoActivity
+```text
+app/
+  src/main/java/com/example/nutriappmovil/
+    adapter/     Adaptadores de interfaz
+    data/        Soporte de datos
+    model/       Modelos y contratos de datos
+    multimedia/  Componentes multimedia
+    network/     Servicios y configuración de API
+    perfil/      Lógica de soporte del perfil
+    session/     Gestión local de sesión
+  src/main/res/      Layouts, estilos y recursos
+  src/test/          Pruebas automatizadas
+  src/androidTest/   Pruebas instrumentadas
+appium-tests/        Automatización end-to-end
+```
 
-## Video de demostración
+## Desarrollo y calidad
 
-Video breve mostrando la navegación entre las 8 Activities del Sprint 1:
-https://drive.google.com/file/d/1sPxGSkXx3gr8MmMe8ypwPvnBfQfO5mfR/view
+- `feature/<integrante>`: trabajo individual.
+- `develop`: integración mediante Pull Requests.
+- `main`: versión estable aprobada para la entrega.
 
-Cada Activity hija permite volver a su Activity padre correspondiente.
+Las revisiones contemplan funcionamiento, validaciones, errores de red,
+permisos, accesibilidad y protección de datos. Los casos, resultados y
+capturas se registran en la planilla de Testing.
 
-## Próximos pasos
+## Distribución y seguridad
 
-- [ ] Consumir los endpoints del backend Django (relevados en la Clase 03)
-- [ ] Implementar autenticación real con Token Authentication (DRF)
-- [ ] Persistir el token en SharedPreferences / DataStore
-- [ ] Sumar tests automatizados
-- [ ] Generar el release (APK) para descarga
+El APK de entrega debe estar firmado y utilizar la URL HTTPS del backend
+aprobado. Su publicación y la validación del despliegue están pendientes.
 
-## Documentación del proyecto
+Para preparar la compilación, sustituir el dominio por el del entorno aprobado:
 
-- [Wiki del repositorio](../../wiki)
-- Especificación de Requisitos de Software (IEEE 830) — ver Wiki
-- Plan de Pruebas y Test Cases — ver página [Testing](../../wiki/Testing)
-- Plan de Seguridad (Ciberseguridad) — ver Wiki
+```powershell
+.\gradlew.bat assembleRelease -PNUTRIAPP_RELEASE_API_BASE_URL=https://dominio-aprobado/api/
+```
+
+La compilación no sustituye la configuración de firma. No distribuir un APK
+sin firmar ni usar la URL de ejemplo incluida por defecto.
+Credenciales, tokens, archivos `.env` y claves de firma deben permanecer
+fuera del repositorio y de las evidencias.
+
+## Documentación y entrega
+
+La [Wiki del proyecto](https://github.com/Proyecto-Integrador-II-TSDWAD-C2025/ProgramadorNutriApp/wiki) reúne la documentación general.
+El [índice de documentación y pendientes](https://github.com/Proyecto-Integrador-II-TSDWAD-C2025/ProgramadorNutriApp/wiki/Documentación-y-entrega)
+identifica los documentos disponibles y los entregables por completar.
+
+- [ ] Actualizar y validar la especificación de requisitos IEEE 830.
+- [ ] Publicar el plan de pruebas final y cerrar la planilla con capturas.
+- [ ] Completar los informes de accesibilidad y automatización Appium.
+- [ ] Actualizar el plan de ciberseguridad para la versión de entrega.
+- [ ] Completar actas y trazabilidad del Sprint 2.
+- [ ] Publicar guía de despliegue, APK firmado y video final.
+
+Los documentos pendientes no se consideran entregados ni aprobados.
 
 ## Equipo TERACODE
 
-| Integrante | Rol | Responsabilidad (Sprint 1) |
-|---|---|---|
-| Fernandez, Ariel | Developer / Administrador del repositorio | Splash, Contacto, Mi Plan Alimenticio |
-| Andreoli, Fernando | Developer | Login |
-| Acosta, Johana | Developer | Registro |
-| Rodas, Ma. Catalina | Developer | Dashboard |
-| Nieto, Tomás | Developer | Mi Rutina |
-| Romero, Pablo | Scrum Master | Perfil |
+Ariel Fernandez, Fernando Andreoli, Johana Vanessa Acosta,
+Ma. Catalina Rodas, Tomás Nieto y Pablo Romero.
 
----
-
-**Institución**: Instituto Superior Politécnico Córdoba (ISPC) — Tecnicatura Superior en Desarrollo Web y Aplicaciones Digitales — Proyecto Integrador II
-
-**Última actualización**: Septiembre 2026
+Última actualización documental: 12/10/2026.

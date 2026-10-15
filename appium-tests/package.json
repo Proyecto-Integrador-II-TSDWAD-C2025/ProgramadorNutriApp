@@ -1,0 +1,19 @@
+{
+  "name": "nutriapp-appium-tests",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Smoke tests E2E para NutriApp Android usando WebdriverIO + Appium",
+  "scripts": {
+    "test": "wdio run wdio.conf.js",
+    "test:smoke": "wdio run wdio.conf.js --spec test/specs/smoke-mi-rutina.e2e.js"
+  },
+  "devDependencies": {
+    "@wdio/cli": "^8.39.0",
+    "@wdio/local-runner": "^8.39.0",
+    "@wdio/mocha-framework": "^8.39.0",
+    "@wdio/spec-reporter": "^8.39.0",
+    "webdriverio": "^8.39.0",
+    "dotenv": "^16.4.5",
+    "axios": "^1.7.2"
+  }
+}

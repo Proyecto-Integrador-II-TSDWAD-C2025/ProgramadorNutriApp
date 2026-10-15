@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.nutriappmovil.perfil.ErroresPerfilTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-15T02:16:16" hostname="ROMERO" time="0.004">
+  <properties/>
+  <testcase name="ignoraEstructurasNoCompatibles" classname="com.example.nutriappmovil.perfil.ErroresPerfilTest" time="0.003"/>
+  <testcase name="respuestasVaciasHTMLONoObjetoNoRompenElFormulario" classname="com.example.nutriappmovil.perfil.ErroresPerfilTest" time="0.001"/>
+  <testcase name="extraeErroresPorCampoDeDRF" classname="com.example.nutriappmovil.perfil.ErroresPerfilTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

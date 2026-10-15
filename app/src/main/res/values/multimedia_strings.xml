@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Textos de la pantalla multimedia y de su tarjeta en el Dashboard
+     (res/values/multimedia_strings.xml) -->
+<resources>
+
+    <string name="multimedia_titulo">Guía en video</string>
+    <string name="multimedia_subtitulo">Cómo armar un plato equilibrado</string>
+    <string name="multimedia_volver">Volver</string>
+
+    <!-- Reproductor -->
+    <string name="multimedia_video_descripcion">Video: cómo armar un plato equilibrado. Dura 25 segundos y no tiene sonido.</string>
+    <string name="multimedia_cargando">Cargando el video…</string>
+    <string name="multimedia_error">No pudimos reproducir el video. Su contenido está escrito más abajo.</string>
+    <string name="multimedia_reintentar">Reintentar</string>
+
+    <!-- Controles: el texto visible y lo que lee TalkBack -->
+    <string name="multimedia_reproducir">Reproducir</string>
+    <string name="multimedia_pausar">Pausar</string>
+    <string name="multimedia_reiniciar">Reiniciar</string>
+    <string name="multimedia_reproducir_descripcion">Reproducir el video</string>
+    <string name="multimedia_pausar_descripcion">Pausar el video</string>
+    <string name="multimedia_reiniciar_descripcion">Reiniciar el video desde el principio</string>
+
+    <!-- Tiempo: "0:05 / 0:25" -->
+    <string name="multimedia_tiempo">%1$s / %2$s</string>
+    <string name="multimedia_tiempo_descripcion">Tiempo de reproducción: %1$s de %2$s</string>
+
+    <!-- Contenido del video en texto, para quien no puede verlo o si falla -->
+    <string name="multimedia_titulo_contenido">Qué muestra el video</string>
+    <string name="multimedia_contenido">Un plato equilibrado se arma en tres partes:\n\n• La mitad, verduras y frutas de distintos colores.\n\n• Un cuarto, proteínas, como pollo, pescado, huevo o legumbres.\n\n• El cuarto restante, cereales integrales, como arroz o pasta.\n\nAcompañalo con agua.</string>
+    <string name="multimedia_nota">El video no tiene sonido. Las imágenes fueron generadas con inteligencia artificial y son orientativas: no reemplazan la indicación de un profesional.</string>
+
+    <!-- Tarjeta del Dashboard -->
+    <string name="dashboard_multimedia_titulo">Guía en video</string>
+    <string name="dashboard_multimedia_subtitulo">Cómo armar un plato equilibrado</string>
+
+</resources>

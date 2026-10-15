@@ -24,6 +24,15 @@ public class EjercicioAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private static final int TYPE_EJERCICIO = 1;
 
     private final List<Object> items = new ArrayList<>();
+    private OnEjercicioClickListener listener;
+
+    public interface OnEjercicioClickListener {
+        void onEjercicioClick(Ejercicio ejercicio, int adapterPosition);
+    }
+
+    public void setOnEjercicioClickListener(OnEjercicioClickListener listener) {
+        this.listener = listener;
+    }
 
     public void setItems(List<Object> nuevosItems) {
         items.clear();
@@ -31,6 +40,13 @@ public class EjercicioAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             items.addAll(nuevosItems);
         }
         notifyDataSetChanged();
+    }
+
+    public void updateItem(int position, Object item) {
+        if (position >= 0 && position < items.size()) {
+            items.set(position, item);
+            notifyItemChanged(position);
+        }
     }
 
     @Override
@@ -62,7 +78,7 @@ public class EjercicioAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             ((HeaderViewHolder) holder).bind(diaTexto);
         } else if (holder instanceof EjercicioViewHolder) {
             Ejercicio ejercicio = (Ejercicio) items.get(position);
-            ((EjercicioViewHolder) holder).bind(ejercicio);
+            ((EjercicioViewHolder) holder).bind(ejercicio, listener);
         }
     }
 
@@ -102,7 +118,7 @@ public class EjercicioAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             ivCompletado = itemView.findViewById(R.id.ivCompletado);
         }
 
-        void bind(Ejercicio ejercicio) {
+        void bind(Ejercicio ejercicio, OnEjercicioClickListener listener) {
             tvNombreEjercicio.setText(ejercicio.getNombre());
             tvDescripcionEjercicio.setText(ejercicio.getDescripcion());
 
@@ -130,6 +146,19 @@ public class EjercicioAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ivCompletado.setVisibility(View.GONE);
                 itemView.setBackgroundResource(R.drawable.bg_card_exercise);
             }
+
+            // Localizador estable para Appium
+            String estado = ejercicio.isCompletadoHoy() ? "completado" : "pendiente";
+            itemView.setContentDescription(
+                    "Ejercicio: " + ejercicio.getNombre() + ", " + estado
+            );
+
+            itemView.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if (listener != null && position != RecyclerView.NO_POSITION) {
+                    listener.onEjercicioClick(ejercicio, position);
+                }
+            });
         }
     }
 }

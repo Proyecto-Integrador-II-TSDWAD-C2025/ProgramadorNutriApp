@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.nutriappmovil.multimedia.FormatoTiempoTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-10-14T23:55:07" hostname="ROMERO" time="0.001">
+  <properties/>
+  <testcase name="minutosYSegundos_tomaUnValorNegativoComoCero" classname="com.example.nutriappmovil.multimedia.FormatoTiempoTest" time="0.0"/>
+  <testcase name="minutosYSegundos_completaLosSegundosConCero" classname="com.example.nutriappmovil.multimedia.FormatoTiempoTest" time="0.001"/>
+  <testcase name="porcentaje_noSeSaleDelRango" classname="com.example.nutriappmovil.multimedia.FormatoTiempoTest" time="0.0"/>
+  <testcase name="porcentaje_calculaElAvance" classname="com.example.nutriappmovil.multimedia.FormatoTiempoTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

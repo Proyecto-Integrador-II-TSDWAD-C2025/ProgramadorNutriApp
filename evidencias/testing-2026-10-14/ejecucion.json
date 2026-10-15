@@ -1,0 +1,50 @@
+{
+  "proyecto": "NutriApp",
+  "equipo": "TERACODE",
+  "fecha": "2026-10-14",
+  "zona_horaria_del_reporte": "America/Buenos_Aires",
+  "hora_generacion_gradle": "20:55:08",
+  "rama": "feature/PabloRomero",
+  "codigo_probado": "d8e50c01cee3873e6bddd28ffce495bc87f60997",
+  "develop_incorporado": "5b96434a45bbdf47d7841923b1cdcda9371b87db",
+  "entorno": "Windows, JDK 17.0.6, Gradle 8.7; JVM y HTTP simulado sobre loopback",
+  "comando_ejecutado": ".\\gradlew.bat testDebugUnitTest assembleDebug assembleDebugAndroidTest --rerun-tasks --no-daemon --max-workers=2",
+  "resultado_gradle": "BUILD SUCCESSFUL; 61 tareas ejecutadas",
+  "resultado_local_y_red": {
+    "estado": "PASS",
+    "tests": 45,
+    "fallos": 0,
+    "errores": 0,
+    "omitidos": 0,
+    "nota": "Incluye 1 test de ejemplo de Android Studio. No equivale a 45 recorridos de negocio.",
+    "perfil": {"viewmodel_mockito": 6, "validacion": 8, "errores_por_campo": 3, "red_mockwebserver": 4}
+  },
+  "reporte_html": "reporte-gradle/index.html",
+  "resultados_xml": "resultados-junit/",
+  "capturas_reales_del_reporte": [
+    "01-resumen-gradle.jpg",
+    "02-viewmodel.jpg",
+    "03-red-mockwebserver.jpg",
+    "04-validaciones.jpg"
+  ],
+  "pruebas_android": {
+    "compilacion_apk": "PASS",
+    "compilacion_apk_tests": "PASS",
+    "ejecucion": "PENDIENTE",
+    "motivo": "adb devices no muestra Android conectado; no se inicio un emulador ni se ejecutaron tests instrumentados.",
+    "flujo_preparado": "PerfilFlujoTest#datosValidos_guardaPerfilYCapturaResultado",
+    "preparacion": "ActivityScenarioRule, Screen Object, AccessibilityChecks y HTTP interceptado sin Railway",
+    "nota": "Compilar no acredita PASS de UI ni accesibilidad. Las capturas publicadas son del reporte de pruebas JVM."
+  },
+  "trazabilidad_por_completar": {
+    "planilla": "https://docs.google.com/spreadsheets/d/16tmCbjcoSpipI8RmOmbiR8WhEJBT160I/edit",
+    "pendiente": "Vincular metodos con los IDs reales de casos, historias e Issues. La publicacion no modifica resultados de la planilla."
+  },
+  "limites": [
+    "Esta ejecucion no accede a Railway/MySQL.",
+    "No se modificaron login, registro ni archivos de sesion.",
+    "No valida login real, registro, Scanner, TalkBack, Appium ni APK release.",
+    "El refactor de Perfil aun requiere regresion de pantalla antes de integrar a develop.",
+    "Los avisos de APIs y funciones Gradle obsoletas no se consideran resueltos por un build exitoso."
+  ]
+}

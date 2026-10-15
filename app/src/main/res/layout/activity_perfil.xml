@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
     android:fillViewport="true">
 
     <LinearLayout
@@ -14,7 +14,8 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnVolverPerfil"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
             android:background="@drawable/bg_button_secondary"
             android:fontFamily="@font/inter_semibold"
             android:minWidth="112dp"
@@ -43,9 +44,11 @@
                 android:textSize="13sp" />
 
             <TextView
+                android:id="@+id/tvTituloPerfil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
+                android:accessibilityHeading="true"
                 android:fontFamily="@font/inter_bold"
                 android:text="@string/perfil_titulo"
                 android:textColor="@color/text_heading"
@@ -63,6 +66,7 @@
 
             <TextView
                 style="@style/PerfilLabel"
+                android:labelFor="@id/spSexo"
                 android:text="@string/label_sexo" />
 
             <Spinner
@@ -72,48 +76,53 @@
 
             <TextView
                 style="@style/PerfilLabel"
+                android:labelFor="@id/etEdad"
                 android:text="@string/label_edad" />
 
             <EditText
                 android:id="@+id/etEdad"
                 style="@style/PerfilInput"
-                android:hint="@string/hint_edad"
+                android:importantForAutofill="no"
                 android:inputType="number"
                 android:maxLength="3" />
 
             <TextView
                 style="@style/PerfilLabel"
+                android:labelFor="@id/etPesoActual"
                 android:text="@string/label_peso_actual" />
 
             <EditText
                 android:id="@+id/etPesoActual"
                 style="@style/PerfilInput"
-                android:hint="@string/hint_peso_actual"
+                android:importantForAutofill="no"
                 android:inputType="numberDecimal" />
 
             <TextView
                 style="@style/PerfilLabel"
+                android:labelFor="@id/etAltura"
                 android:text="@string/label_altura" />
 
             <EditText
                 android:id="@+id/etAltura"
                 style="@style/PerfilInput"
-                android:hint="@string/hint_altura"
+                android:importantForAutofill="no"
                 android:inputType="number"
                 android:maxLength="3" />
 
             <TextView
                 style="@style/PerfilLabel"
+                android:labelFor="@id/etPesoObjetivo"
                 android:text="@string/label_peso_objetivo" />
 
             <EditText
                 android:id="@+id/etPesoObjetivo"
                 style="@style/PerfilInput"
-                android:hint="@string/hint_peso_objetivo"
+                android:importantForAutofill="no"
                 android:inputType="numberDecimal" />
 
             <TextView
                 style="@style/PerfilLabel"
+                android:labelFor="@id/spObjetivo"
                 android:text="@string/label_objetivo" />
 
             <Spinner
@@ -123,6 +132,7 @@
 
             <TextView
                 style="@style/PerfilLabel"
+                android:labelFor="@id/spActividad"
                 android:text="@string/label_actividad" />
 
             <Spinner
@@ -132,17 +142,19 @@
 
             <TextView
                 style="@style/PerfilLabel"
+                android:labelFor="@id/etDiasEntrenamiento"
                 android:text="@string/label_dias_entrenamiento" />
 
             <EditText
                 android:id="@+id/etDiasEntrenamiento"
                 style="@style/PerfilInput"
-                android:hint="@string/hint_dias_entrenamiento"
+                android:importantForAutofill="no"
                 android:inputType="number"
                 android:maxLength="1" />
 
             <TextView
                 style="@style/PerfilLabel"
+                android:labelFor="@id/spPreferencia"
                 android:text="@string/label_preferencia" />
 
             <Spinner
@@ -152,34 +164,60 @@
 
             <TextView
                 style="@style/PerfilLabel"
+                android:labelFor="@id/etLimitaciones"
                 android:text="@string/label_limitaciones" />
 
             <EditText
                 android:id="@+id/etLimitaciones"
                 style="@style/PerfilInput"
+                android:importantForAutofill="no"
                 android:gravity="top|start"
-                android:hint="@string/hint_opcional"
                 android:inputType="textCapSentences|textMultiLine"
                 android:minHeight="96dp" />
 
             <TextView
                 style="@style/PerfilLabel"
+                android:labelFor="@id/etConsideracionesAlimentarias"
                 android:text="@string/label_consideraciones_alimentarias" />
 
             <EditText
                 android:id="@+id/etConsideracionesAlimentarias"
                 style="@style/PerfilInput"
+                android:importantForAutofill="no"
                 android:gravity="top|start"
-                android:hint="@string/hint_opcional"
                 android:inputType="textCapSentences|textMultiLine"
                 android:minHeight="96dp" />
+
+            <TextView
+                android:id="@+id/tvEstadoPerfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:accessibilityLiveRegion="polite"
+                android:fontFamily="@font/inter_regular"
+                android:textColor="@color/text_body"
+                android:textSize="15sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnReintentarPerfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_button_secondary"
+                android:text="@string/perfil_reintentar"
+                android:textColor="@color/primary"
+                android:textAllCaps="false"
+                android:visibility="gone" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnGuardarPerfil"
                 android:layout_width="match_parent"
-                android:layout_height="54dp"
+                android:layout_height="wrap_content"
+                android:minHeight="54dp"
                 android:layout_marginTop="24dp"
-                android:background="@drawable/bg_button_primary"
+                android:background="@drawable/bg_button_perfil_primary"
+                app:backgroundTint="@null"
                 android:fontFamily="@font/inter_semibold"
                 android:text="@string/guardar_perfil"
                 android:textAllCaps="false"

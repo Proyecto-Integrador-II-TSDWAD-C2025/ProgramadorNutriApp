@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tarjeta de una comida del plan. TalkBack la lee como un solo elemento:
+     el adapter arma su contentDescription con los textos visibles y el estado. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardComidaPlan"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/card_fondo"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:padding="18dp">
+
+    <TextView
+        android:id="@+id/tvTipoComida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tag_fondo"
+        android:fontFamily="@font/inter_medium"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="4dp"
+        android:textAllCaps="true"
+        android:textColor="@color/primary"
+        android:textSize="12sp"
+        tools:text="Desayuno" />
+
+    <TextView
+        android:id="@+id/tvNombreComida"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/inter_semibold"
+        android:textColor="@color/text_heading"
+        android:textSize="16sp"
+        tools:text="Yogur natural con avena y fruta" />
+
+    <TextView
+        android:id="@+id/tvPorcionComida"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/inter_regular"
+        android:textColor="@color/text_body"
+        android:textSize="14sp"
+        tools:text="Porción: 1 bol" />
+
+    <TextView
+        android:id="@+id/tvMacrosComida"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/inter_regular"
+        android:textColor="@color/text_secondary"
+        android:textSize="13sp"
+        tools:text="340 kcal · Proteínas 15 g · Carbohidratos 52 g · Grasas 8 g" />
+
+    <TextView
+        android:id="@+id/tvAlternativaComida"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/inter_regular"
+        android:textColor="@color/text_secondary"
+        android:textSize="13sp"
+        tools:text="Alternativa: Tostadas integrales con queso y fruta" />
+
+    <!-- El estado se indica con texto y símbolo, no solo con el color de fondo -->
+    <TextView
+        android:id="@+id/tvCompletadaComida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_completed"
+        android:fontFamily="@font/inter_medium"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="4dp"
+        android:text="@string/plan_alim_completada"
+        android:textColor="@color/success_text"
+        android:textSize="12sp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <!-- El adapter cambia el texto, el estilo y el contentDescription según el estado.
+         Queda deshabilitado mientras se guarda el cambio. -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCompletarComida"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/bg_button_primary"
+        android:fontFamily="@font/inter_semibold"
+        android:minHeight="48dp"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        tools:text="@string/plan_alim_marcar" />
+
+</LinearLayout>

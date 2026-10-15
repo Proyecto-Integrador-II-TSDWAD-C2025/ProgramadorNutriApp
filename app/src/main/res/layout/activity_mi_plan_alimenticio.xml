@@ -1,191 +1,287 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
     tools:context=".MiPlanAlimenticioActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollPlanAlimenticio"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnVolverPlanAlimenticio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:id="@+id/tvTituloPlanAlimenticio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/titulo_plan_alimenticio"
+                android:textColor="@color/text_heading"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/tvSubtituloPlanAlimenticio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/subtitulo_plan_alimenticio"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp" />
+
+            <!-- Estado: cargando -->
+            <LinearLayout
+                android:id="@+id/layoutCargandoPlan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ProgressBar
+                    android:id="@+id/progressPlan"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:importantForAccessibility="no"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/primary" />
+
+                <TextView
+                    android:id="@+id/tvCargandoPlan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:accessibilityLiveRegion="polite"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@string/plan_alim_cargando"
+                    android:textAlignment="center"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <!-- Estados sin contenido: sin perfil, en revisión o error.
+                 El título y el mensaje dicen qué pasó; no depende del color. -->
+            <LinearLayout
+                android:id="@+id/layoutEstadoPlan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:accessibilityLiveRegion="polite"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/tvEstadoTitulo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textAlignment="center"
+                    android:textColor="@color/text_heading"
+                    android:textSize="18sp"
+                    tools:text="@string/plan_alim_error_titulo" />
+
+                <TextView
+                    android:id="@+id/tvEstadoMensaje"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/inter_regular"
+                    android:textAlignment="center"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp"
+                    tools:text="@string/plan_alim_error_red" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnEstadoAccion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/bg_button_secondary"
+                    android:fontFamily="@font/inter_semibold"
+                    android:minWidth="160dp"
+                    android:minHeight="48dp"
+                    android:paddingHorizontal="24dp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/primary"
+                    android:textSize="15sp"
+                    tools:text="@string/plan_alim_reintentar" />
+
+            </LinearLayout>
+
+            <!-- Contenido: datos del plan y menú por día -->
+            <LinearLayout
+                android:id="@+id/layoutPlan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/card_fondo"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView
+                        android:id="@+id/tvNombrePlan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_bold"
+                        android:textColor="@color/text_heading"
+                        android:textSize="20sp"
+                        tools:text="Descenso equilibrado" />
+
+                    <TextView
+                        android:id="@+id/tvDescripcionPlan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/inter_regular"
+                        android:textColor="@color/text_body"
+                        android:textSize="14sp"
+                        tools:text="Ciclo orientativo de tres dias para acompanar un objetivo gradual." />
+
+                    <!-- ChipGroup acomoda las etiquetas en varias filas si no entran
+                         (pantallas angostas o fuente ampliada) -->
+                    <com.google.android.material.chip.ChipGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        app:chipSpacingHorizontal="8dp"
+                        app:chipSpacingVertical="8dp">
+
+                        <TextView
+                            android:id="@+id/tagCaloriasPlan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_tag_chip"
+                            android:fontFamily="@font/inter_medium"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="4dp"
+                            android:textColor="@color/primary"
+                            android:textSize="12sp"
+                            tools:text="1800 kcal por día" />
+
+                        <TextView
+                            android:id="@+id/tagDuracionPlan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_tag_chip"
+                            android:fontFamily="@font/inter_medium"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="4dp"
+                            android:textColor="@color/primary"
+                            android:textSize="12sp"
+                            tools:text="14 días" />
+
+                        <TextView
+                            android:id="@+id/tagOrigenPlan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_tag_chip"
+                            android:fontFamily="@font/inter_medium"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="4dp"
+                            android:textColor="@color/primary"
+                            android:textSize="12sp"
+                            tools:text="Sugerencia orientativa" />
+
+                    </com.google.android.material.chip.ChipGroup>
+
+                    <TextView
+                        android:id="@+id/tvVigenciaPlan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/inter_regular"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp"
+                        tools:text="Vigente del 10/10/2026 al 23/10/2026" />
+
+                    <TextView
+                        android:id="@+id/tvMotivoPlan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/inter_regular"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp"
+                        tools:text="Sugerencia orientativa segun objetivo bajar grasa corporal." />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvTituloMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/inter_semibold"
+                    android:text="@string/plan_alim_titulo_menu"
+                    android:textColor="@color/text_heading"
+                    android:textSize="18sp" />
+
+                <!-- Estado vacío: hay plan pero todavía no tiene comidas -->
+                <TextView
+                    android:id="@+id/tvMenuVacio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@string/plan_alim_menu_vacio"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerComidas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:nestedScrollingEnabled="false"
+                    tools:listitem="@layout/item_comida_plan" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnVolverPlanAlimenticio"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/bg_button_primary"
+        android:fontFamily="@font/inter_semibold"
+        android:minHeight="52dp"
+        android:text="@string/plan_alim_volver"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/titulo_plan_alimenticio"
-            android:textColor="@color/text_heading"
-            android:fontFamily="@font/inter_bold"
-            android:textSize="24sp"
-            android:layout_marginBottom="4dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/subtitulo_plan_alimenticio"
-            android:textColor="@color/text_secondary"
-            android:fontFamily="@font/inter_regular"
-            android:textSize="14sp"
-            android:layout_marginBottom="24dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tag_desayuno"
-            android:textColor="@color/primary"
-            android:fontFamily="@font/inter_medium"
-            android:textSize="13sp"
-            android:background="@drawable/tag_fondo"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="6dp"
-            android:layout_marginBottom="8dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/card_fondo"
-            android:padding="16dp"
-            android:layout_marginBottom="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/comida_desayuno"
-                android:textColor="@color/text_heading"
-                android:fontFamily="@font/inter_semibold"
-                android:textSize="16sp"
-                android:layout_marginBottom="4dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/detalle_desayuno"
-                android:textColor="@color/text_body"
-                android:fontFamily="@font/inter_regular"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tag_almuerzo"
-            android:textColor="@color/primary"
-            android:fontFamily="@font/inter_medium"
-            android:textSize="13sp"
-            android:background="@drawable/tag_fondo"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="6dp"
-            android:layout_marginBottom="8dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/card_fondo"
-            android:padding="16dp"
-            android:layout_marginBottom="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/comida_almuerzo"
-                android:textColor="@color/text_heading"
-                android:fontFamily="@font/inter_semibold"
-                android:textSize="16sp"
-                android:layout_marginBottom="4dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/detalle_almuerzo"
-                android:textColor="@color/text_body"
-                android:fontFamily="@font/inter_regular"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tag_merienda"
-            android:textColor="@color/primary"
-            android:fontFamily="@font/inter_medium"
-            android:textSize="13sp"
-            android:background="@drawable/tag_fondo"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="6dp"
-            android:layout_marginBottom="8dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/card_fondo"
-            android:padding="16dp"
-            android:layout_marginBottom="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/comida_merienda"
-                android:textColor="@color/text_heading"
-                android:fontFamily="@font/inter_semibold"
-                android:textSize="16sp"
-                android:layout_marginBottom="4dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/detalle_merienda"
-                android:textColor="@color/text_body"
-                android:fontFamily="@font/inter_regular"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tag_cena"
-            android:textColor="@color/primary"
-            android:fontFamily="@font/inter_medium"
-            android:textSize="13sp"
-            android:background="@drawable/tag_fondo"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="6dp"
-            android:layout_marginBottom="8dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/card_fondo"
-            android:padding="16dp"
-            android:layout_marginBottom="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/comida_cena"
-                android:textColor="@color/text_heading"
-                android:fontFamily="@font/inter_semibold"
-                android:textSize="16sp"
-                android:layout_marginBottom="4dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/detalle_cena"
-                android:textColor="@color/text_body"
-                android:fontFamily="@font/inter_regular"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

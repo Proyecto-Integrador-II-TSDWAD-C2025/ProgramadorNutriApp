@@ -5,26 +5,39 @@
     <string name="perfil_descripcion">Estos datos nos ayudan a recomendarte una rutina acorde a tu objetivo y disponibilidad semanal.</string>
     <string name="volver_dashboard">Volver</string>
     <string name="guardar_perfil">Guardar perfil</string>
-    <string name="mensaje_perfil_demo">Perfil guardado en modo demostración</string>
+    <string name="perfil_cargando">Cargando tu perfil…</string>
+    <string name="perfil_listo">Podés revisar y actualizar tus datos.</string>
+    <string name="perfil_nuevo">Completá tus datos para crear tu perfil.</string>
+    <string name="perfil_guardando">Guardando perfil…</string>
+    <string name="perfil_guardado">Perfil guardado correctamente.</string>
+    <string name="perfil_guardado_revision">Perfil guardado. Tus datos requieren revisión profesional.</string>
+    <string name="perfil_guardado_interrumpido">Se interrumpió la conexión durante el guardado. Volvé a abrir el perfil para comprobar si se guardó.</string>
+    <string name="perfil_sesion_invalida">Tu sesión no es válida. Volvé e iniciá sesión nuevamente.</string>
+    <string name="perfil_error_carga">No se pudo cargar el perfil. Reintentá antes de editar.</string>
+    <string name="perfil_error_guardado">No se pudo confirmar el guardado. Conservamos tus datos en pantalla; reintentá o volvé a abrir el perfil para comprobarlos.</string>
+    <string name="perfil_error_conexion">No hay conexión con el servidor. Revisá tu conexión y reintentá.</string>
+    <string name="perfil_error_conexion_guardado">Se perdió la conexión. Tus datos siguen en pantalla; volvé a abrir el perfil para comprobar si se guardaron.</string>
+    <string name="perfil_reintentar">Reintentar carga</string>
+    <string name="perfil_revisar_datos">Revisá los campos señalados e intentá nuevamente.</string>
+    <string name="perfil_campo_obligatorio">Este campo es obligatorio.</string>
+    <string name="perfil_error_edad">Ingresá una edad entera entre 13 y 100.</string>
+    <string name="perfil_error_peso">Ingresá un peso entre 30 y 300 kg, con hasta dos decimales.</string>
+    <string name="perfil_error_altura">Ingresá una altura entera entre 100 y 250 cm.</string>
+    <string name="perfil_error_dias">Ingresá entre 1 y 6 días completos.</string>
+    <string name="perfil_opciones_obligatorias">Seleccioná sexo, objetivo, actividad y preferencia alimenticia.</string>
+    <string name="perfil_error_opcion">%1$s: %2$s</string>
 
     <string name="label_sexo">Sexo biológico</string>
-    <string name="label_edad">Edad</string>
-    <string name="label_peso_actual">Peso actual</string>
-    <string name="label_altura">Altura</string>
-    <string name="label_peso_objetivo">Peso objetivo</string>
+    <string name="label_edad">Edad (años)</string>
+    <string name="label_peso_actual">Peso actual (kg)</string>
+    <string name="label_altura">Altura (cm)</string>
+    <string name="label_peso_objetivo">Peso objetivo (kg)</string>
     <string name="label_objetivo">Objetivo físico</string>
     <string name="label_actividad">Nivel de actividad</string>
     <string name="label_dias_entrenamiento">Días disponibles por semana</string>
     <string name="label_preferencia">Preferencia alimenticia</string>
-    <string name="label_limitaciones">Limitaciones físicas o de salud</string>
-    <string name="label_consideraciones_alimentarias">Alergias o consideraciones alimentarias</string>
-
-    <string name="hint_edad">Ejemplo: 18</string>
-    <string name="hint_peso_actual">Ejemplo: 70 kg</string>
-    <string name="hint_altura">Ejemplo: 175 cm</string>
-    <string name="hint_peso_objetivo">Ejemplo: 65 kg</string>
-    <string name="hint_dias_entrenamiento">Ejemplo: 3</string>
-    <string name="hint_opcional">Opcional</string>
+    <string name="label_limitaciones">Limitaciones físicas o de salud (opcional)</string>
+    <string name="label_consideraciones_alimentarias">Alergias o consideraciones alimentarias (opcional)</string>
 
     <string-array name="opciones_sexo">
         <item>Seleccioná tu sexo</item>
