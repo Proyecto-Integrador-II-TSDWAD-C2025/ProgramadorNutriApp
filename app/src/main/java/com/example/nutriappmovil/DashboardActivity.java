@@ -33,6 +33,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     private TextView tvSaludo;
     private TextView tvRol;
+    private View cardAdministrarUsuarios;
     private TextView tvErrorDashboard;
     private ProgressBar progressDashboard;
     private View layoutErrorDashboard;
@@ -48,6 +49,8 @@ public class DashboardActivity extends AppCompatActivity {
 
         tvSaludo = findViewById(R.id.tvSaludo);
         tvRol = findViewById(R.id.tvRol);
+        cardAdministrarUsuarios = findViewById(R.id.cardAdministrarUsuarios);
+        cardAdministrarUsuarios.setVisibility(View.GONE);
         tvErrorDashboard = findViewById(R.id.tvErrorDashboard);
         progressDashboard = findViewById(R.id.progressDashboard);
         layoutErrorDashboard = findViewById(R.id.layoutErrorDashboard);
@@ -81,6 +84,8 @@ public class DashboardActivity extends AppCompatActivity {
 
         cardContacto.setOnClickListener(v ->
                 startActivity(new Intent(DashboardActivity.this, ContactoActivity.class)));
+        cardAdministrarUsuarios.setOnClickListener(v ->
+                startActivity(new Intent(DashboardActivity.this, UsuariosActivity.class)));
 
         btnReintentar.setOnClickListener(v -> cargarUsuario());
 
@@ -149,16 +154,35 @@ public class DashboardActivity extends AppCompatActivity {
         tvRol.setText("Cargando tu perfil…");
     }
 
+
     private void mostrarUsuario(Usuario usuario) {
         progressDashboard.setVisibility(View.GONE);
         layoutErrorDashboard.setVisibility(View.GONE);
 
         String nombre = usuario.getNombre();
-        tvSaludo.setText(nombre == null || nombre.isEmpty() ? "Hola 👋" : "Hola, " + nombre + " 👋");
+        tvSaludo.setText(
+                nombre == null || nombre.isEmpty()
+                        ? "Hola "
+                        : "Hola, " + nombre + ""
+        );
 
-        String rol = usuario.getRol() != null ? usuario.getRol().getNombreRol() : null;
+        String rol = usuario.getRol() != null
+                ? usuario.getRol().getNombreRol()
+                : null;
+        Toast.makeText(
+                this,
+                "Rol recibido: " + rol,
+                Toast.LENGTH_LONG
+        ).show();
         tvRol.setText("Rol: " + etiquetaRol(rol));
-    }
+
+        // Solo el administrador puede ver la tarjeta.
+        // Mostrar la tarjeta para probar la administración de usuarios.
+        cardAdministrarUsuarios.setVisibility(View.VISIBLE);
+        }
+
+
+
 
     private void mostrarError(String mensaje) {
         progressDashboard.setVisibility(View.GONE);

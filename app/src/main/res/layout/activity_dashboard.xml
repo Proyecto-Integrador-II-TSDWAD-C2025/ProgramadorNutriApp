@@ -542,6 +542,75 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- Card: Administrar usuarios -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cardAdministrarUsuarios"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/card_fondo"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="18dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/cardContacto"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                    android:id="@+id/iconAdministrarUsuarios"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_icon_circulo"
+                    android:gravity="center"
+                    android:importantForAccessibility="no"
+                    android:text="👥"
+                    android:textSize="22sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvTituloAdministrarUsuarios"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="Administrar usuarios"
+                    android:textColor="@color/text_heading"
+                    android:textSize="17sp"
+                    app:layout_constraintTop_toTopOf="@id/iconAdministrarUsuarios"
+                    app:layout_constraintStart_toEndOf="@id/iconAdministrarUsuarios"
+                    app:layout_constraintEnd_toStartOf="@id/chevronAdministrarUsuarios" />
+
+                <TextView
+                    android:id="@+id/tvSubtituloAdministrarUsuarios"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="Consultar y gestionar usuarios"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"
+                    app:layout_constraintTop_toBottomOf="@id/tvTituloAdministrarUsuarios"
+                    app:layout_constraintStart_toEndOf="@id/iconAdministrarUsuarios"
+                    app:layout_constraintEnd_toStartOf="@id/chevronAdministrarUsuarios" />
+
+                <TextView
+                    android:id="@+id/chevronAdministrarUsuarios"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:importantForAccessibility="no"
+                    android:text="›"
+                    android:textColor="@color/text_muted"
+                    android:textSize="22sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <!-- Botón de Cerrar Sesión -->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnLogout"
@@ -553,7 +622,7 @@
                 android:textColor="@color/danger_text_dark"
                 android:fontFamily="@font/inter_semibold"
                 android:textAllCaps="false"
-                app:layout_constraintTop_toBottomOf="@id/cardContacto"
+                app:layout_constraintTop_toBottomOf="@id/cardAdministrarUsuarios"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
