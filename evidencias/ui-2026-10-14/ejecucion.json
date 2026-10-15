@@ -1,0 +1,35 @@
+{
+  "proyecto": "NutriApp",
+  "equipo": "TERACODE",
+  "fecha_local": "2026-10-14",
+  "zona_horaria": "America/Buenos_Aires",
+  "timestamp_original_xml": "2026-10-15T00:14:59",
+  "nota_fecha": "El XML registra la ejecucion en UTC; corresponde al 14/10 a las 21:14:59 de Argentina.",
+  "rama": "feature/PabloRomero",
+  "codigo_probado": "d8e50c01cee3873e6bddd28ffce495bc87f60997",
+  "head_al_ejecutar": "5a62da50ddcf3af85bf0145a13a3801f575a5036",
+  "develop_incorporado": "5b96434a45bbdf47d7841923b1cdcda9371b87db",
+  "dispositivo": "Samsung SM-A217M, Android 12, API 31, fisico",
+  "entorno": "Windows, JDK 17.0.6, Gradle 8.7, Android Gradle Plugin 8.1.0",
+  "comando": ".\\gradlew.bat connectedDebugAndroidTest -Pandroid.experimental.androidTest.useUnifiedTestPlatform=false -Pandroid.testInstrumentationRunnerArguments.class=com.example.nutriappmovil.PerfilActivityTest,com.example.nutriappmovil.perfil.PerfilFlujoTest --no-daemon --max-workers=2",
+  "resultado_gradle": "BUILD SUCCESSFUL in 2m 36s; 57 actionable tasks: 1 executed, 56 up-to-date",
+  "resultado": {"tests": 9, "fallos": 0, "errores": 0, "omitidos": 0, "estado": "PASS"},
+  "reporte_html": "reporte-gradle/index.html",
+  "resultados_xml": "resultados-junit/TEST-Perfil-Android12.xml",
+  "captura_real": "TC-PER-UI-01-guardado.png",
+  "trazabilidad": {
+    "casos": "TC-PER-UI-01 a TC-PER-UI-09",
+    "historia": "US06 / https://github.com/Proyecto-Integrador-II-TSDWAD-C2025/ProgramadorNutriApp/issues/32",
+    "incremento_sprint2": "https://github.com/Proyecto-Integrador-II-TSDWAD-C2025/ProgramadorNutriApp/issues/55",
+    "planilla": "https://docs.google.com/spreadsheets/d/1GdLyngvUkjq4eWV24LxXn83cLdkSiwc7i22htZQwHVQ/edit"
+  },
+  "accesibilidad": "AccessibilityChecks.enable().setRunChecksFromRootView(true) en PerfilFlujoTest; sin errores que hagan fallar el test. No acredita ausencia de advertencias ni auditoria total.",
+  "incidencia_ejecutor": "El ejecutor UTP predeterminado aborto antes de los tests por IllegalAccessError entre clases protobuf. Se uso el ejecutor legacy mediante un parametro de esta ejecucion, sin cambiar la configuracion del proyecto. Tambien se verifico PASS de los 9 tests por AndroidJUnitRunner directo.",
+  "limites": [
+    "HTTP interceptado y datos sinteticos; no se accedio a Railway/MySQL.",
+    "Las 9 pruebas corresponden a Perfil, no al recorrido completo de la app.",
+    "No valida login o registro reales, expiracion remota de token, Appium, TalkBack, Accessibility Scanner ni APK release.",
+    "No se ejecuto SessionManagerInstrumentedTest para no limpiar la sesion del usuario.",
+    "La captura real corresponde a TC-PER-UI-01; los otros 8 resultados se acreditan mediante el reporte y XML, no mediante capturas individuales."
+  ]
+}

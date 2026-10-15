@@ -8,6 +8,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.nutriappmovil.model.Perfil;
 import com.example.nutriappmovil.model.PerfilRequest;
@@ -16,6 +17,10 @@ import com.example.nutriappmovil.network.ApiClient;
 import com.example.nutriappmovil.network.PerfilApiService;
 import com.example.nutriappmovil.perfil.ErroresPerfil;
 import com.example.nutriappmovil.perfil.ValidacionPerfil;
+import com.example.nutriappmovil.perfil.EstadoCargaPerfil;
+import com.example.nutriappmovil.perfil.PerfilRepository;
+import com.example.nutriappmovil.perfil.PerfilViewModel;
+import com.example.nutriappmovil.perfil.RetrofitPerfilRepository;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
@@ -33,8 +38,10 @@ public class PerfilActivity extends AppCompatActivity {
     private Button btnGuardar, btnReintentar;
     private TextView tvEstado;
     private final Map<String, View> campos = new LinkedHashMap<>();
-    private PerfilApiService perfilApiService;
-    private Call<PerfilResponse> cargaCall, guardadoCall;
+    private PerfilRepository perfilRepository;
+    private PerfilViewModel perfilViewModel;
+    private Call<PerfilResponse> guardadoCall;
+    private boolean restaurandoEdicion;
     private boolean perfilDisponible, cargando, guardando;
 
     @Override
@@ -42,13 +49,26 @@ public class PerfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
         inicializarVistas();
-        perfilApiService = ApiClient.getClient(this).create(PerfilApiService.class);
+        perfilRepository = new RetrofitPerfilRepository(
+                ApiClient.getClient(this).create(PerfilApiService.class));
+        perfilViewModel = new ViewModelProvider(this,
+                new PerfilViewModel.Factory(perfilRepository)).get(PerfilViewModel.class);
         findViewById(R.id.btnVolverPerfil).setOnClickListener(v -> finish());
         btnGuardar.setOnClickListener(v -> guardarPerfil());
         btnReintentar.setOnClickListener(v -> cargarPerfil());
 
         perfilDisponible = savedInstanceState != null
                 && savedInstanceState.getBoolean("perfil_disponible");
+        restaurandoEdicion = perfilDisponible;
+        perfilViewModel.getEstado().observe(this, estado -> {
+            // No sobrescribir el formulario restaurado con la respuesta anterior.
+            if (restaurandoEdicion && estado.getTipo() != EstadoCargaPerfil.Tipo.CARGANDO) {
+                restaurandoEdicion = false;
+                return;
+            }
+            restaurandoEdicion = false;
+            mostrarCarga(estado);
+        });
         if (perfilDisponible) {
             actualizarControles();
             mostrarEstado(savedInstanceState.getBoolean("guardando")
@@ -87,40 +107,36 @@ public class PerfilActivity extends AppCompatActivity {
     }
 
     private void cargarPerfil() {
-        cargando = true;
+        restaurandoEdicion = false;
+        mostrarCarga(new EstadoCargaPerfil(EstadoCargaPerfil.Tipo.CARGANDO, null));
+        perfilViewModel.cargarPerfil();
+    }
+
+    private void mostrarCarga(EstadoCargaPerfil estado) {
+        cargando = estado.getTipo() == EstadoCargaPerfil.Tipo.CARGANDO;
         perfilDisponible = false;
         btnReintentar.setVisibility(View.GONE);
-        actualizarControles();
-        mostrarEstado(R.string.perfil_cargando);
-        cargaCall = perfilApiService.getPerfil();
-        cargaCall.enqueue(new Callback<PerfilResponse>() {
-            @Override public void onResponse(Call<PerfilResponse> call, Response<PerfilResponse> response) {
-                if (terminada() || call.isCanceled()) return;
-                cargando = false;
-                if (respuestaConPerfil(response)) {
-                    mostrarPerfil(response.body().getPerfil());
-                    perfilDisponible = true;
-                    mostrarEstado(R.string.perfil_listo);
-                } else if (response.code() == 404) {
-                    perfilDisponible = true;
-                    mostrarEstado(R.string.perfil_nuevo);
-                } else {
-                    mostrarEstado(response.code() == 401
-                            ? R.string.perfil_sesion_invalida : R.string.perfil_error_carga);
-                    btnReintentar.setVisibility(View.VISIBLE);
-                }
-                cerrarError(response);
-                actualizarControles();
-            }
-
-            @Override public void onFailure(Call<PerfilResponse> call, Throwable error) {
-                if (terminada() || call.isCanceled()) return;
-                cargando = false;
-                mostrarEstado(R.string.perfil_error_conexion);
+        switch (estado.getTipo()) {
+            case CARGANDO:
+                mostrarEstado(R.string.perfil_cargando);
+                break;
+            case LISTO:
+                mostrarPerfil(estado.getPerfil());
+                perfilDisponible = true;
+                mostrarEstado(R.string.perfil_listo);
+                break;
+            case NUEVO:
+                perfilDisponible = true;
+                mostrarEstado(R.string.perfil_nuevo);
+                break;
+            default:
+                mostrarEstado(estado.getTipo() == EstadoCargaPerfil.Tipo.SESION_INVALIDA
+                        ? R.string.perfil_sesion_invalida
+                        : estado.getTipo() == EstadoCargaPerfil.Tipo.ERROR_CONEXION
+                        ? R.string.perfil_error_conexion : R.string.perfil_error_carga);
                 btnReintentar.setVisibility(View.VISIBLE);
-                actualizarControles();
-            }
-        });
+        }
+        actualizarControles();
     }
 
     private void guardarPerfil() {
@@ -151,7 +167,7 @@ public class PerfilActivity extends AppCompatActivity {
         guardando = true;
         actualizarControles();
         mostrarEstado(R.string.perfil_guardando);
-        guardadoCall = perfilApiService.actualizarPerfil(request);
+        guardadoCall = perfilRepository.actualizarPerfil(request);
         guardadoCall.enqueue(new Callback<PerfilResponse>() {
             @Override public void onResponse(Call<PerfilResponse> call, Response<PerfilResponse> response) {
                 if (terminada() || call.isCanceled()) return;
@@ -279,7 +295,6 @@ public class PerfilActivity extends AppCompatActivity {
     }
 
     @Override protected void onDestroy() {
-        if (cargaCall != null) cargaCall.cancel();
         if (guardadoCall != null) guardadoCall.cancel();
         super.onDestroy();
     }

@@ -4,6 +4,42 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ValidacionPerfilTest {
+    @Test public void edadValida_aceptaValorInterior() {
+        // Arrange
+        String edad = "30";
+        // Act
+        boolean valida = ValidacionPerfil.enteroEnRango(edad, 13, 100);
+        // Assert
+        assertTrue(valida);
+    }
+
+    @Test public void edadVacia_rechazaCampoObligatorio() {
+        // Arrange
+        String edad = "";
+        // Act
+        boolean valida = ValidacionPerfil.enteroEnRango(edad, 13, 100);
+        // Assert
+        assertFalse(valida);
+    }
+
+    @Test public void edadEnLimiteInferior_aceptaTrece() {
+        // Arrange
+        String edad = "13";
+        // Act
+        boolean valida = ValidacionPerfil.enteroEnRango(edad, 13, 100);
+        // Assert
+        assertTrue(valida);
+    }
+
+    @Test public void edadFueraDeFormato_rechazaTexto() {
+        // Arrange
+        String edad = "treinta";
+        // Act
+        boolean valida = ValidacionPerfil.enteroEnRango(edad, 13, 100);
+        // Assert
+        assertFalse(valida);
+    }
+
     @Test public void aceptaLimitesDeEdadYDias() {
         assertTrue(ValidacionPerfil.enteroEnRango("13", 13, 100));
         assertTrue(ValidacionPerfil.enteroEnRango("100", 13, 100));

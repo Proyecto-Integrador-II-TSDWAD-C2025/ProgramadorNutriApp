@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.nutriappmovil.model.PlanAlimenticioModelTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-10-15T02:16:16" hostname="ROMERO" time="0.012">
+  <properties/>
+  <testcase name="completarComida_respuesta_leeIdYEstado" classname="com.example.nutriappmovil.model.PlanAlimenticioModelTest" time="0.003"/>
+  <testcase name="completarComida_request_usaElNombreDeCampoDeDjango" classname="com.example.nutriappmovil.model.PlanAlimenticioModelTest" time="0.003"/>
+  <testcase name="miPlan_enRevision_vieneSinAsignacionYConMensaje" classname="com.example.nutriappmovil.model.PlanAlimenticioModelTest" time="0.002"/>
+  <testcase name="miPlan_conAsignacion_leeAsignacionYPlan" classname="com.example.nutriappmovil.model.PlanAlimenticioModelTest" time="0.002"/>
+  <testcase name="miPlan_conAsignacion_leeComidasConSuDetalle" classname="com.example.nutriappmovil.model.PlanAlimenticioModelTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

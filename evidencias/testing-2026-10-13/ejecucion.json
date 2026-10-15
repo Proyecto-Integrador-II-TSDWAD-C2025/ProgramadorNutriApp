@@ -1,0 +1,58 @@
+{
+  "proyecto": "NutriApp",
+  "equipo": "TERACODE",
+  "fecha": "2026-10-13",
+  "zona_horaria_del_reporte": "America/Buenos_Aires",
+  "hora_generacion_gradle": "20:12:47",
+  "rama": "feature/PabloRomero",
+  "codigo_probado": "454dee433f5c59569c10c8a4d035f6af79f64442",
+  "entorno": "Windows, JDK 17.0.6, Gradle 8.7; JVM y HTTP simulado sobre loopback",
+  "comandos_verificados": [
+    ".\\gradlew.bat testDebugUnitTest",
+    ".\\gradlew.bat assembleDebug",
+    ".\\gradlew.bat assembleDebugAndroidTest"
+  ],
+  "resultado_local_y_red": {
+    "estado": "PASS",
+    "tests": 45,
+    "fallos": 0,
+    "errores": 0,
+    "omitidos": 0,
+    "nota": "Incluye 1 test de ejemplo de Android Studio. No equivale a 45 recorridos de negocio.",
+    "perfil": {
+      "viewmodel_mockito": 6,
+      "validacion": 8,
+      "errores_por_campo": 3,
+      "red_mockwebserver": 4
+    }
+  },
+  "reporte_html": "reporte-gradle/index.html",
+  "resultados_xml": "resultados-junit/",
+  "capturas_reales_del_reporte": [
+    "01-resumen-gradle.png",
+    "02-viewmodel.png",
+    "03-red-mockwebserver.png",
+    "04-validaciones.png"
+  ],
+  "pruebas_android": {
+    "compilacion_apk": "PASS",
+    "compilacion_apk_tests": "PASS",
+    "ejecucion": "PENDIENTE",
+    "motivo": "Sin Android conectado; no se inicio el emulador por poca memoria disponible.",
+    "flujo_preparado": "PerfilFlujoTest#datosValidos_guardaPerfilYCapturaResultado",
+    "preparacion": "ActivityScenarioRule, Screen Object, AccessibilityChecks y HTTP interceptado sin Railway",
+    "captura_automatica_al_aprobar": "TC-PER-UI-01-guardado.png en Android/data/com.example.nutriappmovil/files/evidencias/",
+    "nota": "La compilacion NO acredita PASS de UI o accesibilidad. No se generaron capturas de una app no ejecutada."
+  },
+  "trazabilidad_por_completar": {
+    "requisitos": ["AUT-UNIT-02", "AUT-UNIT-03", "AUT-NET-01", "AUT-NET-02", "AUT-UI-01", "AUT-UI-02", "AUT-UI-03", "ACC-01"],
+    "planilla": "https://docs.google.com/spreadsheets/d/16tmCbjcoSpipI8RmOmbiR8WhEJBT160I/edit",
+    "pendiente": "Vincular cada metodo con el ID real del caso, historia e Issue. No se modifico la planilla ni se declararon cumplidos requisitos del equipo completo."
+  },
+  "limites": [
+    "Sin llamadas ni modificaciones a Railway/MySQL.",
+    "Login, registro y archivos de sesion no modificados.",
+    "No valida login real, registro, UI ejecutada, Scanner, TalkBack, Appium ni el APK release.",
+    "Pruebas de pantalla y regresion de la Activity refactorizada pendientes de Android."
+  ]
+}
