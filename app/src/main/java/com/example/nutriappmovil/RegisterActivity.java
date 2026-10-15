@@ -1,3 +1,4 @@
+
 package com.example.nutriappmovil;
 
 import android.content.Intent;
@@ -13,17 +14,18 @@ import com.example.nutriappmovil.model.Usuario;
 import com.example.nutriappmovil.network.ApiClient;
 import com.example.nutriappmovil.network.ApiService;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    // Botones
     private Button btnRegisterSubmit;
     private Button btnBackToLogin;
 
-    // Campos de texto
     private EditText etEmail;
     private EditText etPassword;
     private EditText etNombre;
@@ -35,72 +37,163 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        // 1. Vincular los botones de tu diseño actual
         btnRegisterSubmit = findViewById(R.id.btnRegisterSubmit);
         btnBackToLogin = findViewById(R.id.btnBackToLogin);
 
-        // 2. Vincular los campos de texto con los IDs correctos del XML
         etEmail = findViewById(R.id.etRegisterEmail);
         etPassword = findViewById(R.id.etRegisterPassword);
         etNombre = findViewById(R.id.etRegisterName);
 
-        // 3. Inicializar Retrofit
-        apiService = ApiClient.getClient(this).create(ApiService.class);
+        apiService = ApiClient.getClient(this)
+                .create(ApiService.class);
 
-        // 4. Flujo para volver atrás
         btnBackToLogin.setOnClickListener(v -> finish());
 
-        // 5. Flujo de registro REAL contra el servidor
         btnRegisterSubmit.setOnClickListener(v -> performRegister());
     }
 
     private void performRegister() {
-        // Obtenemos el texto ingresado
-        String email = etEmail != null ? etEmail.getText().toString().trim() : "";
-        String password = etPassword != null ? etPassword.getText().toString().trim() : "";
-        String nombre = etNombre != null ? etNombre.getText().toString().trim() : "Usuario";
 
-        if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Completá email y contraseña", Toast.LENGTH_SHORT).show();
+        String email = etEmail.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
+        String nombre = etNombre.getText().toString().trim();
+
+        etEmail.setError(null);
+        etPassword.setError(null);
+
+        boolean hayErrores = false;
+
+        if (email.isEmpty()) {
+            etEmail.setError("Ingresá tu email");
+            hayErrores = true;
+        } else if (!android.util.Patterns.EMAIL_ADDRESS
+                .matcher(email).matches()) {
+            etEmail.setError("Ingresá un email válido");
+            hayErrores = true;
+        }
+
+        if (password.isEmpty()) {
+            etPassword.setError("Ingresá tu contraseña");
+            hayErrores = true;
+        } else if (password.length() < 8) {
+            etPassword.setError(
+                    "La contraseña debe tener al menos 8 caracteres"
+            );
+            hayErrores = true;
+        }
+
+        if (hayErrores) {
             return;
         }
 
-        btnRegisterSubmit.setEnabled(false); // Bloquear botón para no mandar doble click
+        btnRegisterSubmit.setEnabled(false);
 
-        // Armamos la petición
-        RegisterRequest request = new RegisterRequest(email, password, nombre, "Usuario");
+        RegisterRequest request =
+                new RegisterRequest(email, password, nombre, "Usuario");
 
         apiService.register(request).enqueue(new Callback<Usuario>() {
+
             @Override
-            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+            public void onResponse(
+                    Call<Usuario> call,
+                    Response<Usuario> response
+            ) {
                 btnRegisterSubmit.setEnabled(true);
 
                 if (response.isSuccessful()) {
-                    Toast.makeText(RegisterActivity.this, "Cuenta creada. Ahora iniciá sesión.", Toast.LENGTH_LONG).show();
 
-                    // Volvemos al Login para que inicie sesión y obtenga el Token
-                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    Toast.makeText(
+                            RegisterActivity.this,
+                            "Cuenta creada. Ahora iniciá sesión.",
+                            Toast.LENGTH_LONG
+                    ).show();
+
+                    Intent intent = new Intent(
+                            RegisterActivity.this,
+                            LoginActivity.class
+                    );
+
+                    intent.setFlags(
+                            Intent.FLAG_ACTIVITY_NEW_TASK
+                                    | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    );
+
                     startActivity(intent);
                     finish();
+
                 } else {
-                    // Acá capturamos el mensaje exacto de error que manda Django
-                    String detalleError = "Error " + response.code();
+
                     try {
                         if (response.errorBody() != null) {
-                            detalleError += ": " + response.errorBody().string();
-                        }
-                    } catch (Exception ignored) {}
 
-                    Toast.makeText(RegisterActivity.this, detalleError, Toast.LENGTH_LONG).show();
+                            String errorJson =
+                                    response.errorBody().string();
+
+                            JSONObject errores =
+                                    new JSONObject(errorJson);
+
+                            if (errores.has("email")) {
+                                mostrarErrorCampo(
+                                        errores.get("email"),
+                                        etEmail
+                                );
+
+                            } else if (errores.has("password")) {
+                                mostrarErrorCampo(
+                                        errores.get("password"),
+                                        etPassword
+                                );
+
+                            } else if (errores.has("contrasena")) {
+                                mostrarErrorCampo(
+                                        errores.get("contrasena"),
+                                        etPassword
+                                );
+
+                            } else {
+                                Toast.makeText(
+                                        RegisterActivity.this,
+                                        errorJson,
+                                        Toast.LENGTH_LONG
+                                ).show();
+                            }
+                        }
+
+                    } catch (Exception e) {
+                        Toast.makeText(
+                                RegisterActivity.this,
+                                "No se pudo procesar el error del registro",
+                                Toast.LENGTH_LONG
+                        ).show();
+                    }
                 }
             }
 
             @Override
-            public void onFailure(Call<Usuario> call, Throwable t) {
+            public void onFailure(
+                    Call<Usuario> call,
+                    Throwable t
+            ) {
                 btnRegisterSubmit.setEnabled(true);
-                Toast.makeText(RegisterActivity.this, "Error de conexión", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(
+                        RegisterActivity.this,
+                        "Error de conexión",
+                        Toast.LENGTH_SHORT
+                ).show();
             }
         });
+    }
+
+    private void mostrarErrorCampo(Object error, EditText campo) {
+        if (error instanceof JSONArray) {
+            JSONArray mensajes = (JSONArray) error;
+
+            if (mensajes.length() > 0) {
+                campo.setError(mensajes.optString(0));
+            }
+        } else {
+            campo.setError(error.toString());
+        }
     }
 }
