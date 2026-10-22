@@ -72,8 +72,12 @@ public class LoginActivity extends AppCompatActivity {
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
 
-        if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Completá todos los campos", Toast.LENGTH_SHORT).show();
+        if (!LoginValidator.isEmailValid(email)) {
+            Toast.makeText(this, "Ingresá un email válido", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (!LoginValidator.isPasswordValid(password)) {
+            Toast.makeText(this, "Clave mínima de 6 caracteres", Toast.LENGTH_SHORT).show();
             return;
         }
 
