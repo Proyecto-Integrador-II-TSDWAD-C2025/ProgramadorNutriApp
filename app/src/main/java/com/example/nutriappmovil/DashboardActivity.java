@@ -7,6 +7,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -84,29 +85,25 @@ public class DashboardActivity extends AppCompatActivity {
 
         cardContacto.setOnClickListener(v ->
                 startActivity(new Intent(DashboardActivity.this, ContactoActivity.class)));
+
         cardAdministrarUsuarios.setOnClickListener(v ->
                 startActivity(new Intent(DashboardActivity.this, UsuariosActivity.class)));
 
         btnReintentar.setOnClickListener(v -> cargarUsuario());
 
-        // Flujo de navegación para el Logout real contra el backend
-        btnLogout.setOnClickListener(v -> {
-            progressDashboard.setVisibility(View.VISIBLE);
+        // Muestra el cuadro de diálogo en lugar de cerrar directamente
+        btnLogout.setOnClickListener(v -> mostrarDialogoCerrarSesion());
+    }
 
-            apiService.logout().enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
-                    cerrarSesionLocal();
-                }
-
-                @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-                    cerrarSesionLocal();
-                }
-            });
-        });
-
-        cargarUsuario();
+    // Se ejecuta cada vez que la app vuelve a primer plano
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!sessionManager.isLoggedIn()) {
+            cerrarSesionLocal();
+        } else {
+            cargarUsuario();
+        }
     }
 
     @Override
@@ -117,17 +114,41 @@ public class DashboardActivity extends AppCompatActivity {
         }
     }
 
+    private void mostrarDialogoCerrarSesion() {
+        new AlertDialog.Builder(this)
+                .setTitle("Cerrar sesión")
+                .setMessage("¿Estás seguro de que querés salir de tu cuenta?")
+                .setPositiveButton("Sí, salir", (dialog, which) -> realizarLogout())
+                .setNegativeButton("Cancelar", null)
+                .show();
+    }
+
+    private void realizarLogout() {
+        progressDashboard.setVisibility(View.VISIBLE);
+        apiService.logout().enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                cerrarSesionLocal();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                cerrarSesionLocal(); // Cerramos localmente incluso si falla la red
+            }
+        });
+    }
+
     /** Pide identidad y rol reales a /api/me/ y actualiza la pantalla. */
     private void cargarUsuario() {
-        mostrarCargando();
+        if (tvRol.getText().toString().isEmpty() || tvRol.getText().toString().equals("Cargando tu perfil…")) {
+            mostrarCargando();
+        }
 
         llamadaMe = apiService.me();
         llamadaMe.enqueue(new Callback<Usuario>() {
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                if (isFinishing() || isDestroyed()) {
-                    return;
-                }
+                if (isFinishing() || isDestroyed()) return;
 
                 if (response.code() == 401) {
                     volverAlLogin();
@@ -140,9 +161,7 @@ public class DashboardActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Usuario> call, Throwable t) {
-                if (call.isCanceled() || isFinishing() || isDestroyed()) {
-                    return;
-                }
+                if (call.isCanceled() || isFinishing() || isDestroyed()) return;
                 mostrarError("No hay conexión con el servidor. Revisá tu internet e intentá de nuevo.");
             }
         });
@@ -154,35 +173,23 @@ public class DashboardActivity extends AppCompatActivity {
         tvRol.setText("Cargando tu perfil…");
     }
 
-
     private void mostrarUsuario(Usuario usuario) {
         progressDashboard.setVisibility(View.GONE);
         layoutErrorDashboard.setVisibility(View.GONE);
 
         String nombre = usuario.getNombre();
-        tvSaludo.setText(
-                nombre == null || nombre.isEmpty()
-                        ? "Hola "
-                        : "Hola, " + nombre + ""
-        );
+        tvSaludo.setText(nombre == null || nombre.isEmpty() ? "Hola 👋" : "Hola, " + nombre + " 👋");
 
-        String rol = usuario.getRol() != null
-                ? usuario.getRol().getNombreRol()
-                : null;
-        Toast.makeText(
-                this,
-                "Rol recibido: " + rol,
-                Toast.LENGTH_LONG
-        ).show();
+        String rol = usuario.getRol() != null ? usuario.getRol().getNombreRol() : null;
         tvRol.setText("Rol: " + etiquetaRol(rol));
 
-        // Solo el administrador puede ver la tarjeta.
-        // Mostrar la tarjeta para probar la administración de usuarios.
-        cardAdministrarUsuarios.setVisibility(View.VISIBLE);
+        // Solo mostrar "Administrar usuarios" si el rol es administrador
+        if (rol != null && (rol.equalsIgnoreCase("admin") || rol.equalsIgnoreCase("administrador"))) {
+            cardAdministrarUsuarios.setVisibility(View.VISIBLE);
+        } else {
+            cardAdministrarUsuarios.setVisibility(View.GONE);
         }
-
-
-
+    }
 
     private void mostrarError(String mensaje) {
         progressDashboard.setVisibility(View.GONE);
@@ -203,7 +210,6 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void cerrarSesionLocal() {
         sessionManager.clearSession();
-
         Intent intent = new Intent(DashboardActivity.this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
@@ -211,9 +217,7 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private String etiquetaRol(String rol) {
-        if (rol == null || rol.isEmpty()) {
-            return "sin rol";
-        }
+        if (rol == null || rol.isEmpty()) return "sin rol";
         return rol.substring(0, 1).toUpperCase(Locale.getDefault()) + rol.substring(1);
     }
 }

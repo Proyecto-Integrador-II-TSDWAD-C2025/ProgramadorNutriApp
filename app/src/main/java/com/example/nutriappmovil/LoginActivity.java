@@ -2,8 +2,11 @@ package com.example.nutriappmovil;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -27,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etPassword;
     private Button btnLogin;
     private Button btnGoToRegister;
+    private CheckBox cbShowPassword;
     private ProgressBar progressBarLogin;
 
     private ApiService apiService;
@@ -41,11 +45,28 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
         btnGoToRegister = findViewById(R.id.btnGoToRegister);
+        cbShowPassword = findViewById(R.id.cbShowPassword);
         progressBarLogin = findViewById(R.id.progressBarLogin);
 
         // Inicializar SessionManager y Retrofit con las clases reales del proyecto
         sessionManager = new SessionManager(this);
         apiService = ApiClient.getClient(this).create(ApiService.class);
+
+        // Lógica para mostrar/ocultar contraseña manteniendo el cursor
+        cbShowPassword.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            int cursorPosition = etPassword.getSelectionEnd(); // Guardamos donde estaba el cursor
+
+            if (isChecked) {
+                etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            } else {
+                etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            }
+
+            // Restauramos el cursor a su lugar original
+            if (cursorPosition >= 0) {
+                etPassword.setSelection(cursorPosition);
+            }
+        });
 
         btnLogin.setOnClickListener(v -> performLogin());
 
@@ -140,5 +161,6 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setEnabled(!isLoading);
         etEmail.setEnabled(!isLoading);
         etPassword.setEnabled(!isLoading);
+        cbShowPassword.setEnabled(!isLoading);
     }
 }
