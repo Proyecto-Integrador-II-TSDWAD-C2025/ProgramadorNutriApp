@@ -1,0 +1,61 @@
+{
+  "proyecto": "NutriApp",
+  "equipo": "TERACODE",
+  "responsable": "Pablo Romero",
+  "fecha_local": "2026-10-26",
+  "zona_horaria": "America/Buenos_Aires",
+  "rama": "feature/PabloRomero",
+  "base_develop": "4391315f7688cf42f2c1c3a9ddb6ee0686708158",
+  "codigo_probado": "dc9cbddba53c13131bfd1cebdde5a04a759f883a",
+  "motivo": "Devolucion EV3: definir el resultado posterior al guardado y ofrecer retorno visible desde Perfil.",
+  "cambios": [
+    "Volver al inicio permanece fuera del desplazamiento del formulario.",
+    "Un guardado confirmado ofrece mensaje y retorno junto a Guardar; incluye el caso requiere_revision.",
+    "La confirmacion se conserva al recrear la Activity; un error de guardado no muestra el retorno de exito."
+  ],
+  "compilacion": {
+    "comando": ".\\gradlew.bat testDebugUnitTest assembleDebug assembleDebugAndroidTest --no-daemon --max-workers=2",
+    "resultado": "BUILD SUCCESSFUL",
+    "java": "Android Studio JBR 17"
+  },
+  "jvm": {
+    "tests": 48,
+    "fallos": 0,
+    "errores": 0,
+    "omitidos": 0,
+    "estado": "PASS",
+    "reporte": "resultados-junit/",
+    "nota": "Incluye 1 ExampleUnitTest y los 3 tests nuevos de Login incorporados desde develop. Los cambios posteriores a esta ejecucion afectan unicamente a pruebas instrumentadas y al espaciado del boton de retorno."
+  },
+  "android": {
+    "ejecutor": "AndroidJUnitRunner via adb; sin desinstalar ni limpiar los datos de la app.",
+    "dispositivo": "Samsung SM-A217M fisico",
+    "version": "Android 12 / API 31",
+    "tests": 12,
+    "fallos": 0,
+    "errores": 0,
+    "omitidos": 0,
+    "estado": "PASS",
+    "duracion_segundos": 27.677,
+    "comando": "adb -s RF8N7276VGP shell am instrument -w -r -e class com.example.nutriappmovil.PerfilActivityTest,com.example.nutriappmovil.perfil.PerfilFlujoTest com.example.nutriappmovil.test/androidx.test.runner.AndroidJUnitRunner",
+    "reporte": "android-instrumentacion.txt",
+    "capturas": [
+      "TC-PER-UI-01-guardado.png",
+      "TC-PER-UI-REVISION-guardado.png"
+    ],
+    "nuevos_casos": [
+      "PerfilActivityTest#volverPermaneceVisibleAlFinalDelFormulario",
+      "PerfilActivityTest#guardadoConRevisionPermiteVolverSinCerrarOtroMensaje",
+      "PerfilActivityTest#recrearTrasGuardarConservaConfirmacionYRetorno"
+    ],
+    "sincronizacion": "El primer intento registro 11 PASS y 1 fallo al consultar demasiado pronto ActivityScenario.getState() tras finish(). Se cambio esa asercion por la espera del evento ON_DESTROY mediante CountDownLatch, sin Thread.sleep. La ejecucion final acredita 12 PASS."
+  },
+  "apk_debug_sha256": "9B0CF9DC35555994611A4E99260411D8EE77D1CBE21D0F18F809DFD4B1822F58",
+  "apk_tests_sha256": "D150C3EC4C704A5ABC50C2F0F9300A84BAED156895EB32022B13763CE3B24583",
+  "limites": [
+    "HTTP interceptado en memoria y datos sinteticos; estas pruebas no llaman a Railway.",
+    "Los tests de retorno verifican visibilidad y cierre de Perfil dentro de ActivityScenario; no son un recorrido completo desde Login con el backend real.",
+    "El flujo PerfilFlujoTest incluye chequeos ATF; no acredita TalkBack manual ni una auditoria completa de accesibilidad.",
+    "No se ejecutaron CRUD de Usuarios, Appium, instalacion release ni pruebas de expiracion del token en esta revision."
+  ]
+}
