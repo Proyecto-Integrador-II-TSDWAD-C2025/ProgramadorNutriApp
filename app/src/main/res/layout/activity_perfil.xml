@@ -1,33 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:orientation="vertical"
+    android:padding="20dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnVolverPerfil"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:minHeight="48dp"
+        android:background="@drawable/bg_button_secondary"
+        android:fontFamily="@font/inter_semibold"
+        android:minWidth="112dp"
+        android:paddingHorizontal="16dp"
+        android:text="@string/perfil_volver_inicio"
+        android:textAllCaps="false"
+        android:textColor="@color/primary"
+        android:textSize="14sp" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnVolverPerfil"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:background="@drawable/bg_button_secondary"
-            android:fontFamily="@font/inter_semibold"
-            android:minWidth="112dp"
-            android:text="@string/volver_dashboard"
-            android:textAllCaps="false"
-            android:textColor="@color/primary"
-            android:textSize="14sp" />
+    <ScrollView
+        android:id="@+id/scrollPerfil"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="16dp"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:background="@drawable/card_fondo"
             android:orientation="vertical"
             android:padding="26dp">
@@ -224,6 +227,18 @@
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnContinuarPerfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:minHeight="48dp"
+                android:background="@drawable/bg_button_secondary"
+                android:text="@string/perfil_volver_inicio"
+                android:textAllCaps="false"
+                android:textColor="@color/primary"
+                android:visibility="gone" />
+
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</LinearLayout>

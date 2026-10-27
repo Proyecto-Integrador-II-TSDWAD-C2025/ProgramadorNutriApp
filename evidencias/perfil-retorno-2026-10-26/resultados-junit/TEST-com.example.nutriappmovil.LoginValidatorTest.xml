@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.nutriappmovil.LoginValidatorTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-27T02:45:17" hostname="ROMERO" time="0.001">
+  <properties/>
+  <testcase name="passwordMenorA6_retornaFalso" classname="com.example.nutriappmovil.LoginValidatorTest" time="0.0"/>
+  <testcase name="emailVacio_retornaFalso" classname="com.example.nutriappmovil.LoginValidatorTest" time="0.0"/>
+  <testcase name="emailSinArroba_retornaFalso" classname="com.example.nutriappmovil.LoginValidatorTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
