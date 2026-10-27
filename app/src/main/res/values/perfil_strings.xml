@@ -4,13 +4,14 @@
     <string name="perfil_titulo">Completá tu perfil</string>
     <string name="perfil_descripcion">Estos datos nos ayudan a recomendarte una rutina acorde a tu objetivo y disponibilidad semanal.</string>
     <string name="volver_dashboard">Volver</string>
+    <string name="perfil_volver_inicio">Volver al inicio</string>
     <string name="guardar_perfil">Guardar perfil</string>
     <string name="perfil_cargando">Cargando tu perfil…</string>
     <string name="perfil_listo">Podés revisar y actualizar tus datos.</string>
     <string name="perfil_nuevo">Completá tus datos para crear tu perfil.</string>
     <string name="perfil_guardando">Guardando perfil…</string>
-    <string name="perfil_guardado">Perfil guardado correctamente.</string>
-    <string name="perfil_guardado_revision">Perfil guardado. Tus datos requieren revisión profesional.</string>
+    <string name="perfil_guardado">Perfil guardado correctamente. Podés seguir editando o volver al inicio.</string>
+    <string name="perfil_guardado_revision">Perfil guardado. Tus datos requieren revisión de un profesional. Podés volver al inicio.</string>
     <string name="perfil_guardado_interrumpido">Se interrumpió la conexión durante el guardado. Volvé a abrir el perfil para comprobar si se guardó.</string>
     <string name="perfil_sesion_invalida">Tu sesión no es válida. Volvé e iniciá sesión nuevamente.</string>
     <string name="perfil_error_carga">No se pudo cargar el perfil. Reintentá antes de editar.</string>

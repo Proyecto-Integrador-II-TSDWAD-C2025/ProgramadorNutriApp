@@ -59,6 +59,7 @@ public final class PerfilScreen {
     public PerfilScreen comprobarGuardado() {
         esperarEstado(R.string.perfil_guardado);
         onView(withId(GUARDAR)).check(matches(isEnabled()));
+        onView(withId(R.id.btnContinuarPerfil)).perform(scrollTo()).check(matches(isDisplayed()));
         return this;
     }
 

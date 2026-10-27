@@ -15,8 +15,11 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.core.graphics.ColorUtils;
 import androidx.core.view.ViewCompat;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleEventObserver;
 
 import com.example.nutriappmovil.network.ApiClient;
+import com.example.nutriappmovil.perfil.PerfilScreen;
 import com.google.gson.Gson;
 
 import org.hamcrest.Matcher;
@@ -29,6 +32,7 @@ import java.lang.reflect.Field;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -58,6 +62,7 @@ public class PerfilActivityTest {
     private final AtomicInteger putCode = new AtomicInteger(200);
     private final AtomicInteger getRequests = new AtomicInteger();
     private final AtomicInteger putRequests = new AtomicInteger();
+    private final AtomicBoolean requiereRevision = new AtomicBoolean();
     private volatile CountDownLatch putGate;
     private Field retrofitField;
     private Object previousRetrofit;
@@ -86,7 +91,8 @@ public class PerfilActivityTest {
                 getRequests.incrementAndGet();
                 code = getCode.get();
             }
-            String body = code == 200 ? PERFIL
+            String body = code == 200 ? PERFIL.substring(0, PERFIL.length() - 1)
+                    + ",\"requiere_revision\":" + requiereRevision.get() + "}"
                     : code == 400 ? "{\"edad\":[\"Edad rechazada por la API\"]}"
                     : "{\"detail\":\"Respuesta de prueba\"}";
             return new okhttp3.Response.Builder().request(chain.request())
@@ -139,6 +145,7 @@ public class PerfilActivityTest {
         putCode.set(500);
         pulsarGuardar();
         esperarEstado(R.string.perfil_error_guardado);
+        onView(withId(R.id.btnContinuarPerfil)).check(matches(not(isDisplayed())));
         onView(withId(R.id.etPesoActual)).check(matches(withText("78,00")));
         onView(withId(R.id.btnGuardarPerfil)).check(matches(isEnabled()));
         putCode.set(200);
@@ -211,6 +218,55 @@ public class PerfilActivityTest {
             guardar.setPressed(false);
             assertEquals(0, putRequests.get());
         });
+    }
+
+    @Test public void volverPermaneceVisibleAlFinalDelFormulario() throws InterruptedException {
+        abrirPerfilNuevo();
+        onView(withId(R.id.btnGuardarPerfil)).perform(scrollTo());
+        CountDownLatch cierre = observarCierre();
+        onView(withId(R.id.btnVolverPerfil)).check(matches(isDisplayed())).perform(click());
+        comprobarCierre(cierre);
+        assertEquals(0, putRequests.get());
+    }
+
+    @Test public void guardadoConRevisionPermiteVolverSinCerrarOtroMensaje() throws Exception {
+        abrirPerfilNuevo();
+        completarFormulario();
+        requiereRevision.set(true);
+        pulsarGuardar();
+        esperarEstado(R.string.perfil_guardado_revision);
+        onView(withId(R.id.tvEstadoPerfil)).check(matches(isDisplayed()));
+        new PerfilScreen().capturar("TC-PER-UI-REVISION-guardado");
+        CountDownLatch cierre = observarCierre();
+        onView(withId(R.id.btnContinuarPerfil)).perform(scrollTo(), click());
+        comprobarCierre(cierre);
+        assertEquals(1, putRequests.get());
+    }
+
+    @Test public void recrearTrasGuardarConservaConfirmacionYRetorno() {
+        abrirPerfilNuevo();
+        completarFormulario();
+        requiereRevision.set(true);
+        pulsarGuardar();
+        esperarEstado(R.string.perfil_guardado_revision);
+        scenario.recreate();
+        esperarEstado(R.string.perfil_guardado_revision);
+        onView(withId(R.id.btnContinuarPerfil)).perform(scrollTo()).check(matches(isDisplayed()));
+        assertEquals(1, putRequests.get());
+        assertEquals(1, getRequests.get());
+    }
+
+    private CountDownLatch observarCierre() {
+        CountDownLatch cierre = new CountDownLatch(1);
+        scenario.onActivity(activity -> activity.getLifecycle().addObserver(
+                (LifecycleEventObserver) (owner, event) -> {
+                    if (event == Lifecycle.Event.ON_DESTROY) cierre.countDown();
+                }));
+        return cierre;
+    }
+
+    private void comprobarCierre(CountDownLatch cierre) throws InterruptedException {
+        assertTrue("Perfil no termino al pulsar Volver", cierre.await(5, TimeUnit.SECONDS));
     }
 
     private boolean tieneEtiqueta(View view, int fieldId) {

@@ -1,10 +1,13 @@
 package com.example.nutriappmovil;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,7 +38,8 @@ public class PerfilActivity extends AppCompatActivity {
     private Spinner spSexo, spObjetivo, spActividad, spPreferencia;
     private EditText etEdad, etPesoActual, etAltura, etPesoObjetivo;
     private EditText etDiasEntrenamiento, etLimitaciones, etConsideracionesAlimentarias;
-    private Button btnGuardar, btnReintentar;
+    private Button btnGuardar, btnReintentar, btnContinuar;
+    private ScrollView scrollPerfil;
     private TextView tvEstado;
     private final Map<String, View> campos = new LinkedHashMap<>();
     private PerfilRepository perfilRepository;
@@ -43,6 +47,7 @@ public class PerfilActivity extends AppCompatActivity {
     private Call<PerfilResponse> guardadoCall;
     private boolean restaurandoEdicion;
     private boolean perfilDisponible, cargando, guardando;
+    private boolean guardadoConfirmado, requiereRevision;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +59,17 @@ public class PerfilActivity extends AppCompatActivity {
         perfilViewModel = new ViewModelProvider(this,
                 new PerfilViewModel.Factory(perfilRepository)).get(PerfilViewModel.class);
         findViewById(R.id.btnVolverPerfil).setOnClickListener(v -> finish());
+        btnContinuar.setOnClickListener(v -> finish());
         btnGuardar.setOnClickListener(v -> guardarPerfil());
         btnReintentar.setOnClickListener(v -> cargarPerfil());
 
         perfilDisponible = savedInstanceState != null
                 && savedInstanceState.getBoolean("perfil_disponible");
         restaurandoEdicion = perfilDisponible;
+        guardadoConfirmado = savedInstanceState != null
+                && savedInstanceState.getBoolean("guardado_confirmado");
+        requiereRevision = savedInstanceState != null
+                && savedInstanceState.getBoolean("requiere_revision");
         perfilViewModel.getEstado().observe(this, estado -> {
             // No sobrescribir el formulario restaurado con la respuesta anterior.
             if (restaurandoEdicion && estado.getTipo() != EstadoCargaPerfil.Tipo.CARGANDO) {
@@ -71,8 +81,12 @@ public class PerfilActivity extends AppCompatActivity {
         });
         if (perfilDisponible) {
             actualizarControles();
-            mostrarEstado(savedInstanceState.getBoolean("guardando")
-                    ? R.string.perfil_guardado_interrumpido : R.string.perfil_listo);
+            if (guardadoConfirmado) {
+                mostrarGuardadoConfirmado();
+            } else {
+                mostrarEstado(savedInstanceState.getBoolean("guardando")
+                        ? R.string.perfil_guardado_interrumpido : R.string.perfil_listo);
+            }
         } else {
             cargarPerfil();
         }
@@ -92,6 +106,8 @@ public class PerfilActivity extends AppCompatActivity {
         etConsideracionesAlimentarias = findViewById(R.id.etConsideracionesAlimentarias);
         btnGuardar = findViewById(R.id.btnGuardarPerfil);
         btnReintentar = findViewById(R.id.btnReintentarPerfil);
+        btnContinuar = findViewById(R.id.btnContinuarPerfil);
+        scrollPerfil = findViewById(R.id.scrollPerfil);
         tvEstado = findViewById(R.id.tvEstadoPerfil);
         campos.put("sexo", spSexo);
         campos.put("edad", etEdad);
@@ -141,6 +157,8 @@ public class PerfilActivity extends AppCompatActivity {
 
     private void guardarPerfil() {
         if (!perfilDisponible || cargando || guardando) return;
+        guardadoConfirmado = false;
+        btnContinuar.setVisibility(View.GONE);
         for (View campo : campos.values()) {
             if (campo instanceof EditText) ((EditText) campo).setError(null);
         }
@@ -175,8 +193,9 @@ public class PerfilActivity extends AppCompatActivity {
                 actualizarControles();
                 if (respuestaConPerfil(response)) {
                     mostrarPerfil(response.body().getPerfil());
-                    mostrarEstado(response.body().isRequiereRevision()
-                            ? R.string.perfil_guardado_revision : R.string.perfil_guardado);
+                    guardadoConfirmado = true;
+                    requiereRevision = response.body().isRequiereRevision();
+                    mostrarGuardadoConfirmado();
                 } else if (response.code() == 400) {
                     mostrarEstado(R.string.perfil_revisar_datos);
                     mostrarErroresServidor(response.errorBody());
@@ -251,6 +270,20 @@ public class PerfilActivity extends AppCompatActivity {
 
     private void mostrarEstado(int recurso) { mostrarEstado(getString(recurso)); }
     private void mostrarEstado(String mensaje) { tvEstado.setText(mensaje); }
+
+    private void mostrarGuardadoConfirmado() {
+        mostrarEstado(requiereRevision
+                ? R.string.perfil_guardado_revision : R.string.perfil_guardado);
+        btnContinuar.setVisibility(View.VISIBLE);
+        View foco = getCurrentFocus();
+        if (foco != null) {
+            InputMethodManager teclado = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (teclado != null) teclado.hideSoftInputFromWindow(foco.getWindowToken(), 0);
+            foco.clearFocus();
+        }
+        // Mantener juntos el resultado y la salida del formulario, sin otro modal.
+        scrollPerfil.post(() -> scrollPerfil.smoothScrollTo(0, tvEstado.getTop()));
+    }
     private boolean terminada() { return isFinishing() || isDestroyed(); }
     private String texto(EditText campo) { return campo.getText().toString().trim(); }
     private double decimal(EditText campo) { return Double.parseDouble(texto(campo).replace(',', '.')); }
@@ -291,6 +324,8 @@ public class PerfilActivity extends AppCompatActivity {
     @Override protected void onSaveInstanceState(Bundle outState) {
         outState.putBoolean("perfil_disponible", perfilDisponible);
         outState.putBoolean("guardando", guardando);
+        outState.putBoolean("guardado_confirmado", guardadoConfirmado);
+        outState.putBoolean("requiere_revision", requiereRevision);
         super.onSaveInstanceState(outState);
     }
 
